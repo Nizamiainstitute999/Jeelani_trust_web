@@ -1,5 +1,6 @@
 
-  // Initialize AOS
-  if (typeof AOS !== 'undefined') {
+
+
+  document.addEventListener("DOMContentLoaded", function () {
     AOS.init();
-  }
+  });
