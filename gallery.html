@@ -1,337 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nizamia – Modern Event Gallery</title>
-
-    <!-- Tailwind JIT CDN with custom config  -->
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#003C43",
-              spiritual: "#b2ebf2",
-              festive: "#fff8e1",
-              educational: "#c8e6c9",
-              leadership: "#bbdefb",
-            },
-            fontFamily: {
-              pop: ["Poppins", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+    <title>Gallery | Jeelani Trust</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- AOS & Font‑Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link
-      href="https://unpkg.com/aos@2.3.1/dist/aos.css"
-      rel="stylesheet"
-    />
     <style>
-      /* Hide default scrollbar for timeline slider */
-      .scrollbar-hide::-webkit-scrollbar {
-        display: none;
+      body {
+        font-family: 'Segoe UI', sans-serif;
       }
-      .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+
+      .gallery img {
+        transition: transform 0.3s ease;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05);
       }
     </style>
   </head>
 
-  <body
-    class="min-h-screen bg-gray-100 font-pop text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300"
-  >
-    <!-- 🌗 Dark‑mode toggle -->
-    <button
-      id="themeToggle"
-      class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-primary text-white shadow-lg hover:scale-105 hover:shadow-2xl transition"
-      aria-label="toggle theme"
-    >
-      <i class="fa-solid fa-moon text-lg"></i>
-    </button>
-
-    <header class="py-14 text-center" data-aos="fade-down">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-3">
-        Our Event Journey
+  <body class="bg-white text-gray-800">
+    <section class="py-12 px-4 max-w-7xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold text-center mb-10">
+        Jeelani Moments
       </h1>
-      <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
-        Explore memorable moments of community, learning & celebration.
-      </p>
-    </header>
 
-    <!-- 🔎 Filter Bar -->
-    <section class="max-w-7xl mx-auto px-4" data-aos="fade-up">
-      <div
-        id="filterBar"
-        class="flex flex-wrap justify-center gap-3 mb-12"
-      >
-        <button data-filter="all" class="pill active">All</button>
-        <button data-filter="spiritual" class="pill">Spiritual</button>
-        <button data-filter="festive" class="pill">Festive</button>
-        <button data-filter="educational" class="pill">Educational</button>
-        <button data-filter="leadership" class="pill">Leadership</button>
-      </div>
-    </section>
+      <div class="gallery grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <!-- Column 1 -->
+        <div class="grid gap-4">
+          <img class="w-full rounded-xl" src="photos/Quthbuzzman Jeelani Shareef_ Kodimaram.jpg" alt="Image 1" />
+          <img class="w-full rounded-xl" src="photos/NQ/Baab Inauguration Swalath June 2024.jpg" alt="Image 2" />
+          <img class="w-full rounded-xl" src="photos/Magazine/Magazine 1.jpg" alt="Image 3" />
+        </div>
 
-    <!-- 🖼️ Gallery Grid -->
-    <main
-      id="gallery"
-      class="max-w-7xl mx-auto px-4 grid gap-6 md:gap-10 [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
-    ></main>
+        <!-- Column 2 -->
+        <div class="grid gap-4">
+          <img class="w-full rounded-xl" src="photos/main/NM.jpg" alt="Image 4" />
+          <img class="w-full rounded-xl" src="photos/QZ/Haj Ceremony in Mekkah.jpg" alt="Image 5" />
+          <img class="w-full rounded-xl" src="photos/Nizamia/Institute Inauguration.jpg" alt="Image 6" />
+        </div>
 
-    <!-- 🕒 Timeline Slider -->
-    <section class="max-w-7xl mx-auto px-4 mt-20" data-aos="fade-up">
-      <h2 class="text-2xl font-bold mb-4">Timeline</h2>
-      <div
-        id="timelineSlider"
-        class="overflow-x-auto scrollbar-hide flex gap-4 py-4 bg-white dark:bg-gray-800 rounded-xl shadow-md px-4"
-      ></div>
+        <!-- Column 3 -->
+        <div class="grid gap-4">
+          <img class="w-full rounded-xl" src="photos/Nizamia/Madrasa Inauguration.jpg" alt="Image 7" />
+          <img class="w-full rounded-xl" src="photos/Nizamia/Madrasa Principal Class.jpg" alt="Image 8" />
+          <img class="w-full rounded-xl" src="photos/main/QM.jpg" alt="Image 9" />
+        </div>
 
-      <article id="timelineContent" class="mt-10"></article>
-    </section>
-
-    <!-- 🔍 Modal -->
-    <div
-      id="modal"
-      class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-[999] opacity-0 pointer-events-none transition"
-    >
-      <button
-        id="modalClose"
-        class="absolute top-6 right-6 text-white text-2xl"
-      >
-        &times;
-      </button>
-      <img
-        id="modalImg"
-        class="max-h-[80vh] max-w-full rounded-2xl shadow-xl"
-        alt="expanded image"
-      />
-    </div>
-
-    <!-- ✅ Templates (using JS clone) -->
-    <template id="cardTemplate">
-      <div
-        class="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg transition hover:scale-[1.03] hover:shadow-2xl duration-300 cursor-pointer"
-      >
-        <img
-          class="w-full h-56 object-cover transition duration-300 group-hover:scale-110"
-          loading="lazy"
-        />
-        <span
-          class="absolute top-4 left-4 bg-primary text-white text-[0.65rem] font-semibold px-3 py-1 rounded-full shadow-md category-pill"
-        ></span>
-        <span
-          class="absolute top-4 right-4 bg-black/60 text-white text-xs px-2 py-1 rounded-lg date-badge"
-        ></span>
-        <div class="p-5">
-          <h3 class="text-lg font-bold mb-1 title"></h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm desc"></p>
-          <div class="mt-4 flex justify-between items-center">
-            <span class="italic text-xs text-gray-600 dark:text-gray-400 quote"></span>
-            <button class="text-primary hover:text-primary/80 text-lg expand-btn">
-              <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
-            </button>
-          </div>
+        <!-- Column 4 -->
+        <div class="grid gap-4">
+          <img class="w-full rounded-xl" src="photos/Magazine/Magazine 4.jpg" alt="Image 10" />
+          <img class="w-full rounded-xl" src="photos/QZ/Qthbuzzaman International Sufi Conference.jpg" alt="Image 11" />
+          <img class="w-full rounded-xl" src="photos/mala-cover-malayalam.jpg" alt="Image 12" />
         </div>
       </div>
-    </template>
-
-    <template id="yearTemplate">
-      <button
-        class="flex-shrink-0 px-6 py-2 rounded-full font-semibold bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-primary/20 year-btn"
-      ></button>
-    </template>
-
-    <!-- ⚙️ Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({ once: true });
-
-      /* ---------- Data --------------- */
-      const events = [
-        {
-          id: 1,
-          category: "spiritual",
-          year: 2016,
-          title: "International Sufi Conference",
-          date: "Mar 2016",
-          attendees: "1,200+",
-          img: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80",
-          quote:
-            "Life‑changing experience that deepened my spiritual understanding.",
-          desc: "Gathering of scholars & devotees celebrating Sufi traditions.",
-        },
-        {
-          id: 2,
-          category: "festive",
-          year: 2025,
-          title: "Eidul Fitr Celebration",
-          date: "Apr 2025",
-          attendees: "850+",
-          img: "https://images.unsplash.com/photo-1511994298241-608e28f14fde?w=800&q=80",
-          quote: "The most joyful Eid celebration with my family.",
-          desc: "A vibrant community festival marking the end of Ramadan.",
-        },
-        {
-          id: 3,
-          category: "leadership",
-          year: 2025,
-          title: "Irada Leadership Conclave",
-          date: "Jan 2025",
-          attendees: "300+",
-          img: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=800&q=80",
-          quote: "Inspiring speakers and practical workshops for leaders.",
-          desc: "Empowering young Muslim leaders with skills & networks.",
-        },
-        {
-          id: 4,
-          category: "educational",
-          year: 2022,
-          title: "Nizamia Institute Inauguration",
-          date: "Sep 2022",
-          attendees: "500+",
-          img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
-          quote: "A milestone for Islamic education in our community.",
-          desc: "Opening of the institute focusing on traditional sciences.",
-        },
-        {
-          id: 5,
-          category: "spiritual",
-          year: 2024,
-          title: "Grand Swalath Gathering",
-          date: "Oct 2024",
-          attendees: "1,500+",
-          img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
-          quote: "The atmosphere was electric with devotion.",
-          desc: "Mass gathering for Swalath & Durood with renowned Qaris.",
-        },
-        {
-          id: 6,
-          category: "spiritual",
-          year: 2019,
-          title: "Quthbuzzaman Pilgrimage",
-          date: "Nov 2019",
-          attendees: "200+",
-          img: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
-          quote: "A transformative pilgrimage to Ajmeer Sharif.",
-          desc: "Journey connecting pilgrims to spiritual heritage.",
-        },
-      ];
-
-      /* ---------- Helpers --------------- */
-      const $ = (s, o = document) => o.querySelector(s);
-      const $$ = (s, o = document) => [...o.querySelectorAll(s)];
-
-      /* ---------- Render Gallery --------------- */
-      const gallery = $("#gallery");
-      const cardTpl = $("#cardTemplate").content;
-
-      function renderGallery(filter = "all") {
-        gallery.innerHTML = "";
-        events
-          .filter((e) => filter === "all" || e.category === filter)
-          .forEach((ev) => {
-            const node = cardTpl.cloneNode(true);
-            const img = $("img", node);
-            img.src = ev.img;
-            img.alt = ev.title;
-            $(".category-pill", node).textContent = ev.category;
-            $(".date-badge", node).textContent = ev.date;
-            $(".title", node).textContent = ev.title;
-            $(".desc", node).textContent = `${ev.attendees} attendees`;
-            $(".quote", node).textContent = `“${ev.quote}”`;
-            $(".expand-btn", node).addEventListener("click", (e) => {
-              e.stopPropagation();
-              openModal(ev.img, ev.title);
-            });
-            node.addEventListener("click", () => openModal(ev.img, ev.title));
-            gallery.appendChild(node);
-          });
-      }
-
-      /* ---------- Render Timeline --------------- */
-      const years = [...new Set(events.map((e) => e.year))].sort((a, b) => a - b);
-      const slider = $("#timelineSlider");
-      const yearTpl = $("#yearTemplate").content;
-
-      function renderTimeline() {
-        years.forEach((yr, idx) => {
-          const btn = yearTpl.cloneNode(true);
-          const el = $(".year-btn", btn);
-          el.textContent = yr;
-          el.dataset.year = yr;
-          if (idx === 0) el.classList.add("bg-primary", "text-white");
-          el.addEventListener("click", () => switchYear(yr, el));
-          slider.appendChild(btn);
-        });
-        switchYear(years[0]);
-      }
-
-      function switchYear(year, targetBtn) {
-        $$(".year-btn", slider).forEach((b) =>
-          b.classList.remove("bg-primary", "text-white")
-        );
-        targetBtn && targetBtn.classList.add("bg-primary", "text-white");
-        const ev = events.find((e) => e.year == year);
-        if (!ev) return;
-        $("#timelineContent").innerHTML = `
-          <div class="flex flex-col md:flex-row gap-8 items-center" data-aos="fade-up">
-            <img src="${ev.img}" alt="${ev.title}" class="rounded-2xl shadow-xl w-full md:w-1/2" />
-            <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-3">${ev.title}</h3>
-              <p class="mb-4">${ev.desc}</p>
-              <p class="font-semibold text-primary">${ev.attendees} attendees</p>
-            </div>
-          </div>`;
-      }
-
-      /* ---------- Filter Interactions --------------- */
-      const pillCss =
-        "pill px-5 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-700 text-primary/80 hover:bg-primary/10 transition";
-      const activeCss = "active bg-primary text-white";
-
-      $("#filterBar").addEventListener("click", (e) => {
-        if (!e.target.matches("button")) return;
-        $$("#filterBar button").forEach((b) => b.classList.remove(...activeCss.split(" ")));
-        e.target.classList.add(...activeCss.split(" "));
-        renderGallery(e.target.dataset.filter);
-      });
-      // Initialize pills styling (after tailwind)
-      $$("#filterBar button").forEach((b) => b.className = pillCss + (b.classList.contains("active") ? ` ${activeCss}` : ""));
-
-      /* ---------- Modal --------------- */
-      const modal = $("#modal");
-      const modalImg = $("#modalImg");
-      function openModal(src, alt) {
-        modalImg.src = src;
-        modalImg.alt = alt;
-        modal.classList.remove("opacity-0", "pointer-events-none");
-      }
-      function closeModal() {
-        modal.classList.add("opacity-0", "pointer-events-none");
-      }
-      $("#modalClose").addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => e.target === modal && closeModal());
-
-      /* ---------- Theme Toggle --------------- */
-      const themeBtn = $("#themeToggle");
-      themeBtn.addEventListener("click", () => {
-        document.documentElement.classList.toggle("dark");
-      });
-
-      /* ---------- Init --------------- */
-      renderGallery();
-      renderTimeline();
-    </script>
+    </section>
   </body>
 </html>
