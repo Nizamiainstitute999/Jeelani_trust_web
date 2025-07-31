@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Vision | Jeelani Trust</title>
+  <script>
+    fetch("meta.html")
+      .then(res => res.text())
+      .then(data => document.head.insertAdjacentHTML("afterbegin", data));
+  </script>
+
+  <link rel="icon" type="image/png" class="bg-white" href="assets/img/LOGO-ico.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet">
+  <script src="tailwind.config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+   <nav class="bg-white shadow-sm border-b border-white border-opacity-10 fixed top-0 left-0 w-full z-50 mb-5 text-trust-900">
+    <div class="max-w-full ">
+      <div
+        class="flex items-center justify-between h-[72px] px-[10px] relative shadow-[0_2px_18px_0_rgba(129,162,182,0.2)] bg-white">
+
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 group">
+          <!-- Logo -->
+         <img src="assets/img/LOGO-without-Text.png" alt="Jeelani Trust Logo" class="h-10 w-auto ml-4">
+
+          <!-- Text Block -->
+          <div class="flex flex-col leading-tight">
+            <a href="index.html" class="font-bold text-2xl tracking-tight font-cinzel sm:text-md">
+              Jeelani Trust
+            </a>
+         
+          </div>
+        </div>
+
+
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex space-x-1">
+          <a href="index.html"
+            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+            <span
+              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Home</span>
+          </a>
+          <a href="index.html#about"
+            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+            <span
+              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">About
+              Us</span>
+          </a>
+          <a href="index.html#programs"
+            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+            <span
+              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Initiatives</span>
+          </a>
+          <a href="index.html#gallery"
+            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+            <span
+              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Gallery</span>
+          </a>
+          <a href="index.html#contact"
+            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+            <span
+              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Contact</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden text-trust-700 focus:outline-none p-2 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors"
+          aria-label="Toggle mobile menu" id="menu-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-trust-900 bg-opacity-95 backdrop-blur-sm z-50 pt-24 px-6 text-white
+         transform translate-x-full opacity-0 pointer-events-none
+         transition-all duration-3500 ease-in-out md:hidden">
+      <div class="flex flex-col space-y-4">
+        <a href="index.html" class="text-xl py-3 px-4 hover:text-gold transition-all">Home</a>
+        <a href="index.html#about" class="text-xl py-3 px-4 hover:text-gold transition-all">About</a>
+        <a href="index.html#programs" class="text-xl py-3 px-4 hover:text-gold transition-all">Initiatives</a>
+        <a href="index.html#gallery" class="text-xl py-3 px-4 hover:text-gold transition-all">Gallery</a>
+        <a href="index.html#contact" class="text-xl py-3 px-4 hover:text-gold transition-all">Contact</a>
+      </div>
+
+      <!-- Close Button -->
+      <button id="menu-close"
+        class="absolute top-6 right-6 text-white hover:bg-white hover:bg-opacity-10 p-2 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+
+  </nav>
+  <section class="max-w-6xl  mx-auto">
+ <!-- About Us Section -->
+  <section id="about" class="py-16 bg-white ">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+     
+        <div class="w-24 h-1 bg--500 mx-auto text-trust-600 mb-4"></div>
+      </div>
+
+      <div class="grid gap-12">
+        <div class="md:col-span-1">
+     
+         
+
+          <div data-aos="fade-up" data-aos-duration="1500">
+            <h4 class="text-3xl font-medium font-cormorant mt-8 mb-4 text-trust-800">Our Mission</h4>
+            <p class=" leading-relaxed font-quicksand">
+              Under the steadfast leadership of its Chairman, His Holiness Naeb Quthbuzzaman Dr. Sheikh Nizamudhin
+              Sulthan Shah Qadiri Chishti, Jeelani Trust carries forward the foundational objectives set by the
+              revered Sufi Guru, His Holiness Quthbuzzaman Dr. Sheikh Yousuf Sulthan Shah Qadiri Chishti. Continuing
+              the profound legacy of its founder, the current leadership firmly advances the noble mission of Jeelani
+              Trust, expanding its vital work of promoting Sufi perfection of human life, sponsoring developments in
+              education and health, helping the poor and needy, and spreading peace and harmony in society. Based at
+              Jeelani Shareef in Kerala, the Trust's core commitment remains to serve society and nurturing a morally
+              robust humanity.
+
+            </p>
+            <p class=" leading-relaxed font-quicksand pt-4">
+
+
+              Upholding our wider vision and addressing the pressing needs of the time, Jeelani Trust keeps devising
+              effective plans and projects, and systematically carries them out on regular basis. The Trust conducts
+              programmes and runs institutions for promoting holistic well-being, expanding educational development,
+              healthcare initiatives, and humanitarian aid, grounded in the principles of Sufi piety and
+              socio-religious reformation, for the benefit of the deserving and under-served communities within the
+              region and around the world.
+
+
+            </p>
+            <p class="leading-relaxed font-quicksand pt-4">
+              Jeelani Trust is keen on advancing its activities and initiatives in various fields, including (but not
+              limited to):
+            </p>
+
+         <ul class="space-y-4 font-quicksand leading-relaxed pt-2 pl-2" data-aos="fade-up" data-aos-duration="1500">
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Promoting human development through Sufi moral values and practices, propagating the traditional Qadiri – Chishti Sufi path among all sections of society, providing spiritual guidance, classes and conventions, enabling people for ethical life, and ensuring peace in life and hereafter.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Keeping access open for all to the global Sufi centre of peace and spiritual blessings, Quthbuzzaman Jeelani Shareef, providing guidance in Prophetic teachings for the ideal humanity.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Encouraging and sponsoring the integration of Islamic and liberal education, and in-depth research and practice in Sufism; Promoting cutting edge studies in science and technology, (especially in ICT), with ethical guidance and moral values – ‘Nizamia Institute’ being a comprehensive example.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Establish educational institutions and excellence centres – colleges and institutes for studies in STEM, Liberal Arts, and Religious Studies; run orphanages, high schools, educational & vocational training centers, institutes for ICT, etc. for the educational advancement, not only of the Muslim religious minority, but for the society at large.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Establish and maintain Mosques, Sufi research centre, special centres for traditional Islamic & Arabic studies, offline and online Madrasas – from preschool to higher secondary – Jeelani Mosque, Nizamia Institute, Nizamia Madrasa, etc. are among many functional models.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Develop Libraries & Research Institutes, special centres for advanced studies and career guidance, coaching institutes for competitive exams supportive especially of the weaker social section - Quthbuzzaman Global Sufi Research Centre, Gurukulam Nizamia, Nizamia Centre for Excellence, to name a few ventures in this connection.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Providing free education, off-line and online, at pre-school, primary, secondary, intermediate, undergraduate and postgraduate levels, enabling students for the future of advancements, and grounding them in moral vision – the multi-layered educational platforms of ‘Nizamia’ stand to fulfill this mission.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Ensuring wholistic empowerment of social and religious minorities and weaker sections through healthcare, education, and employment; providing philanthropic aid and setting up enabling measures.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Public championing of religious harmony, and campaigning against terrorism and communalism, conducting conferences and mass-rallies to promote peace and harmony.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Encouraging inter-faith dialogue and propagating pluralist unity in society.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Educating the youth in ethical lifestyle and moral leadership, with entrepreneurial success for social care; building awareness against drug and anti-social elements.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Conducting frequent humanitarian reach-outs and welfare initiatives.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Establishing Hospitals, conducting medical camps and awareness programmes, providing healthcare amenities, catering to the health and well-being of the society in general, and poor and minorities in particular – Thaqdees Hospital, run by the Chairman of the Trust, stands as an outstanding initiative serving the society in the field of health and care.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Aiding public schools and offices for renovations; and supporting developments in infrastructure and public utility services.</span>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="assets/img/image.png" alt="Bullet" class="w-4 h-4 mt-1">
+    <span>Massively endorsing environmental care and sustenance of nature, etc., by conducting awareness programmes and seminars, supporting heritage-conservatory and eco-friendly projects, and leading a plant-a-tree drive on the World Environment Day, etc.</span>
+  </li>
+</ul>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div data-aos="fade-up" data-aos-duration="1500">
+      </div>
+
+
+    </div>
+  </section>
+    <a href="index.html"
+      class="inline-flex items-center gap-2 group font-medium text-white px-5 py-2.5 rounded-lg bg-trust-900 hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-emerald-500/20 my-5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-2 transition-transform"
+        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Home
+    </a>
+  </section>
+  <footer>
+    <div class=" mt-2 py-6 text-center text-white bg-trust-800  text-sm">
+      <p>© 2025 Jeelani Trust. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/swalath.js"></script>
+  <script src="assets/js/day-remainder-arabic.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/date.js"></script>
+  <script src="assets/js/scrollspy.js"></script>
+  <!-- <script src="assets/js/special-redirect.js"></script> -->
+  <script src="assets/js/gallery-modal.js"></script>
+  <script src="assets/js/form-submission.js"></script>
+  <script src="assets/js/arabic-date-api.js"></script>
+  <script src="assets/js/add.js"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+</body>
+
+</html>
