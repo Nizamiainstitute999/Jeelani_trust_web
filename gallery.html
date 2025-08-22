@@ -1,123 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery | Jeelani Trust</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    .gallery img {
-      transition: transform 0.3s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
+    body { font-family: 'Segoe UI', sans-serif; }
+    .gallery img { transition: transform 0.3s ease; }
+    .gallery img:hover { transform: scale(1.05); }
   </style>
 </head>
 
 <body class="bg-white text-gray-800 min-h-screen flex flex-col">
   <!-- Navbar -->
-  <nav class="bg-white shadow-sm border-b border-white border-opacity-10 fixed top-0 left-0 w-full z-50 text-trust-900">
-    <div class="max-w-full">
-      <div
-        class="flex items-center justify-between h-[72px] px-[10px] shadow-[0_2px_18px_0_rgba(129,162,182,0.2)] bg-white">
-        <!-- Logo -->
-        <div class="flex items-center space-x-2 group">
-          <img src="assets/img/logo/logo.webp" alt="Jeelani Trust Logo" class="h-10 w-auto ml-4">
-          <div class="flex flex-col leading-tight">
-            <a href="index.html" class="font-bold text-2xl tracking-tight font-cinzel sm:text-md">
-              Jeelani Trust
-            </a>
-          </div>
-        </div>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex space-x-1">
-          <a href="index.html" class="nav-link px-4 py-2 font-medium hover:text-gold">Home</a>
-          <a href="index.html#about" class="nav-link px-4 py-2 font-medium hover:text-gold">About Us</a>
-          <a href="index.html#programs" class="nav-link px-4 py-2 font-medium hover:text-gold">Initiatives</a>
-          <a href="index.html#gallery" class="nav-link px-4 py-2 font-medium hover:text-gold">Gallery</a>
-          <a href="index.html#contact" class="nav-link px-4 py-2 font-medium hover:text-gold">Contact</a>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button id="menu-toggle"
-          class="md:hidden text-trust-700 focus:outline-none p-2 rounded-full hover:bg-gray-100 transition-colors"
-          aria-label="Toggle mobile menu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+  <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-50" aria-label="Main">
+    <div class="flex items-center justify-between h-[72px] px-[10px] shadow bg-white">
+      <div class="flex items-center space-x-2">
+        <img src="assets/img/logo/logo.webp" alt="Jeelani Trust Logo" class="h-10 w-auto ml-4">
+        <a href="index.html" class="font-bold text-2xl tracking-tight font-cinzel">Jeelani Trust</a>
       </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-trust-900 bg-opacity-95 backdrop-blur-sm z-50 pt-24 px-6 text-white
-                  transform translate-x-full opacity-0 pointer-events-none
-                  transition-all duration-700 ease-in-out md:hidden">
-      <div class="flex flex-col space-y-4">
-        <a href="index.html" class="text-xl py-3 px-4 hover:text-gold transition-all">Home</a>
-        <a href="index.html#about" class="text-xl py-3 px-4 hover:text-gold transition-all">About</a>
-        <a href="index.html#programs" class="text-xl py-3 px-4 hover:text-gold transition-all">Initiatives</a>
-        <a href="index.html#gallery" class="text-xl py-3 px-4 hover:text-gold transition-all">Gallery</a>
-        <a href="index.html#contact" class="text-xl py-3 px-4 hover:text-gold transition-all">Contact</a>
+      <div class="hidden md:flex space-x-1">
+        <a href="index.html" class="px-4 py-2 hover:text-gold">Home</a>
+        <a href="index.html#about" class="px-4 py-2 hover:text-gold">About Us</a>
+        <a href="index.html#programs" class="px-4 py-2 hover:text-gold">Initiatives</a>
+        <a href="index.html#gallery" class="px-4 py-2 hover:text-gold" aria-current="page">Gallery</a>
+        <a href="index.html#contact" class="px-4 py-2 hover:text-gold">Contact</a>
       </div>
-
-      <!-- Close Button -->
-      <button id="menu-close"
-        class="absolute top-6 right-6 text-white hover:bg-white hover:bg-opacity-10 p-2 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
     </div>
   </nav>
 
-  <!-- Gallery Section -->
+  <!-- Gallery -->
   <main class="flex-grow pt-[90px]">
     <section class="py-16 px-4 max-w-7xl mx-auto">
       <div class="text-center mb-12">
-        <h1 class="text-3xl md:text-4xl font-cinzel font-bold text-trust-900">Jeelani Moments</h1>
+        <h1 class="text-3xl md:text-4xl font-cinzel font-bold">Jeelani Moments</h1>
         <p class="mt-3 text-gray-600 max-w-2xl mx-auto">
           Glimpses from our cherished events, gatherings, and milestones.
         </p>
       </div>
 
-      <!-- Cards will be injected here -->
-      <div id="gallery-grid"
-           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 md:gap-6">
+      <!-- Grid of images -->
+      <div class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+
+        <img src="assets/img/NQ/Akbar Ali Suthan Swalath June 2023.webp"
+             alt="Akbar Ali Suthan Swalath June 2023"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Akbar Ali Suthan_Indian Independence Day Cebration 2024_ Nizamia Institute.webp"
+             alt="Akbar Ali Suthan Indian Independence Day Celebration 2024 Nizamia Institute"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Akbar Ali Suthan_Irada 2025.webp"
+             alt="Akbar Ali Suthan Irada 2025"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Baab Inauguration Swalath June 2024.webp"
+             alt="Baab Inauguration Swalath June 2024"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Eidul Fitr April 2024.webp"
+             alt="Eidul Fitr April 2024"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Eidul Fitr April 2025.webp"
+             alt="Eidul Fitr April 2025"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Irada Conclave 2025.webp"
+             alt="Irada Conclave 2025"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Mahan2.webp"
+             alt="Mahan 2"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Swalath December 2024.webp"
+             alt="Swalath December 2024"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Swalath February 2023.webp"
+             alt="Swalath February 2023"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Swalath February 2025.webp"
+             alt="Swalath February 2025"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Swalath July 2024.webp"
+             alt="Swalath July 2024"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Swalath June 2023.webp"
+             alt="Swalath June 2023"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/NQ/Swalath Qctober 2024.webp"
+             alt="Swalath october 2024"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Back Cover.webp"
+             alt="Back Cover"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Haj Ceremony in Mekkah.webp"
+             alt="Haj Ceremony in Mekkah"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/International Sufi Conference .webp"
+             alt="International Sufi Conference"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/International Sufi Conference 2016.webp"
+             alt="International Sufi Conference 2016"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Mahan.webp"
+             alt="Mahan"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Nizamia Institute Hostel Inauguration Ceremony.webp"
+             alt="Nizamia Institute Hostel Inauguration Ceremony"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Qthbuzzaman International Sufi Conference 1.webp"
+             alt="Quthbuzzaman International Sufi Conference 1"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Qthbuzzaman International Sufi Conference.webp"
+             alt="Quthbuzzaman International Sufi Conference"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Quthbuzzaman in Ajmeer.webp"
+             alt="Quthbuzzaman in Ajmeer"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
+        <img src="assets/img/QZ/Quthbuzzaman With Grandchild of Ghousul Aa'lam.webp"
+             alt="Quthbuzzaman With Grandchild of Ghousul Aa'lam"
+             class="w-full aspect-[4/3] object-cover rounded-xl"
+           >
+
       </div>
     </section>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
-      <button id="lb-prev"
-        class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white hover:bg-white/20">
-        &#10094;
-      </button>
-      <img id="lb-img" src="" class="max-h-[85%] max-w-[90%] rounded-lg shadow-lg" alt="">
-      <button id="lb-next"
-        class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white hover:bg-white/20">
-        &#10095;
-      </button>
-      <div id="lb-cap"
-           class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/90 text-sm md:text-base px-3 py-2">
-      </div>
-      <button id="lb-close" class="absolute top-4 right-4 p-2 rounded-full bg-white hover:bg-white/20">✕</button>
-    </div>
 
     <!-- Back to Home -->
     <div class="text-center mt-12">
       <a href="index.html"
-        class="inline-flex items-center gap-2 group font-medium text-white px-6 py-3 rounded-lg bg-trust-900 hover:bg-trust-700 transition duration-300 shadow-md hover:shadow-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-2 transition-transform"
-          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        class="inline-flex items-center gap-2 font-medium text-white px-6 py-3 rounded-lg bg-trust-900 hover:bg-trust-700 transition duration-300 shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
         Back to Home
@@ -130,113 +183,17 @@
     <p>© 2025 Jeelani Trust. All Rights Reserved.</p>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-    // --- 1) Your images (from /assets/img/NQ and /assets/img/QZ) ---
-    const IMAGES = [
-      { src: "assets/img/NQ/Akbar Ali Suthan Swalath June 2023.webp" },
-      { src: "assets/img/NQ/Akbar Ali Suthan_Indian Independence Day Cebration 2024_ Nizamia Institute.webp" },
-      { src: "assets/img/NQ/Akbar Ali Suthan_Irada 2025.webp" },
-      { src: "assets/img/NQ/Baab Inauguration Swalath June 2024.webp" },
-      { src: "assets/img/NQ/Eidul Fitr April 2024.webp" },
-      { src: "assets/img/NQ/Eidul Fitr April 2025.webp" },
-      { src: "assets/img/NQ/Irada Conclave 2025.webp" },
-      { src: "assets/img/NQ/Mahan2.webp" },
-      { src: "assets/img/NQ/Swalath December 2024.webp" },
-      { src: "assets/img/NQ/Swalath February 2023.webp" },
-      { src: "assets/img/NQ/Swalath February 2025.webp" },
-      { src: "assets/img/NQ/Swalath July 2024.webp" },
-      { src: "assets/img/NQ/Swalath June 2023.webp" },
-      { src: "assets/img/NQ/Swalath Qctober 2024.webp" },
-      { src: "assets/img/QZ/Back Cover.webp" },
-      { src: "assets/img/QZ/Haj Ceremony in Mekkah.webp" },
-      { src: "assets/img/QZ/International Sufi Conference .webp" },
-      { src: "assets/img/QZ/International Sufi Conference 2016.webp" },
-      { src: "assets/img/QZ/Mahan.webp" },
-      { src: "assets/img/QZ/Nizamia Institute Hostel Inauguration Ceremony.webp" },
-      { src: "assets/img/QZ/Qthbuzzaman International Sufi Conference 1.webp" },
-      { src: "assets/img/QZ/Qthbuzzaman International Sufi Conference.webp" },
-      { src: "assets/img/QZ/Quthbuzzaman in Ajmeer.webp" },
-      { src: "assets/img/QZ/Quthbuzzaman With Grandchild of Ghousul Aa'lam.webp" },
-    ].map(it => ({
-      ...it,
-      alt: it.alt || it.src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ').trim()
-    }));
-
-    // --- 2) Render cards ---
-    const grid = document.getElementById('gallery-grid');
-    grid.innerHTML = IMAGES.map((img, i) => `
-      <div data-aos="zoom-in" data-aos-duration="1000"
-           class="group overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
-        <div class="overflow-hidden">
-          <img src="${img.src}" alt="${img.alt}"
-               data-index="${i}"
-               class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110 rounded-xl"
-               loading="lazy" decoding="async">
-        </div>
-      </div>
-    `).join('');
-
-    // --- 3) Lightbox with next/prev/caption ---
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    const lbCap = document.getElementById('lb-cap');
-    const btnPrev = document.getElementById('lb-prev');
-    const btnNext = document.getElementById('lb-next');
-    const btnClose = document.getElementById('lb-close');
-
-    let current = 0;
-
-    function openLB(index) {
-      current = index;
-      const item = IMAGES[current];
-      lbImg.src = item.src;
-      lbImg.alt = item.alt;
-      lbCap.textContent = item.alt;
-      lb.classList.remove('hidden');
-      lb.classList.add('flex');
-    }
-
-    function closeLB() {
-      lb.classList.add('hidden');
-      lb.classList.remove('flex');
-      lbImg.src = "";
-    }
-
-    function next() { openLB((current + 1) % IMAGES.length); }
-    function prev() { openLB((current - 1 + IMAGES.length) % IMAGES.length); }
-
-    document.querySelectorAll('.gallery-img').forEach(img => {
-      img.addEventListener('click', e => openLB(Number(e.target.dataset.index)));
-    });
-
-    btnNext.addEventListener('click', e => { e.stopPropagation(); next(); });
-    btnPrev.addEventListener('click', e => { e.stopPropagation(); prev(); });
-    btnClose.addEventListener('click', e => { e.stopPropagation(); closeLB(); });
-
-    lb.addEventListener('click', e => {
-      if (e.target === lb) closeLB();
-    });
-
-    document.addEventListener('keydown', e => {
-      if (lb.classList.contains('hidden')) return;
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'Escape') closeLB();
-    });
-  </script>
-
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/swalath.js"></script>
-  <script src="assets/js/day-remainder-arabic.js"></script>
-  <script src="assets/js/menu.js"></script>
-  <script src="assets/js/date.js"></script>
-  <script src="assets/js/scrollspy.js"></script>
-  <script src="assets/js/gallery-modal.js"></script>
-  <script src="assets/js/form-submission.js"></script>
-  <script src="assets/js/arabic-date-api.js"></script>
-  <script src="assets/js/add.js"></script>
-  <script src="assets/js/tailwind.config.js"></script>
+  <!-- Non-critical scripts marked defer -->
+  <script defer src="assets/js/main.js"></script>
+  <script defer src="assets/js/swalath.js"></script>
+  <script defer src="assets/js/day-remainder-arabic.js"></script>
+  <script defer src="assets/js/menu.js"></script>
+  <script defer src="assets/js/date.js"></script>
+  <script defer src="assets/js/scrollspy.js"></script>
+  <script defer src="assets/js/gallery-modal.js"></script>
+  <script defer src="assets/js/form-submission.js"></script>
+  <script defer src="assets/js/arabic-date-api.js"></script>
+  <script defer src="assets/js/add.js"></script>
+  <script defer src="assets/js/tailwind.config.js"></script>
 </body>
-
 </html>
