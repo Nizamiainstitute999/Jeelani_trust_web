@@ -4,11 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery | Jeelani Trust</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (Animate On Scroll) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
   <style>
     body { font-family: 'Segoe UI', sans-serif; }
-    .gallery img { transition: transform 0.3s ease; }
+    .gallery img { transition: transform 0.3s ease; cursor: zoom-in; }
     .gallery img:hover { transform: scale(1.05); }
+    /* Respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      [data-aos] { transition: none !important; transform: none !important; opacity: 1 !important; }
+    }
   </style>
 </head>
 
@@ -33,7 +41,7 @@
   <!-- Gallery -->
   <main class="flex-grow pt-[90px]">
     <section class="py-16 px-4 max-w-7xl mx-auto">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="700">
         <h1 class="text-3xl md:text-4xl font-cinzel font-bold">Jeelani Moments</h1>
         <p class="mt-3 text-gray-600 max-w-2xl mx-auto">
           Glimpses from our cherished events, gatherings, and milestones.
@@ -43,132 +51,156 @@
       <!-- Grid of images -->
       <div class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
 
+        <!-- Tip: width/height prevent layout shift; adjust if your source images differ -->
         <img src="assets/img/NQ/Akbar Ali Suthan Swalath June 2023.webp"
              alt="Akbar Ali Suthan Swalath June 2023"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="eager" fetchpriority="high" decoding="async">
 
         <img src="assets/img/NQ/Akbar Ali Suthan_Indian Independence Day Cebration 2024_ Nizamia Institute.webp"
-             alt="Akbar Ali Suthan Indian Independence Day Celebration 2024 Nizamia Institute"
+             alt="Akbar Ali Suthan Indian Independence Day Celebration 2024 — Nizamia Institute"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Akbar Ali Suthan_Irada 2025.webp"
-             alt="Akbar Ali Suthan Irada 2025"
+             alt="Akbar Ali Suthan — Irada 2025"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Baab Inauguration Swalath June 2024.webp"
-             alt="Baab Inauguration Swalath June 2024"
+             alt="Baab Inauguration — Swalath June 2024"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Eidul Fitr April 2024.webp"
-             alt="Eidul Fitr April 2024"
+             alt="Eidul Fitr — April 2024"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Eidul Fitr April 2025.webp"
-             alt="Eidul Fitr April 2025"
+             alt="Eidul Fitr — April 2025"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Irada Conclave 2025.webp"
              alt="Irada Conclave 2025"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Mahan2.webp"
              alt="Mahan 2"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Swalath December 2024.webp"
-             alt="Swalath December 2024"
+             alt="Swalath — December 2024"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Swalath February 2023.webp"
-             alt="Swalath February 2023"
+             alt="Swalath — February 2023"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Swalath February 2025.webp"
-             alt="Swalath February 2025"
+             alt="Swalath — February 2025"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Swalath July 2024.webp"
-             alt="Swalath July 2024"
+             alt="Swalath — July 2024"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Swalath June 2023.webp"
-             alt="Swalath June 2023"
+             alt="Swalath — June 2023"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-               loading="lazy"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/NQ/Swalath Qctober 2024.webp"
-             alt="Swalath october 2024"
+             alt="Swalath — October 2024"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Back Cover.webp"
              alt="Back Cover"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Haj Ceremony in Mekkah.webp"
-             alt="Haj Ceremony in Mekkah"
+             alt="Hajj Ceremony in Makkah"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/International Sufi Conference .webp"
              alt="International Sufi Conference"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/International Sufi Conference 2016.webp"
-             alt="International Sufi Conference 2016"
+             alt="International Sufi Conference — 2016"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Mahan.webp"
              alt="Mahan"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Nizamia Institute Hostel Inauguration Ceremony.webp"
              alt="Nizamia Institute Hostel Inauguration Ceremony"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Qthbuzzaman International Sufi Conference 1.webp"
-             alt="Quthbuzzaman International Sufi Conference 1"
+             alt="Quthbuzzaman — International Sufi Conference (1)"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Qthbuzzaman International Sufi Conference.webp"
-             alt="Quthbuzzaman International Sufi Conference"
+             alt="Quthbuzzaman — International Sufi Conference"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Quthbuzzaman in Ajmeer.webp"
-             alt="Quthbuzzaman in Ajmeer"
+             alt="Quthbuzzaman in Ajmer"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
         <img src="assets/img/QZ/Quthbuzzaman With Grandchild of Ghousul Aa'lam.webp"
-             alt="Quthbuzzaman With Grandchild of Ghousul Aa'lam"
+             alt="Quthbuzzaman with Grandchild of Ghous-ul A'lam"
              class="w-full aspect-[4/3] object-cover rounded-xl"
-           >
+             width="1600" height="1200"
+             loading="lazy" decoding="async">
 
       </div>
     </section>
 
     <!-- Back to Home -->
-    <div class="text-center mt-12">
+    <div class="text-center mt-12" data-aos="fade-up">
       <a href="index.html"
         class="inline-flex items-center gap-2 font-medium text-white px-6 py-3 rounded-lg bg-trust-900 hover:bg-trust-700 transition duration-300 shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -184,17 +216,119 @@
     <p>© 2025 Jeelani Trust. All Rights Reserved.</p>
   </footer>
 
-  <!-- Non-critical scripts marked defer -->
+  <!-- Lightbox Modal -->
+  <div id="lightbox"
+       class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[9999] hidden">
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl font-bold" aria-label="Close">&times;</button>
+
+    <div class="relative max-w-5xl w-full flex items-center justify-center px-10">
+      <button id="lightbox-prev"
+              class="absolute left-2 md:left-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full"
+              aria-label="Previous">&#10094;</button>
+
+      <img id="lightbox-img"
+           src=""
+           alt="Gallery Image"
+           class="max-h-[80vh] max-w-full rounded-lg shadow-lg object-contain select-none" />
+
+      <button id="lightbox-next"
+              class="absolute right-2 md:right-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full"
+              aria-label="Next">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Non-critical scripts marked defer (keep or remove as per your project) -->
   <script defer src="assets/js/main.js"></script>
   <script defer src="assets/js/swalath.js"></script>
   <script defer src="assets/js/day-remainder-arabic.js"></script>
   <script defer src="assets/js/menu.js"></script>
   <script defer src="assets/js/date.js"></script>
   <script defer src="assets/js/scrollspy.js"></script>
-  <script defer src="assets/js/gallery-modal.js"></script>
+  <!-- <script defer src="assets/js/gallery-modal.js"></script> -->
   <script defer src="assets/js/form-submission.js"></script>
   <script defer src="assets/js/arabic-date-api.js"></script>
   <script defer src="assets/js/add.js"></script>
   <script defer src="assets/js/tailwind.config.js"></script>
+
+  <!-- Inline lightbox + AOS setup -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelectorAll(".gallery img");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const closeBtn = document.getElementById("lightbox-close");
+      const prevBtn = document.getElementById("lightbox-prev");
+      const nextBtn = document.getElementById("lightbox-next");
+      let currentIndex = 0;
+
+      // --- AOS: assign animations to gallery images programmatically ---
+      // Stagger delays 0, 75, 150, 225, 300, 375ms in a loop
+      images.forEach((img, i) => {
+        const delay = (i % 6) * 75;
+        img.setAttribute("data-aos", "zoom-in");
+        img.setAttribute("data-aos-delay", String(delay));
+        img.setAttribute("data-aos-duration", "600");
+        img.setAttribute("data-aos-easing", "ease-out-cubic");
+        // Ensure lazy behavior
+        if (i > 0) {
+          img.setAttribute("loading", img.getAttribute("loading") || "lazy");
+          img.setAttribute("decoding", img.getAttribute("decoding") || "async");
+        }
+      });
+
+      // Init AOS after attributes are set
+      if (window.AOS) {
+        AOS.init({
+          once: true,           // animate only once
+          offset: 80,           // triggers slightly before entering
+          duration: 600,
+          easing: 'ease-out-cubic'
+        });
+      }
+
+      // --- Lightbox functions ---
+      function openLightbox(index) {
+        currentIndex = index;
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt || "Gallery Image";
+        lightbox.classList.remove("hidden");
+        document.documentElement.style.overflow = "hidden";
+      }
+      function closeLightbox() {
+        lightbox.classList.add("hidden");
+        document.documentElement.style.overflow = "";
+      }
+      function showNext() {
+        currentIndex = (currentIndex + 1) % images.length;
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt || "Gallery Image";
+      }
+      function showPrev() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt || "Gallery Image";
+      }
+
+      // Bind clicks
+      images.forEach((img, index) => img.addEventListener("click", () => openLightbox(index)));
+      closeBtn.addEventListener("click", closeLightbox);
+      nextBtn.addEventListener("click", showNext);
+      prevBtn.addEventListener("click", showPrev);
+
+      // Close on backdrop click
+      lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (lightbox.classList.contains("hidden")) return;
+        if (e.key === "ArrowRight") showNext();
+        if (e.key === "ArrowLeft") showPrev();
+        if (e.key === "Escape") closeLightbox();
+      });
+    });
+  </script>
 </body>
 </html>
