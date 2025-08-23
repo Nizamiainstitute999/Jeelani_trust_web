@@ -25,11 +25,6 @@
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Quicksand:wght@300..700&display=swap"
     rel="stylesheet">
   <script src="tailwind.config.js"></script>
@@ -37,141 +32,121 @@
     rel="stylesheet">
 
   <style>
+    /* Masonry with CSS columns */
+    .masonry > * { 
+      break-inside: avoid; 
+      -webkit-column-break-inside: avoid; 
+      page-break-inside: avoid; 
+    }
 
+    /* Image polish + paint optimizations */
+    .gallery img {
+      display: block; 
+      width: 100%; 
+      height: auto; 
+      border-radius: 0.75rem;
+      transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+      cursor: pointer;
+      content-visibility: auto;
+      contain-intrinsic-size: 400px 300px;
+    }
+    .gallery img:hover { 
+      transform: scale(1.03); 
+    }
 
-/* Masonry with CSS columns */
-.masonry > * { 
-  break-inside: avoid; 
-  -webkit-column-break-inside: avoid; 
-  page-break-inside: avoid; 
-}
+    /* Lightbox zoom canvas wrapper */
+    .zoom-wrap { 
+      transform-origin: 0 0; 
+      will-change: transform; 
+    }
 
-/* Image polish + paint optimizations */
-.gallery img {
-  display: block; 
-  width: 100%; 
-  height: auto; 
-  border-radius: 0.75rem;
-  transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
-  cursor: pointer;                     /* pointer, not lens */
-  content-visibility: auto;            /* render only when needed */
-  contain-intrinsic-size: 400px 300px; /* reserve space; reduce CLS */
-}
-.gallery img:hover { 
-  transform: scale(1.03); 
-}
+    @media (prefers-reduced-motion: reduce) {
+      [data-aos], .gallery img { 
+        transition: none !important; 
+        transform: none !important; 
+        opacity: 1 !important; 
+      }
+    }
 
-/* Chips scroller */
-.chips::-webkit-scrollbar { height: 8px; }
-.chips::-webkit-scrollbar-thumb { 
-  background: rgba(0,0,0,.12); 
-  border-radius: 999px; 
-}
+    /* -------- Lightbox Controls: arrows + close -------- */
 
-/* Lightbox zoom canvas wrapper */
-.zoom-wrap { 
-  transform-origin: 0 0; 
-  will-change: transform; 
-}
+    /* Remove zoom backgrounds/side gradients */
+    #lightbox::before, 
+    #lightbox::after { 
+      display: none !important; 
+    }
+    #zoomContainer { 
+      background: transparent !important; 
+    }
 
-@media (prefers-reduced-motion: reduce) {
-  [data-aos], .gallery img { 
-    transition: none !important; 
-    transform: none !important; 
-    opacity: 1 !important; 
-  }
-}
+    /* Lightbox navigation buttons (chevrons) */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex; align-items: center; justify-content: center;
+      width: 64px; height: 64px;
+      z-index: 10000;
+      color: #fff;
+      background: rgba(0,0,0,.65); 
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.35);
+      transition: background .15s ease, transform .08s ease, box-shadow .15s ease, opacity .15s ease;
+      opacity: 1;
+    }
+    .nav-btn:hover { 
+      background: rgba(0,0,0,.85); 
+      transform: translateY(-50%) scale(1.03); 
+    }
+    .nav-btn:active { 
+      transform: translateY(-50%) scale(.98); 
+    }
+    #lightbox-prev.nav-btn { 
+      left: max(16px, env(safe-area-inset-left)); 
+    }
+    #lightbox-next.nav-btn { 
+      right: max(16px, env(safe-area-inset-right)); 
+    }
 
-/* -------- Lightbox Controls: arrows + close -------- */
+    @media (max-width: 640px){
+      .nav-btn { width: 56px; height: 56px; }
+    }
 
-/* Remove zoom backgrounds/side gradients */
-#lightbox::before, 
-#lightbox::after { 
-  display: none !important; 
-}
-#zoomContainer { 
-  background: transparent !important; 
-}
+    /* Close (X) button */
+    .close-btn{
+      position: fixed;
+      top: max(14px, env(safe-area-inset-top)); 
+      right: max(14px, env(safe-area-inset-right));
+      z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px;
+      color: #fff; 
+      background: rgba(0,0,0,.65); 
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.35);
+      transition: background .15s ease, transform .08s ease;
+    }
+    .close-btn:hover { 
+      background: rgba(0,0,0,.85); 
+      transform: scale(1.03); 
+    }
+    .close-btn:active { 
+      transform: scale(.98); 
+    }
 
-/* Lightbox navigation buttons (chevrons) */
-.nav-btn {
-  position: fixed;                     /* fixed to viewport edges */
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex; align-items: center; justify-content: center;
-  width: 64px; height: 64px;
-  z-index: 10000;                      /* above everything */
-  color: #fff;
-  background: rgba(0,0,0,.65); 
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 999px;
-  box-shadow: 0 8px 28px rgba(0,0,0,.35);
-  transition: background .15s ease, transform .08s ease, box-shadow .15s ease, opacity .15s ease;
-  opacity: 1;
-}
-.nav-btn:hover { 
-  background: rgba(0,0,0,.85); 
-  transform: translateY(-50%) scale(1.03); 
-}
-.nav-btn:active { 
-  transform: translateY(-50%) scale(.98); 
-}
-#lightbox-prev.nav-btn { 
-  left: max(16px, env(safe-area-inset-left)); 
-}
-#lightbox-next.nav-btn { 
-  right: max(16px, env(safe-area-inset-right)); 
-}
+    #lightbox .nav-btn, 
+    #lightbox .close-btn { 
+      pointer-events: auto; 
+    }
 
-/* Bigger tap targets on small screens */
-@media (max-width: 640px){
-  .nav-btn { width: 56px; height: 56px; }
-}
-
-/* Close (X) button with better hit area */
-.close-btn{
-  position: fixed;                      /* fixed instead of absolute */
-  top: max(14px, env(safe-area-inset-top)); 
-  right: max(14px, env(safe-area-inset-right));
-  z-index: 10000;
-  display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px;
-  color: #fff; 
-  background: rgba(0,0,0,.65); 
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 999px;
-  box-shadow: 0 8px 28px rgba(0,0,0,.35);
-  transition: background .15s ease, transform .08s ease;
-}
-.close-btn:hover { 
-  background: rgba(0,0,0,.85); 
-  transform: scale(1.03); 
-}
-.close-btn:active { 
-  transform: scale(.98); 
-}
-
-/* Ensure controls clickable above image */
-#lightbox .nav-btn, 
-#lightbox .close-btn { 
-  pointer-events: auto; 
-}
-
-/* Keyboard focus ring */
-.nav-btn:focus-visible, 
-.close-btn:focus-visible {
-  outline: 3px solid rgba(255,255,255,.75);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(0,0,0,.4);
-}
-
-/* Lightbox image cursor: pointer when not zoomed; grab when zoomed */
-#lightbox-img { 
-  cursor: pointer; 
-}
-
+    /* Lightbox image cursor: pointer when not zoomed; grab when zoomed */
+    #lightbox-img { 
+      cursor: pointer; 
+    }
   </style>
 </head>
 
@@ -195,35 +170,31 @@
 
   <!-- Gallery -->
   <main class="flex-grow pt-[90px] mb-18">
-    <div class="text-center mb-6 md:mx-28 md:my-12" >
+    <div class="text-center mb-6 md:mx-28 md:my-12">
       <h1 class="font-bold text-trust-800 mb-8 text-center font-cormorant text-3xl uppercase">Treasured Jeelani Moments</h1>
-      
- 
-      <p class="mt-3 text-gray-600 max-w-2xl mx-auto font-quicksand">From heartfelt gatherings to historic milestones, these moments capture the spirit of Jeelani Trust. A celebration of togetherness, faith, and service — preserved for generations to cherish.</p>
+      <p class="mt-3 text-gray-600 max-w-2xl mx-auto font-quicksand">
+        From heartfelt gatherings to historic milestones, these moments capture the spirit of Jeelani Trust.
+        A celebration of togetherness, faith, and service — preserved for generations to cherish.
+      </p>
     </div>
 
     <!-- Filter + Sort Bar -->
-    <div class=" mb-6">
-      <div class=" border border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 p-3 md:p-4 shadow-sm">
+    <div class="mb-6">
+      <div class="border border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 p-3 md:p-4 shadow-sm">
         <div class="flex flex-col gap-4">
-          <!-- Category chips -->
-          <div class="flex items-center justify-between gap-3">
-            <div class="text-sm font-medium shrink-0">Categories</div>
-            <div class="chips relative flex-1 overflow-x-auto no-scrollbar flex gap-2 px-1" role="group" aria-label="Category filter">
-              <button data-cat="all" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm bg-trust-900 text-white shadow">
-                All
-              </button>
-              <button data-cat="NQ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
-                NQ
-              </button>
-              <button data-cat="QZ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
-                QZ
-              </button>
-            </div>
-          </div>
 
           <!-- Filters row -->
           <div class="flex flex-wrap items-end gap-3">
+            <!-- Category (dropdown) -->
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium" for="category">Category</label>
+              <select id="category" class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                <option value="all">All</option>
+                <option value="NQ">Naeb Quthubuzzaman</option>
+                <option value="QZ">Quthbuzzaman</option>
+              </select>
+            </div>
+
             <div class="flex items-center gap-2">
               <label class="text-sm font-medium" for="event">Event</label>
               <select id="event" class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
@@ -475,323 +446,320 @@
   <script src="assets/js/tailwind.config.js" defer></script>
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-  <!-- Inline lightbox + AOS + Filter + Sorting + Zoom (logic kept, small tweaks) -->
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const gallery = document.querySelector(".gallery");
-    const allImages = Array.from(gallery.querySelectorAll("img"));
+  <!-- Inline lightbox + AOS + Filter + Sorting + Zoom -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // ====== DOM refs ======
+  const gallery = document.querySelector(".gallery");
+  if (!gallery) return;
 
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const zoomWrap = document.getElementById("zoomContainer");
-    const closeBtn = document.getElementById("lightbox-close");
-    const prevBtn = document.getElementById("lightbox-prev");
-    const nextBtn = document.getElementById("lightbox-next");
-    const zoomInBtn = document.getElementById("zoomIn");
-    const zoomOutBtn = document.getElementById("zoomOut");
-    const zoomResetBtn = document.getElementById("zoomReset");
+  const allImages = Array.from(gallery.querySelectorAll("img"));
 
-    const sortSelect = document.getElementById("sort");
-    const resultCount = document.getElementById("resultCount");
-    const resetBtn = document.getElementById("resetFilters");
+  const sortSelect   = document.getElementById("sort");
+  const resultCount  = document.getElementById("resultCount");
+  const resetBtn     = document.getElementById("resetFilters");
+  const categorySel  = document.getElementById("category");
+  const eventSel     = document.getElementById("event");
+  const yearSel      = document.getElementById("year");
+  const searchInput  = document.getElementById("search");
 
-    // Filters
-    const catButtons = Array.from(document.querySelectorAll(".cat-btn"));
-    const eventSelect = document.getElementById("event");
-    const yearSelect  = document.getElementById("year");
-    const searchInput = document.getElementById("search");
+  // Lightbox + Zoom refs (unchanged)
+  const lightbox     = document.getElementById("lightbox");
+  const lightboxImg  = document.getElementById("lightbox-img");
+  const zoomWrap     = document.getElementById("zoomContainer");
+  const closeBtn     = document.getElementById("lightbox-close");
+  const prevBtn      = document.getElementById("lightbox-prev");
+  const nextBtn      = document.getElementById("lightbox-next");
+  const zoomInBtn    = document.getElementById("zoomIn");
+  const zoomOutBtn   = document.getElementById("zoomOut");
+  const zoomResetBtn = document.getElementById("zoomReset");
 
-    // Helpers
-    const norm = (v) => (v ?? "").toString().trim();
-    const normLower = (v) => norm(v).toLowerCase();
-    const normUpper = (v) => norm(v).toUpperCase();
+  // ====== Helpers ======
+  const norm  = (v) => (v ?? "").toString().trim();
+  const lower = (v) => norm(v).toLowerCase();
+  const upper = (v) => norm(v).toUpperCase();
 
-    // AOS
-    allImages.forEach((img, i) => {
-      const delay = (i % 6) * 75;
-      img.setAttribute("data-aos", "zoom-in");
-      img.setAttribute("data-aos-delay", String(delay));
-      img.setAttribute("data-aos-duration", "600");
-      img.setAttribute("data-aos-easing", "ease-out-cubic");
-      if (i > 0) {
-        img.setAttribute("loading", img.getAttribute("loading") || "lazy");
-        img.setAttribute("decoding", img.getAttribute("decoding") || "async");
-      }
-      if (!img.classList.contains("mb-5")) img.classList.add("mb-5");
+  // AOS (keep)
+  allImages.forEach((img, i) => {
+    const delay = (i % 6) * 75;
+    img.setAttribute("data-aos", "zoom-in");
+    img.setAttribute("data-aos-delay", String(delay));
+    img.setAttribute("data-aos-duration", "600");
+    img.setAttribute("data-aos-easing", "ease-out-cubic");
+    if (!img.hasAttribute("loading"))  img.setAttribute("loading","lazy");
+    if (!img.hasAttribute("decoding")) img.setAttribute("decoding","async");
+    if (!img.classList.contains("mb-5")) img.classList.add("mb-5");
+  });
+  if (window.AOS) AOS.init({ once: true, offset: 80, duration: 600, easing: "ease-out-cubic" });
+
+  // ====== Build filter options dynamically ======
+  function addOptions(select, values, {sort=true, mapLabel=(x)=>x} = {}) {
+    const firstText = "All";
+    select.innerHTML = "";
+    const optAll = document.createElement("option");
+    optAll.value = "all"; optAll.textContent = firstText;
+    select.appendChild(optAll);
+
+    const list = Array.from(values);
+    if (sort) list.sort((a,b)=> a.localeCompare(b, undefined, {numeric:true, sensitivity:"base"}));
+    list.forEach(v=>{
+      const opt = document.createElement("option");
+      opt.value = v;
+      opt.textContent = mapLabel(v);
+      select.appendChild(opt);
     });
-    if (window.AOS) AOS.init({ once: true, offset: 80, duration: 600, easing: 'ease-out-cubic' });
+  }
 
-    // ---------- Filters ----------
-    let state = { category: "all", event: "all", year: "all", search: "" };
+  const categories = new Set();
+  const events     = new Set();
+  const years      = new Set();
+  let hasUnknownYear = false;
 
-    function matchesFilters(img) {
-      const cat   = normUpper(img.dataset.category);
-      const event = normLower(img.dataset.event);
-      const year  = norm(img.dataset.year);
-      const title = normLower(img.dataset.title || img.alt);
-      const catOk   = state.category === "all" || cat === state.category;
-      const eventOk = state.event === "all"    || event === state.event;
-      const yearOk  = state.year  === "all"    || year === state.year;
-      const searchOk= !state.search || title.includes(state.search);
-      return catOk && eventOk && yearOk && searchOk;
-    }
+  allImages.forEach(img=>{
+    const c = upper(img.dataset.category);
+    if (c) categories.add(c);
+    const e = norm(img.dataset.event);
+    if (e) events.add(e);
+    const y = norm(img.dataset.year);
+    if (y) years.add(y); else hasUnknownYear = true;
 
-    function applyFilters() {
-      let visible = 0;
-      const counts = { all: allImages.length, NQ: 0, QZ: 0 };
-      allImages.forEach(img => {
-        const show = matchesFilters(img);
-        img.classList.toggle("hidden", !show);
-        if (show) {
-          visible++;
-          const c = img.dataset.category;
-          if (c === 'NQ') counts.NQ++; else if (c === 'QZ') counts.QZ++;
-        }
-      });
-      resultCount.textContent = `Showing ${visible} of ${allImages.length}`;
-      catButtons.forEach(btn => {
-        const cat = (btn.dataset.cat || '').toUpperCase();
-        const el = btn.querySelector('.count');
-        if (!el) return;
-        el.classList.remove('hidden');
-        el.textContent = cat === 'ALL' ? visible : (cat === 'NQ' ? counts.NQ : counts.QZ);
-      });
-      if (window.AOS && AOS.refresh) requestAnimationFrame(() => AOS.refresh());
-    }
+    // Normalize a few common typos silently:
+    if (img.dataset.event && lower(img.dataset.event) === "back cover") img.dataset.event = "BackCover";
+  });
 
-    // Category pills
-    catButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        catButtons.forEach(b => b.classList.remove("bg-gray-900","text-white","shadow","border-gray-900"));
-        btn.classList.add("bg-gray-900","text-white","shadow","border-gray-900");
-        const raw = btn.dataset.cat || "all";
-        state.category = raw.toUpperCase() === "ALL" ? "all" : normUpper(raw);
-        applyFilters();
-      });
-    });
-    // initial
-    const allBtn = catButtons.find(b => normLower(b.dataset.cat) === "all");
-    if (allBtn) allBtn.click(); else applyFilters();
+  addOptions(categorySel, categories, { sort:true });
+  addOptions(eventSel, events, { sort:true });
+  addOptions(yearSel, years, { sort:true });
+  if (hasUnknownYear) {
+    const opt = document.createElement("option");
+    opt.value = "__unknown__"; opt.textContent = "Unknown";
+    yearSel.appendChild(opt);
+  }
+  categorySel.value = "all";
+  eventSel.value    = "all";
+  yearSel.value     = "all";
 
-    eventSelect.addEventListener("change", () => {
-      state.event = eventSelect.value === "all" ? "all" : normLower(eventSelect.value);
-      applyFilters();
-    });
-    yearSelect.addEventListener("change", () => {
-      state.year = yearSelect.value;
-      applyFilters();
-    });
+  // ====== State ======
+  let state = { category:"all", event:"all", year:"all", search:"" };
 
-    // Search (debounced)
-    let searchTimer;
-    searchInput.addEventListener("input", () => {
-      clearTimeout(searchTimer);
-      searchTimer = setTimeout(() => {
-        state.search = normLower(searchInput.value);
-        applyFilters();
-      }, 150);
-    });
+  function matches(img) {
+    const cat   = upper(img.dataset.category);          // e.g., NQ/QZ
+    const ev    = norm(img.dataset.event);              // keep case, compare lower
+    const yrRaw = norm(img.dataset.year);
+    const yr    = yrRaw || "__unknown__";
+    const title = lower(img.dataset.title || img.alt);
 
-    // Reset
-    resetBtn.addEventListener("click", () => {
-      if (allBtn) allBtn.click();
-      eventSelect.value = "all";
-      yearSelect.value = "all";
-      searchInput.value = "";
-      sortSelect.value = "default";
-      state = { category: "all", event: "all", year: "all", search: "" };
-      sortAndRender("default");
-      applyFilters();
-    });
+    const catOK = state.category === "all" || cat === upper(state.category);
+    const evOK  = state.event    === "all" || lower(ev) === lower(state.event);
+    const yrOK  = state.year     === "all" || yr === state.year;
+    const qOK   = !state.search || title.includes(state.search);
 
-    // ---------- Sorting ----------
-    const originalOrder = Array.from(gallery.children);
-    const parseDateSafe = (s) => {
-      const t = Date.parse(norm(s));
-      return Number.isNaN(t) ? NaN : t;
-    };
+    return catOK && evOK && yrOK && qOK;
+  }
 
-    function sortAndRender(mode) {
-      if (mode === "default") {
-        originalOrder.forEach(node => gallery.appendChild(node));
-      } else {
-        const imgs = Array.from(gallery.querySelectorAll("img"));
-        let cmp;
-        if (mode === "title") {
-          cmp = (a,b)=> norm(a.dataset.title).localeCompare(norm(b.dataset.title));
-        } else if (mode === "title-desc") {
-          cmp = (a,b)=> norm(b.dataset.title).localeCompare(norm(a.dataset.title));
-        } else if (mode === "date" || mode === "date-asc") {
-          cmp = (a,b)=> {
-            const ad = parseDateSafe(a.dataset.date);
-            const bd = parseDateSafe(b.dataset.date);
-            if (Number.isNaN(ad) && Number.isNaN(bd)) return 0;
-            if (Number.isNaN(ad)) return 1;
-            if (Number.isNaN(bd)) return -1;
-            return mode === "date" ? (bd - ad) : (ad - bd);
-          };
-        }
-        imgs.sort(cmp).forEach(img => gallery.appendChild(img));
-      }
-      if (window.AOS && AOS.refresh) requestAnimationFrame(() => AOS.refresh());
-    }
-    sortSelect.addEventListener("change", (e)=> sortAndRender(e.target.value));
-
-    // ---------- Lightbox (visible-only navigation) ----------
-    const getVisibleImages = () => allImages.filter(img => !img.classList.contains("hidden"));
-    let currentIndex = 0;
-
-    function setLightboxSrc(imgEl) {
-      lightboxImg.src = imgEl.src;
-      lightboxImg.alt = imgEl.alt || "Gallery Image";
-    }
-
-    function openLightbox(index, list) {
-      const visible = list || getVisibleImages();
-      if (!visible.length) return;
-      currentIndex = index;
-      setLightboxSrc(visible[currentIndex]);
-      lightbox.classList.remove("hidden");
-      document.documentElement.style.overflow = "hidden";
-      resetZoom();
-    }
-    function closeLightbox() {
-      lightbox.classList.add("hidden");
-      document.documentElement.style.overflow = "";
-    }
-    function showNext() {
-      const list = getVisibleImages();
-      if (!list.length) return;
-      currentIndex = (currentIndex + 1) % list.length;
-      setLightboxSrc(list[currentIndex]);
-      resetZoom();
-    }
-    function showPrev() {
-      const list = getVisibleImages();
-      if (!list.length) return;
-      currentIndex = (currentIndex - 1 + list.length) % list.length;
-      setLightboxSrc(list[currentIndex]);
-      resetZoom();
-    }
+  function applyFilters() {
+    let visible = 0;
 
     allImages.forEach(img => {
-      img.addEventListener("click", () => {
-        const visible = getVisibleImages();
-        const idx = visible.indexOf(img);
-        if (idx !== -1) openLightbox(idx, visible);
-      });
+      const show = matches(img);
+      // Use display, not just Tailwind "hidden", to be extra safe with CSS columns
+      img.style.display = show ? "" : "none";
+      // mark for debugging
+      img.dataset.match = show ? "1" : "0";
+      if (show) visible++;
     });
 
-    // Button handlers
-    closeBtn.addEventListener("click", closeLightbox);
-    nextBtn.addEventListener("click", showNext);
-    prevBtn.addEventListener("click", showPrev);
-    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener("keydown", (e) => {
-      if (lightbox.classList.contains("hidden")) return;
-      if (e.key === "ArrowRight") showNext();
-      if (e.key === "ArrowLeft") showPrev();
-      if (e.key === "Escape") closeLightbox();
-    });
+    if (resultCount) resultCount.textContent = `Showing ${visible} of ${allImages.length}`;
+    if (window.AOS && AOS.refresh) requestAnimationFrame(()=>AOS.refresh());
 
-    // ---------- Zoom/Pan ----------
-    let scale = 1, minScale = 1, maxScale = 8;
-    let originX = 0, originY = 0;
-    let isPanning = false, startX=0, startY=0;
+    // Debug snapshot (open DevTools > Console to see)
+    console.debug("[Gallery] Filters", JSON.stringify(state));
+    console.debug("[Gallery] Visible count:", visible);
+  }
 
-    function applyTransform() {
-      lightboxImg.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
-      lightboxImg.style.transformOrigin = '0 0';
-      // cursor states: grab when zoomed, pointer when not
-      lightboxImg.style.cursor = scale > 1 ? (isPanning ? 'grabbing' : 'grab') : 'pointer';
-    }
-    function resetZoom() { scale = 1; originX = 0; originY = 0; applyTransform(); }
-
-    function zoomAt(clientX, clientY, deltaScale) {
-      const rect = lightboxImg.getBoundingClientRect();
-      const x = clientX - rect.left - originX;
-      const y = clientY - rect.top  - originY;
-      const newScale = Math.min(maxScale, Math.max(minScale, scale * deltaScale));
-      if (newScale === scale) return;
-      originX -= (x * (newScale/scale - 1));
-      originY -= (y * (newScale/scale - 1));
-      scale = newScale;
-      clampPan();
-      applyTransform();
-    }
-
-    function clampPan() {
-      const rect = zoomWrap.getBoundingClientRect();
-      const imgW = rect.width * scale;
-      const imgH = rect.height * scale;
-      const maxX = Math.max(0, (imgW - rect.width));
-      const maxY = Math.max(0, (imgH - rect.height));
-      originX = Math.min(0, Math.max(-maxX, originX));
-      originY = Math.min(0, Math.max(-maxY, originY));
-    }
-
-    // Wheel zoom
-    zoomWrap.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const factor = e.deltaY < 0 ? 1.2 : 1/1.2;
-      zoomAt(e.clientX, e.clientY, factor);
-    }, { passive: false });
-
-    // Buttons
-    zoomInBtn.addEventListener('click', ()=> zoomAt(window.innerWidth/2, window.innerHeight/2, 1.2));
-    zoomOutBtn.addEventListener('click',()=> zoomAt(window.innerWidth/2, window.innerHeight/2, 1/1.2));
-    zoomResetBtn.addEventListener('click', resetZoom);
-
-    // Drag to pan
-    lightboxImg.addEventListener('pointerdown', (e)=>{
-      if (scale <= 1) return;
-      isPanning = true;
-      lightboxImg.setPointerCapture(e.pointerId);
-      startX = e.clientX - originX; startY = e.clientY - originY;
-      applyTransform(); // set grabbing
-    });
-    lightboxImg.addEventListener('pointermove', (e)=>{
-      if (!isPanning) return;
-      originX = e.clientX - startX; originY = e.clientY - startY;
-      clampPan(); applyTransform();
-    });
-    const endPan = ()=>{ isPanning=false; applyTransform(); };
-    lightboxImg.addEventListener('pointerup', endPan);
-    lightboxImg.addEventListener('pointercancel', endPan);
-
-    // Double-click / double-tap to zoom
-    let lastTap = 0;
-    lightboxImg.addEventListener('click', (e)=>{
-      const now = Date.now();
-      if (now - lastTap < 300) { // double
-        const next = scale >= 2 ? 1 : 2;
-        zoomAt(e.clientX, e.clientY, next/scale);
-      }
-      lastTap = now;
-    });
-
-    // Pinch to zoom (touch)
-    let pointers = new Map();
-    zoomWrap.addEventListener('pointerdown', (e)=>{ pointers.set(e.pointerId, e); zoomWrap.setPointerCapture(e.pointerId); });
-    zoomWrap.addEventListener('pointermove', (e)=>{
-      if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, e);
-      if (pointers.size === 2) {
-        const [p1, p2] = Array.from(pointers.values());
-        const dist = Math.hypot(p2.clientX - p1.clientX, p2.clientY - p1.clientY);
-        if (!zoomWrap._lastDist) zoomWrap._lastDist = dist;
-        const factor = dist / zoomWrap._lastDist; // >1 zoom in
-        const cx = (p1.clientX + p2.clientX)/2; const cy = (p1.clientY + p2.clientY)/2;
-        zoomAt(cx, cy, factor);
-        zoomWrap._lastDist = dist;
-      }
-    });
-    ['pointerup','pointercancel','pointerleave'].forEach(type=> zoomWrap.addEventListener(type, (e)=>{
-      pointers.delete(e.pointerId); if (pointers.size < 2) zoomWrap._lastDist = null;
-    }));
-
-    // Initial paint
+  // ====== Wire controls ======
+  categorySel.addEventListener("change", () => {
+    state.category = categorySel.value;  // "all", "NQ", "QZ"
     applyFilters();
   });
-  </script>
+  eventSel.addEventListener("change", () => {
+    state.event = eventSel.value;        // "all" or event label
+    applyFilters();
+  });
+  yearSel.addEventListener("change", () => {
+    state.year = yearSel.value;          // "all" | "2024" | "__unknown__"
+    applyFilters();
+  });
+
+  let searchTimer;
+  searchInput.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      state.search = lower(searchInput.value);
+      applyFilters();
+    }, 150);
+  });
+
+  resetBtn.addEventListener("click", () => {
+    categorySel.value = "all";
+    eventSel.value    = "all";
+    yearSel.value     = "all";
+    searchInput.value = "";
+    if (sortSelect) sortSelect.value  = "default";
+    state = { category:"all", event:"all", year:"all", search:"" };
+    sortAndRender("default");
+    applyFilters();
+  });
+
+  // ====== Sorting ======
+  const originalOrder = Array.from(gallery.children);
+  const parseDateSafe = (s)=> { const t = Date.parse(norm(s)); return Number.isNaN(t) ? NaN : t; };
+
+  function sortAndRender(mode) {
+    if (mode === "default") {
+      originalOrder.forEach(node => gallery.appendChild(node));
+    } else {
+      const imgs = Array.from(gallery.querySelectorAll("img"));
+      let cmp = (a,b)=>0;
+      if (mode === "title") {
+        cmp = (a,b)=> norm(a.dataset.title).localeCompare(norm(b.dataset.title));
+      } else if (mode === "title-desc") {
+        cmp = (a,b)=> norm(b.dataset.title).localeCompare(norm(a.dataset.title));
+      } else if (mode === "date" || mode === "date-asc") {
+        cmp = (a,b)=> {
+          const ad = parseDateSafe(a.dataset.date);
+          const bd = parseDateSafe(b.dataset.date);
+          if (Number.isNaN(ad) && Number.isNaN(bd)) return 0;
+          if (Number.isNaN(ad)) return 1;
+          if (Number.isNaN(bd)) return -1;
+          return mode === "date" ? (bd - ad) : (ad - bd);
+        };
+      }
+      imgs.sort(cmp).forEach(img => gallery.appendChild(img));
+    }
+    if (window.AOS && AOS.refresh) requestAnimationFrame(()=>AOS.refresh());
+  }
+  if (sortSelect) sortSelect.addEventListener("change", (e)=> { sortAndRender(e.target.value); applyFilters(); });
+
+  // ====== Lightbox (unchanged) ======
+  const getVisibleImages = ()=> allImages.filter(img => img.style.display !== "none");
+  let currentIndex = 0;
+  function setLightboxSrc(imgEl){ lightboxImg.src = imgEl.src; lightboxImg.alt = imgEl.alt || "Gallery Image"; }
+  function openLightbox(index, list){
+    const visible = list || getVisibleImages(); if (!visible.length) return;
+    currentIndex = index; setLightboxSrc(visible[currentIndex]);
+    lightbox.classList.remove("hidden");
+    document.documentElement.style.overflow = "hidden";
+    resetZoom();
+  }
+  function closeLightbox(){ lightbox.classList.add("hidden"); document.documentElement.style.overflow = ""; }
+  function showNext(){ const list = getVisibleImages(); if (!list.length) return; currentIndex = (currentIndex+1)%list.length; setLightboxSrc(list[currentIndex]); resetZoom(); }
+  function showPrev(){ const list = getVisibleImages(); if (!list.length) return; currentIndex = (currentIndex-1+list.length)%list.length; setLightboxSrc(list[currentIndex]); resetZoom(); }
+
+  allImages.forEach(img=>{
+    img.addEventListener("click", ()=>{
+      const visible = getVisibleImages();
+      const idx = visible.indexOf(img);
+      if (idx !== -1) openLightbox(idx, visible);
+    });
+  });
+  closeBtn.addEventListener("click", closeLightbox);
+  nextBtn.addEventListener("click", showNext);
+  prevBtn.addEventListener("click", showPrev);
+  lightbox.addEventListener("click", (e)=>{ if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener("keydown", (e)=>{
+    if (lightbox.classList.contains("hidden")) return;
+    if (e.key === "ArrowRight") showNext();
+    if (e.key === "ArrowLeft") showPrev();
+    if (e.key === "Escape") closeLightbox();
+  });
+
+  // ====== Zoom/Pan (unchanged) ======
+  let scale=1, minScale=1, maxScale=8;
+  let originX=0, originY=0;
+  let isPanning=false, startX=0, startY=0;
+
+  function applyTransform(){
+    lightboxImg.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
+    lightboxImg.style.transformOrigin = "0 0";
+    lightboxImg.style.cursor = scale>1 ? (isPanning ? "grabbing" : "grab") : "pointer";
+  }
+  function resetZoom(){ scale=1; originX=0; originY=0; applyTransform(); }
+  function zoomAt(clientX, clientY, deltaScale){
+    const rect = lightboxImg.getBoundingClientRect();
+    const x = clientX - rect.left - originX;
+    const y = clientY - rect.top  - originY;
+    const newScale = Math.min(maxScale, Math.max(minScale, scale * deltaScale));
+    if (newScale === scale) return;
+    originX -= (x * (newScale/scale - 1));
+    originY -= (y * (newScale/scale - 1));
+    scale = newScale;
+    clampPan(); applyTransform();
+  }
+  function clampPan(){
+    const rect = zoomWrap.getBoundingClientRect();
+    const imgW = rect.width * scale;
+    const imgH = rect.height * scale;
+    const maxX = Math.max(0, imgW - rect.width);
+    const maxY = Math.max(0, imgH - rect.height);
+    originX = Math.min(0, Math.max(-maxX, originX));
+    originY = Math.min(0, Math.max(-maxY, originY));
+  }
+  zoomWrap.addEventListener("wheel", (e)=>{
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.2 : 1/1.2;
+    zoomAt(e.clientX, e.clientY, factor);
+  }, {passive:false});
+  zoomInBtn.addEventListener("click", ()=> zoomAt(window.innerWidth/2, window.innerHeight/2, 1.2));
+  zoomOutBtn.addEventListener("click",()=> zoomAt(window.innerWidth/2, window.innerHeight/2, 1/1.2));
+  zoomResetBtn.addEventListener("click", resetZoom);
+  lightboxImg.addEventListener("pointerdown", (e)=>{
+    if (scale <= 1) return;
+    isPanning = true;
+    lightboxImg.setPointerCapture(e.pointerId);
+    startX = e.clientX - originX; startY = e.clientY - originY;
+    applyTransform();
+  });
+  lightboxImg.addEventListener("pointermove", (e)=>{
+    if (!isPanning) return;
+    originX = e.clientX - startX; originY = e.clientY - startY;
+    clampPan(); applyTransform();
+  });
+  const endPan = ()=>{ isPanning=false; applyTransform(); };
+  lightboxImg.addEventListener("pointerup", endPan);
+  lightboxImg.addEventListener("pointercancel", endPan);
+  let lastTap = 0;
+  lightboxImg.addEventListener("click", (e)=>{
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      const next = scale >= 2 ? 1 : 2;
+      zoomAt(e.clientX, e.clientY, next/scale);
+    }
+    lastTap = now;
+  });
+  let pointers = new Map();
+  zoomWrap.addEventListener("pointerdown", (e)=>{ pointers.set(e.pointerId, e); zoomWrap.setPointerCapture(e.pointerId); });
+  zoomWrap.addEventListener("pointermove", (e)=>{
+    if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, e);
+    if (pointers.size === 2) {
+      const [p1, p2] = Array.from(pointers.values());
+      const dist = Math.hypot(p2.clientX - p1.clientX, p2.clientY - p1.clientY);
+      if (!zoomWrap._lastDist) zoomWrap._lastDist = dist;
+      const factor = dist / zoomWrap._lastDist;
+      const cx = (p1.clientX + p2.clientX)/2; const cy = (p1.clientY + p2.clientY)/2;
+      zoomAt(cx, cy, factor);
+      zoomWrap._lastDist = dist;
+    }
+  });
+  ["pointerup","pointercancel","pointerleave"].forEach(t=> zoomWrap.addEventListener(t, (e)=>{
+    pointers.delete(e.pointerId); if (pointers.size < 2) zoomWrap._lastDist = null;
+  }));
+
+  // First paint
+  applyFilters();
+});
+</script>
+
+
 </body>
 </html>
