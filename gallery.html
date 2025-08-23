@@ -14,16 +14,15 @@
     /* Masonry with CSS columns */
     .masonry > * { break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid; }
 
-    /* Image polish */
+    /* Image polish + paint optimizations */
     .gallery img {
       display: block; width: 100%; height: auto; border-radius: 0.75rem;
       transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
-      cursor: zoom-in;
+      cursor: pointer;                     /* pointer, not lens */
+      content-visibility: auto;            /* render only when needed */
+      contain-intrinsic-size: 400px 300px; /* reserve space; reduce CLS */
     }
     .gallery img:hover { transform: scale(1.03); }
-
-
-
 
     /* Chips scroller */
     .chips::-webkit-scrollbar { height: 8px; }
@@ -35,6 +34,61 @@
     @media (prefers-reduced-motion: reduce) {
       [data-aos], .gallery img { transition: none !important; transform: none !important; opacity: 1 !important; }
     }
+
+    /* -------- Lightbox Controls: arrows + close -------- */
+
+    /* Remove any zoom backgrounds/side gradients */
+    #lightbox::before, #lightbox::after { display: none !important; }
+    #zoomContainer { background: transparent !important; }
+
+    /* Lightbox navigation buttons (chevrons) */
+    .nav-btn{
+      position:absolute; top:50%; transform:translateY(-50%);
+      display:flex; align-items:center; justify-content:center;
+      width:64px; height:64px; z-index:10;
+      color:#fff; background:rgba(0,0,0,.65); backdrop-filter: blur(4px);
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px; padding:0; margin:0;
+      box-shadow:0 8px 28px rgba(0,0,0,.35);
+      transition:background .15s ease, transform .08s ease, box-shadow .15s ease, opacity .15s ease;
+      opacity:1;
+    }
+    .nav-btn:hover{ background:rgba(0,0,0,.85); transform:translateY(-50%) scale(1.03); }
+    .nav-btn:active{ transform:translateY(-50%) scale(.98); }
+    #lightbox-prev.nav-btn{ left:16px; }
+    #lightbox-next.nav-btn{ right:16px; }
+
+    /* Bigger tap targets on small screens */
+    @media (max-width: 640px){
+      .nav-btn{ width:56px; height:56px; }
+    }
+
+    /* Close (X) button with better hit area */
+    .close-btn{
+      position:absolute; top:14px; right:14px; z-index:10;
+      display:flex; align-items:center; justify-content:center;
+      width:44px; height:44px;
+      color:#fff; background:rgba(0,0,0,.65); backdrop-filter: blur(4px);
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px;
+      box-shadow:0 8px 28px rgba(0,0,0,.35);
+      transition:background .15s ease, transform .08s ease;
+    }
+    .close-btn:hover{ background:rgba(0,0,0,.85); transform:scale(1.03); }
+    .close-btn:active{ transform:scale(.98); }
+
+    /* Ensure controls are clickable above image */
+    #lightbox .nav-btn, #lightbox .close-btn { pointer-events:auto; }
+
+    /* Keyboard focus ring */
+    .nav-btn:focus-visible, .close-btn:focus-visible{
+      outline: 3px solid rgba(255,255,255,.75);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(0,0,0,.4);
+    }
+
+    /* Lightbox image cursor: pointer when not zoomed; grab when zoomed (JS toggles) */
+    #lightbox-img{ cursor: pointer; }
   </style>
 </head>
 
@@ -58,31 +112,26 @@
 
   <!-- Gallery -->
   <main class="flex-grow pt-[90px]">
-    <!-- Wider container + smaller padding = reduced side margins -->
     <div class="text-center mb-6 md:mb-8" data-aos="fade-up" data-aos-duration="700">
       <h1 class="text-3xl md:text-4xl font-cinzel font-bold">Jeelani Moments</h1>
       <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Glimpses from our cherished events, gatherings, and milestones.</p>
     </div>
 
-    <!-- Filter + Sort Bar (Redesigned) -->
+    <!-- Filter + Sort Bar -->
     <div class=" mb-6">
       <div class=" border border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 p-3 md:p-4 shadow-sm">
         <div class="flex flex-col gap-4">
-          <!-- Category chips: modern, scrollable -->
+          <!-- Category chips -->
           <div class="flex items-center justify-between gap-3">
             <div class="text-sm font-medium shrink-0">Categories</div>
             <div class="chips relative flex-1 overflow-x-auto no-scrollbar flex gap-2 px-1" role="group" aria-label="Category filter">
-              <!-- Chips injected by JS for active styles -->
               <button data-cat="all" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm bg-trust-900 text-white shadow">
-               
                 All <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-white/20">0</span>
               </button>
               <button data-cat="NQ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
-               
                 NQ <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-gray-100">0</span>
               </button>
               <button data-cat="QZ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
-               
                 QZ <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-gray-100">0</span>
               </button>
             </div>
@@ -140,8 +189,8 @@
         </div>
       </div>
     </div>
-    <section class="py-10 px-2 sm:px-3 max-w-7xl md:max-w-screen-2xl mx-auto">
 
+    <section class="py-10 px-2 sm:px-3 max-w-7xl md:max-w-screen-2xl mx-auto">
       <!-- Masonry container -->
       <div class="gallery masonry columns-1 sm:columns-2 md:columns-3 xl:columns-4 gap-3 md:gap-5">
 
@@ -209,12 +258,14 @@
         <img src="assets/img/NQ/Swalath June 2023.webp"
              alt="Swalath — June 2023" width="1600" height="1200"
              data-title="Swalath — June 2023" data-date="2023-06-01"
-             data-category="NQ" data-event="Swalath" data-year="2023" loading="lazy" decoding="async" class="mb-5">
+             data-category="NQ" data-event="Swalath" data-year="2023"
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Swalath Qctober 2024.webp"
              alt="Swalath — October 2024" width="1600" height="1200"
              data-title="Swalath — October 2024" data-date="2024-10-01"
-             data-category="NQ" data-event="Swalath" data-year="2024" loading="lazy" decoding="async" class="mb-5">
+             data-category="NQ" data-event="Swalath" data-year="2024"
+             loading="lazy" decoding="async" class="mb-5">
 
         <!-- QZ -->
         <img src="assets/img/QZ/Back Cover.webp"
@@ -266,7 +317,6 @@
              alt="Quthbuzzaman with Grandchild of Ghous-ul A'lam" width="1600" height="1200"
              data-title="Quthbuzzaman with Grandchild of Ghous-ul A'lam" data-category="QZ" data-event="Conference" data-year=""
              loading="lazy" decoding="async" class="mb-5">
-
       </div>
     </section>
 
@@ -274,7 +324,7 @@
     <div class="text-center mt-10" data-aos="fade-up">
       <a href="index.html"
         class="inline-flex items-center gap-2 font-medium text-white px-6 py-3 rounded-lg bg-gray-900 hover:bg-gray-800 transition duration-300 shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
         Back to Home
@@ -289,7 +339,12 @@
 
   <!-- Lightbox Modal with Zoom Controls -->
   <div id="lightbox" class="fixed inset-0 bg-trust-800/90 flex items-center justify-center z-[9999] hidden">
-    <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl font-bold" aria-label="Close">&times;</button>
+    <!-- Upgraded Close Button -->
+    <button id="lightbox-close" class="close-btn" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </button>
 
     <!-- Zoom controls -->
     <div class="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2">
@@ -299,33 +354,43 @@
     </div>
 
     <div class="relative max-w-6xl w-full max-h-[86vh] h-[86vh] flex items-center justify-center px-4">
-      <button id="lightbox-prev" class="absolute left-2 md:left-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full" aria-label="Previous">&#10094;</button>
+      <!-- Prev (SVG chevron) -->
+      <button id="lightbox-prev" class="nav-btn" aria-label="Previous">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
 
-      <!-- Zooming container -->
-      <div id="zoomContainer" class="zoom-wrap w-full h-full overflow-hidden rounded-lg shadow-lg bg-black/40">
+      <!-- Zooming container (no bg) -->
+      <div id="zoomContainer" class="zoom-wrap w-full h-full overflow-hidden rounded-lg shadow-lg">
         <img id="lightbox-img" src="" alt="Gallery Image" class="max-w-none select-none object-contain w-full h-full" />
       </div>
 
-      <button id="lightbox-next" class="absolute right-2 md:right-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full" aria-label="Next">&#10095;</button>
+      <!-- Next (SVG chevron) -->
+      <button id="lightbox-next" class="nav-btn" aria-label="Next">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
+          <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/swalath.js"></script>
-  <script src="assets/js/day-remainder-arabic.js"></script>
-  <script src="assets/js/menu.js"></script>
-  <script src="assets/js/date.js"></script>
-  <script src="assets/js/scrollspy.js"></script>
-  <!-- <script src="assets/js/special-redirect.js"></script> -->
-  <script src="assets/js/gallery-modal.js"></script>
-  <script src="assets/js/form-submission.js"></script>
-  <script src="assets/js/arabic-date-api.js"></script>
-  <script src="assets/js/add.js"></script>
-  <script src="assets/js/tailwind.config.js"></script>
+  <!-- Scripts (UNCHANGED LIST, only defer for perf) -->
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/swalath.js" defer></script>
+  <script src="assets/js/day-remainder-arabic.js" defer></script>
+  <script src="assets/js/menu.js" defer></script>
+  <script src="assets/js/date.js" defer></script>
+  <script src="assets/js/scrollspy.js" defer></script>
+  <!-- <script src="assets/js/special-redirect.js" defer></script> -->
+  <script src="assets/js/gallery-modal.js" defer></script>
+  <script src="assets/js/form-submission.js" defer></script>
+  <script src="assets/js/arabic-date-api.js" defer></script>
+  <script src="assets/js/add.js" defer></script>
+  <script src="assets/js/tailwind.config.js" defer></script>
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-  <!-- Inline lightbox + AOS + Filter + Sorting + Zoom -->
+  <!-- Inline lightbox + AOS + Filter + Sorting + Zoom (logic kept, small tweaks) -->
   <script>
   document.addEventListener("DOMContentLoaded", () => {
     const gallery = document.querySelector(".gallery");
@@ -356,15 +421,13 @@
     const normLower = (v) => norm(v).toLowerCase();
     const normUpper = (v) => norm(v).toUpperCase();
 
-    // AOS + blur-up setup
+    // AOS
     allImages.forEach((img, i) => {
       const delay = (i % 6) * 75;
       img.setAttribute("data-aos", "zoom-in");
       img.setAttribute("data-aos-delay", String(delay));
       img.setAttribute("data-aos-duration", "600");
       img.setAttribute("data-aos-easing", "ease-out-cubic");
-      img.classList.add("img-loading");
-      img.addEventListener("load", () => img.classList.remove("img-loading"), { once: true });
       if (i > 0) {
         img.setAttribute("loading", img.getAttribute("loading") || "lazy");
         img.setAttribute("decoding", img.getAttribute("decoding") || "async");
@@ -394,23 +457,21 @@
       allImages.forEach(img => {
         const show = matchesFilters(img);
         img.classList.toggle("hidden", !show);
-        img.style.display = show ? "block" : "none"; // force reflow in CSS columns
-        if (show) visible++;
-        const c = normUpper(img.dataset.category);
-        if (c === 'NQ') counts.NQ++; else if (c === 'QZ') counts.QZ++;
+        if (show) {
+          visible++;
+          const c = img.dataset.category;
+          if (c === 'NQ') counts.NQ++; else if (c === 'QZ') counts.QZ++;
+        }
       });
       resultCount.textContent = `Showing ${visible} of ${allImages.length}`;
-      // Update chip counts
       catButtons.forEach(btn => {
-        const cat = btn.dataset.cat?.toUpperCase();
+        const cat = (btn.dataset.cat || '').toUpperCase();
         const el = btn.querySelector('.count');
         if (!el) return;
-        let val = 0;
-        if (cat === 'ALL') val = visible; else if (cat === 'NQ') val = state.category==='all' ? counts.NQ : Array.from(gallery.querySelectorAll('img')).filter(i=> i.style.display!=="none" && i.dataset.category==='NQ').length; else if (cat === 'QZ') val = state.category==='all' ? counts.QZ : Array.from(gallery.querySelectorAll('img')).filter(i=> i.style.display!=="none" && i.dataset.category==='QZ').length;
-        el.textContent = val;
-        el.classList.toggle('hidden', false);
+        el.classList.remove('hidden');
+        el.textContent = cat === 'ALL' ? visible : (cat === 'NQ' ? counts.NQ : counts.QZ);
       });
-      if (window.AOS && AOS.refresh) AOS.refresh();
+      if (window.AOS && AOS.refresh) requestAnimationFrame(() => AOS.refresh());
     }
 
     // Category pills
@@ -425,7 +486,7 @@
     });
     // initial
     const allBtn = catButtons.find(b => normLower(b.dataset.cat) === "all");
-    if (allBtn) allBtn.click();
+    if (allBtn) allBtn.click(); else applyFilters();
 
     eventSelect.addEventListener("change", () => {
       state.event = eventSelect.value === "all" ? "all" : normLower(eventSelect.value);
@@ -487,12 +548,12 @@
         }
         imgs.sort(cmp).forEach(img => gallery.appendChild(img));
       }
-      if (window.AOS && AOS.refresh) AOS.refresh();
+      if (window.AOS && AOS.refresh) requestAnimationFrame(() => AOS.refresh());
     }
     sortSelect.addEventListener("change", (e)=> sortAndRender(e.target.value));
 
     // ---------- Lightbox (visible-only navigation) ----------
-    const getVisibleImages = () => allImages.filter(img => img.style.display !== "none");
+    const getVisibleImages = () => allImages.filter(img => !img.classList.contains("hidden"));
     let currentIndex = 0;
 
     function setLightboxSrc(imgEl) {
@@ -507,7 +568,6 @@
       setLightboxSrc(visible[currentIndex]);
       lightbox.classList.remove("hidden");
       document.documentElement.style.overflow = "hidden";
-      // Reset zoom every open
       resetZoom();
     }
     function closeLightbox() {
@@ -537,6 +597,7 @@
       });
     });
 
+    // Button handlers
     closeBtn.addEventListener("click", closeLightbox);
     nextBtn.addEventListener("click", showNext);
     prevBtn.addEventListener("click", showPrev);
@@ -548,23 +609,18 @@
       if (e.key === "Escape") closeLightbox();
     });
 
-    // ---------- Zoom/Pan (wheel, buttons, drag, pinch) ----------
-    let scale = 1;
-    let minScale = 1;
-    let maxScale = 8;
-    let originX = 0; // content transform origin X (px)
-    let originY = 0; // content transform origin Y (px)
+    // ---------- Zoom/Pan ----------
+    let scale = 1, minScale = 1, maxScale = 8;
+    let originX = 0, originY = 0;
+    let isPanning = false, startX=0, startY=0;
 
     function applyTransform() {
-      zoomWrap.style.transform = `translate(0,0)`; // container stays
       lightboxImg.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
       lightboxImg.style.transformOrigin = '0 0';
-      lightboxImg.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+      // cursor states: grab when zoomed, pointer when not
+      lightboxImg.style.cursor = scale > 1 ? (isPanning ? 'grabbing' : 'grab') : 'pointer';
     }
-
-    function resetZoom() {
-      scale = 1; originX = 0; originY = 0; applyTransform();
-    }
+    function resetZoom() { scale = 1; originX = 0; originY = 0; applyTransform(); }
 
     function zoomAt(clientX, clientY, deltaScale) {
       const rect = lightboxImg.getBoundingClientRect();
@@ -602,16 +658,21 @@
     zoomResetBtn.addEventListener('click', resetZoom);
 
     // Drag to pan
-    let isPanning = false; let startX=0, startY=0;
     lightboxImg.addEventListener('pointerdown', (e)=>{
-      if (scale <= 1) return; isPanning = true; lightboxImg.setPointerCapture(e.pointerId);
-      startX = e.clientX - originX; startY = e.clientY - originY; lightboxImg.style.cursor='grabbing';
+      if (scale <= 1) return;
+      isPanning = true;
+      lightboxImg.setPointerCapture(e.pointerId);
+      startX = e.clientX - originX; startY = e.clientY - originY;
+      applyTransform(); // set grabbing
     });
     lightboxImg.addEventListener('pointermove', (e)=>{
-      if (!isPanning) return; originX = e.clientX - startX; originY = e.clientY - startY; clampPan(); applyTransform();
+      if (!isPanning) return;
+      originX = e.clientX - startX; originY = e.clientY - startY;
+      clampPan(); applyTransform();
     });
-    lightboxImg.addEventListener('pointerup', ()=>{ isPanning=false; lightboxImg.style.cursor= scale>1?'grab':'zoom-in';});
-    lightboxImg.addEventListener('pointercancel', ()=>{ isPanning=false; lightboxImg.style.cursor= scale>1?'grab':'zoom-in';});
+    const endPan = ()=>{ isPanning=false; applyTransform(); };
+    lightboxImg.addEventListener('pointerup', endPan);
+    lightboxImg.addEventListener('pointercancel', endPan);
 
     // Double-click / double-tap to zoom
     let lastTap = 0;
