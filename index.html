@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="language" content="en" />   
+  <meta name="language" content="en" />
   <meta name="theme-color" content="#306458" />
 
   <!-- SEO Meta -->
@@ -52,17 +52,17 @@
   <!-- End Google Tag Manager -->
 
   <!-- Google Analytics 4 -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CF5RVYZK3L"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CF5RVYZK3L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-CF5RVYZK3L');
-</script>
+    gtag('config', 'G-CF5RVYZK3L');
+  </script>
 
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -341,6 +341,48 @@
 
     </div>
   </div>
+<!-- Today’s Remembrance – Compact Alert -->
+<section id="today-event" aria-labelledby="eventHeading" class="w-full">
+  <div class="mx-auto" data-aos="fade-up" data-aos-duration="1200">
+    <div id="remembranceBox"
+         role="alert"
+         class="relative w-full bg-trust-800 text-white/90 border-l-4 border-emerald-400/80
+                px-4 sm:px-6 py-3 sm:py-4 flex items-start gap-3 sm:gap-4
+                transition-all duration-300 ease-out opacity-100 scale-100">
+
+      <!-- Icon -->
+      <div class="shrink-0 mt-0.5 sm:mt-0.5" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-emerald-300"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+        </svg>
+      </div>
+
+      <!-- Content -->
+      <div class="flex-1 min-w-0">
+        <h2 id="eventHeading" class="text-base sm:text-lg font-semibold leading-6 text-white">
+          Today’s Remembrance
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-white/80 mt-0.5">
+          Today: 15 Muharram 1447 AH
+        </p>
+        <p class="text-sm sm:text-base mt-1.5">
+          Passing of Uwais al-Qarani (RA)
+        </p>
+      </div>
+
+      <!-- Close -->
+      <button type="button"
+              class="shrink-0 ml-auto rounded-md p-1.5 text-white/70 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/40"
+              aria-label="Dismiss"
+              onclick="closeRemembrance()">
+        <span aria-hidden="true" class="block leading-none text-xl">&times;</span>
+      </button>
+    </div>
+  </div>
+</section>
+
 
 
   <!-- Islamic Photo Modal Carousel -->
@@ -450,6 +492,35 @@
     </div>
   </section>
 
+<!-- Today’s Event Card -->
+<!-- Today’s Remembrance – Full Width (Light Theme) -->
+<section id="today-event" aria-labelledby="eventHeading" 
+         class="py-10 px-4 bg-gradient-to-r from-trust-100 to-trust-200">
+  <div class="max-w-7xl mx-auto text-center text-trust-800" data-aos="fade-up" data-aos-duration="900">
+
+    <!-- Heading -->
+    <h2 id="eventHeading" class="text-2xl sm:text-3xl font-bold mb-3">
+      Today’s Remembrance
+    </h2>
+
+    <!-- Date -->
+    <p class="text-base sm:text-lg font-medium mb-4 text-trust-600">
+      📅 Today: 15 Muharram 1447 AH
+    </p>
+
+    <!-- Event -->
+    <p class="text-lg sm:text-xl font-semibold">
+      Passing of Uwais al-Qarani (RA)
+    </p>
+
+  </div>
+</section>
+
+
+
+
+
+
 
   <!-- About Us Section -->
   <section id="about" class="py-16 bg-white" aria-labelledby="aboutHeading">
@@ -467,103 +538,103 @@
       <!-- Content Grid -->
       <!-- <div class="grid md:grid-cols-3 gap-12"> -->
 
-        <!-- Image Section -->
-        <!-- <div class="md:col-span-1 text-center">
+      <!-- Image Section -->
+      <!-- <div class="md:col-span-1 text-center">
           <img data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" src="assets/img/jeelani/jeelani.webp"
             alt="Jeelani Masjid" class="rounded-lg w-full h-64 object-cover object-top" loading="lazy">
           <p class="text-center text-trust-800 font-semibold mt-2">Jeelani Shareef</p>
         </div> -->
 
-        <!-- Text Section -->
-        <div class="md:col-span-2 text-justify font-quicksand space-y-12">
+      <!-- Text Section -->
+      <div class="md:col-span-2 text-justify font-quicksand space-y-12">
 
-          <!-- Who We Are -->
-          <div data-aos="fade-up" data-aos-duration="1500">
-            <h3 class="font-cormorant mb-4 text-trust-800 text-3xl font-medium">Who We Are</h3>
-            <p>
-              Jeelani Trust is a public charitable organization dedicated to foster positive change where piety meets
-              humanity, leading pious, productive, and progressive initiatives in Kerala-India and outside. We
-              champion Sufi piety, educational advancement, and social welfare, serving as a vital platform for moral
-              guidance and impactful initiatives in health, humanitarian aid, and socio-religious reform. Functioning
-              as an inclusive public venture, Jeelani Trust actively promotes Sufi path of excellence, fosters
-              educational progress, advocates for social welfare, and offers moral guidance to empower society as a
-              whole.
-            </p>
-            <p class="pt-4">
-              More than just an organization, Jeelani Trust is a comprehensive public platform, illuminating the path
-              through the propagation of Sufi piety, the unwavering promotion of education and social well-being, and
-              the dedicated practice of moral guidance and human development for the global humanity. With a profound
-              vision of ethics and welfare, the services of Jeelani Trust reach out to the needy people in society at
-              large, beyond the distinctions of community, culture or caste. The key objectives of the Trust are to
-              promote world peace, moral progress and communal harmony.
-            </p>
-            <p class="pt-4">
-              Taking forward the selfless and soulful mission laid out by the astute founder, Quthbuzzaman Dr. Shaikh
-              Yousuf Sulthan Shah Qadiri Chishti, the current chairman and successor, Naeb Quthbuzzaman Dr. Shaikh
-              Nizamudhin Sulthan Shah Qadiri Chishti, meticulously ensures significant progress, mobilizing wider
-              public to the virtuous path of welfare and progress, realized through <em class="font-semibold">Jeelani
-                Shareef</em> and developed under <em class="font-semibold">Jeelani Charitable Trust</em> (reg.
-              no. 0569/04/2006).
-            </p>
-            <button onclick="window.location.href='board-of-trustees.html'"
-              class="bg-trust-600 hover:border hover:border-trust-600 hover:bg-white hover:text-trust-600 text-white px-4 py-2 my-5 rounded-md text-sm font-semibold transition"
-              aria-label="Board of Trustees page">
-              Board of Trustees
-            </button>
-          </div>
-
-          <!-- Our Vision -->
-          <div data-aos="fade-up" data-aos-duration="1500">
-            <h3 class="text-3xl font-medium font-cormorant mb-4 mt-8 text-trust-800">Our Vision</h3>
-            <p>
-              Ethically mending and progressively transforming the current human condition, the practical moral
-              guidance and dedicated social services spearheaded by Jeelani Trust are meticulously designed to
-              actualize the profound vision of humanity's unity, ushering in an era of world peace, justice, and
-              harmony.
-            </p>
-            <p class="pt-4">
-              The Trust envisions a world where every individual lives with moral integrity, social dignity, wholistic
-              health, and access to knowledge, empowered to achieve their full spiritual and human potential.
-            </p>
-            <p class="pt-4">
-              Championing the Sufi path of moral empowerment, guided by the teachings of Holy Prophet Muhammad (peace
-              and blessings be upon him), strengthened by the spirit of Imam Ali (k.w.) and upheld by the great Sufi
-              Shaikh ‘Muhyiddin’ Abdul Qadir al-Jeelani’s spiritual order, Jeelani Public Charitable Trust is actively
-              striving to realize a just and peaceful global society where compassion, understanding, and equitable
-              opportunities universally flourish.
-            </p>
-          </div>
-
-          <!-- Our Mission -->
-          <div data-aos="fade-up" data-aos-duration="1500">
-            <h3 class="text-3xl font-medium font-cormorant mt-8 mb-4 text-trust-800">Our Mission</h3>
-            <p>
-              Under the steadfast leadership of its Chairman, His Holiness Naeb Quthbuzzaman Dr. Sheikh Nizamudhin
-              Sulthan Shah Qadiri Chishti, Jeelani Trust carries forward the foundational objectives set by the
-              revered Sufi Guru, His Holiness Quthbuzzaman Dr. Sheikh Yousuf Sulthan Shah Qadiri Chishti. Continuing
-              the profound legacy of its founder, the current leadership firmly advances the noble mission of Jeelani
-              Trust, expanding its vital work of promoting Sufi perfection of human life, sponsoring developments in
-              education and health, helping the poor and needy, and spreading peace and harmony in society. Based at
-              Jeelani Shareef in Kerala, the Trust's core commitment remains to serve society and nurturing a morally
-              robust humanity.
-            </p>
-            <p class="pt-4">
-              Upholding our wider vision and addressing the pressing needs of the time, Jeelani Trust keeps devising
-              effective plans and projects, and systematically carries them out on regular basis. The Trust conducts
-              programmes and runs institutions for promoting holistic well-being, expanding educational development,
-              healthcare initiatives, and humanitarian aid, grounded in the principles of Sufi piety and
-              socio-religious reformation, for the benefit of the deserving and under-served communities within the
-              region and around the world.
-            </p>
-            <button onclick="window.location.href='our-mission.html'"
-              class="bg-trust-600 hover:border hover:border-trust-600 hover:bg-white hover:text-trust-600 text-white px-4 py-2 my-5 rounded-md text-sm font-semibold transition"
-              aria-label="Read more about our mission">
-              View More
-            </button>
-          </div>
-
+        <!-- Who We Are -->
+        <div data-aos="fade-up" data-aos-duration="1500">
+          <h3 class="font-cormorant mb-4 text-trust-800 text-3xl font-medium">Who We Are</h3>
+          <p>
+            Jeelani Trust is a public charitable organization dedicated to foster positive change where piety meets
+            humanity, leading pious, productive, and progressive initiatives in Kerala-India and outside. We
+            champion Sufi piety, educational advancement, and social welfare, serving as a vital platform for moral
+            guidance and impactful initiatives in health, humanitarian aid, and socio-religious reform. Functioning
+            as an inclusive public venture, Jeelani Trust actively promotes Sufi path of excellence, fosters
+            educational progress, advocates for social welfare, and offers moral guidance to empower society as a
+            whole.
+          </p>
+          <p class="pt-4">
+            More than just an organization, Jeelani Trust is a comprehensive public platform, illuminating the path
+            through the propagation of Sufi piety, the unwavering promotion of education and social well-being, and
+            the dedicated practice of moral guidance and human development for the global humanity. With a profound
+            vision of ethics and welfare, the services of Jeelani Trust reach out to the needy people in society at
+            large, beyond the distinctions of community, culture or caste. The key objectives of the Trust are to
+            promote world peace, moral progress and communal harmony.
+          </p>
+          <p class="pt-4">
+            Taking forward the selfless and soulful mission laid out by the astute founder, Quthbuzzaman Dr. Shaikh
+            Yousuf Sulthan Shah Qadiri Chishti, the current chairman and successor, Naeb Quthbuzzaman Dr. Shaikh
+            Nizamudhin Sulthan Shah Qadiri Chishti, meticulously ensures significant progress, mobilizing wider
+            public to the virtuous path of welfare and progress, realized through <em class="font-semibold">Jeelani
+              Shareef</em> and developed under <em class="font-semibold">Jeelani Charitable Trust</em> (reg.
+            no. 0569/04/2006).
+          </p>
+          <button onclick="window.location.href='board-of-trustees.html'"
+            class="bg-trust-600 hover:border hover:border-trust-600 hover:bg-white hover:text-trust-600 text-white px-4 py-2 my-5 rounded-md text-sm font-semibold transition"
+            aria-label="Board of Trustees page">
+            Board of Trustees
+          </button>
         </div>
+
+        <!-- Our Vision -->
+        <div data-aos="fade-up" data-aos-duration="1500">
+          <h3 class="text-3xl font-medium font-cormorant mb-4 mt-8 text-trust-800">Our Vision</h3>
+          <p>
+            Ethically mending and progressively transforming the current human condition, the practical moral
+            guidance and dedicated social services spearheaded by Jeelani Trust are meticulously designed to
+            actualize the profound vision of humanity's unity, ushering in an era of world peace, justice, and
+            harmony.
+          </p>
+          <p class="pt-4">
+            The Trust envisions a world where every individual lives with moral integrity, social dignity, wholistic
+            health, and access to knowledge, empowered to achieve their full spiritual and human potential.
+          </p>
+          <p class="pt-4">
+            Championing the Sufi path of moral empowerment, guided by the teachings of Holy Prophet Muhammad (peace
+            and blessings be upon him), strengthened by the spirit of Imam Ali (k.w.) and upheld by the great Sufi
+            Shaikh ‘Muhyiddin’ Abdul Qadir al-Jeelani’s spiritual order, Jeelani Public Charitable Trust is actively
+            striving to realize a just and peaceful global society where compassion, understanding, and equitable
+            opportunities universally flourish.
+          </p>
+        </div>
+
+        <!-- Our Mission -->
+        <div data-aos="fade-up" data-aos-duration="1500">
+          <h3 class="text-3xl font-medium font-cormorant mt-8 mb-4 text-trust-800">Our Mission</h3>
+          <p>
+            Under the steadfast leadership of its Chairman, His Holiness Naeb Quthbuzzaman Dr. Sheikh Nizamudhin
+            Sulthan Shah Qadiri Chishti, Jeelani Trust carries forward the foundational objectives set by the
+            revered Sufi Guru, His Holiness Quthbuzzaman Dr. Sheikh Yousuf Sulthan Shah Qadiri Chishti. Continuing
+            the profound legacy of its founder, the current leadership firmly advances the noble mission of Jeelani
+            Trust, expanding its vital work of promoting Sufi perfection of human life, sponsoring developments in
+            education and health, helping the poor and needy, and spreading peace and harmony in society. Based at
+            Jeelani Shareef in Kerala, the Trust's core commitment remains to serve society and nurturing a morally
+            robust humanity.
+          </p>
+          <p class="pt-4">
+            Upholding our wider vision and addressing the pressing needs of the time, Jeelani Trust keeps devising
+            effective plans and projects, and systematically carries them out on regular basis. The Trust conducts
+            programmes and runs institutions for promoting holistic well-being, expanding educational development,
+            healthcare initiatives, and humanitarian aid, grounded in the principles of Sufi piety and
+            socio-religious reformation, for the benefit of the deserving and under-served communities within the
+            region and around the world.
+          </p>
+          <button onclick="window.location.href='our-mission.html'"
+            class="bg-trust-600 hover:border hover:border-trust-600 hover:bg-white hover:text-trust-600 text-white px-4 py-2 my-5 rounded-md text-sm font-semibold transition"
+            aria-label="Read more about our mission">
+            View More
+          </button>
+        </div>
+
       </div>
+    </div>
 
     </div>
   </section>
@@ -768,7 +839,10 @@
           <div class="p-5 space-y-3">
             <h2 class="text-lg font-bold font-cormorant text-green-900 uppercase">Publications</h2>
             <p class="text-sm text-gray-600 text-justify  line-clamp-5">
-             The pious and humanitarian Sufi mission of Jeelani Trust is taken forward also by a number of publications, and media platforms, including social media. The publication division of the Trust is aimed at producing books, periodicals, research journals and pamphlets; keenly attending to a global audience of multi-language bases, with special attention to the local language, Malayalam. 
+              The pious and humanitarian Sufi mission of Jeelani Trust is taken forward also by a number of
+              publications, and media platforms, including social media. The publication division of the Trust is aimed
+              at producing books, periodicals, research journals and pamphlets; keenly attending to a global audience of
+              multi-language bases, with special attention to the local language, Malayalam.
             </p>
             <div class="flex justify-between items-center pt-2 ">
               <a href="publications.html" aria-label="Read more about Publications"
@@ -871,92 +945,128 @@
     </div>
   </section>
 
-  <!-- Gallery Images -->
-  <section class="py-16 px-4 max-w-7xl mx-auto ">
+  <!-- ================== Preview Gallery (images open zoomable lightbox) ================== -->
+  <section id="preview-gallery" class="py-16 px-4 max-w-7xl mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <!-- Image Cards -->
+
+      <!-- Card 1 -->
       <div data-aos="zoom-in" data-aos-duration="1000"
-        class="group overflow-hidden  shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
+        class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="overflow-hidden">
-          <img src="assets/img/QZ/International Sufi Conference 2016.webp" alt="Event 1"
-            class="gallery-img w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
+          <img src="assets/img/QZ/International Sufi Conference 2016.webp" alt="International Sufi Conference — 2016"
+            width="1600" height="1200" loading="lazy" decoding="async"
+            class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
         </div>
-        <!-- <div class="p-4">
-          <p class="text-center text-gray-700 text-sm">International Sufi Conference 2016</p>
-        </div> -->
       </div>
 
+      <!-- Card 2 -->
       <div data-aos="zoom-in" data-aos-duration="1000"
-        class="group overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
+        class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="overflow-hidden">
-          <img src="assets/img/NQ/Eidul Fitr April 2025.webp" alt="Event 2"
-            class="gallery-img w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
+          <img src="assets/img/NQ/Eidul Fitr April 2025.webp" alt="Eidul Fitr — April 2025" width="1600" height="1200"
+            loading="lazy" decoding="async"
+            class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
         </div>
-        <!-- <div class="p-4">
-          <p class="text-center text-gray-700 text-sm">Eidul Fitr April 2025</p>
-        </div> -->
-      </div>
-      <div data-aos="zoom-in" data-aos-duration="1000"
-        class="group overflow-hidden  shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
-        <div class="overflow-hidden">
-          <img src="assets/img/NQ/Akbar Ali Suthan_Irada 2025.webp" alt="Event 2"
-            class="gallery-img w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
-        </div>
-        <!-- <div class="p-4">
-          <p class="text-center text-gray-700 text-sm">Irada Conclave 2025</p>
-        </div> -->
-      </div>
-      <div data-aos="zoom-in" data-aos-duration="1000"
-        class="group overflow-hidden  shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
-        <div class="overflow-hidden">
-          <img src="assets/img/Nizamia/Institute Inauguration.webp" alt="Event 2"
-            class="gallery-img w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
-        </div>
-        <!-- <div class="p-4">
-          <p class="text-center text-gray-700 text-sm">Nizamia Institute Inauguration</p>
-        </div> -->
-      </div>
-      <div data-aos="zoom-in" data-aos-duration="1000"
-        class="group overflow-hidden  shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
-        <div class="overflow-hidden">
-          <img src="assets/img/NQ/Swalath Qctober 2024.webp" alt="Event 2"
-            class="gallery-img w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
-        </div>
-        <!-- <div class="p-4">
-          <p class="text-center text-gray-700 text-sm">Swalath Qctober 2024</p>
-        </div> -->
       </div>
 
+      <!-- Card 3 -->
       <div data-aos="zoom-in" data-aos-duration="1000"
-        class="group overflow-hidden  shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
+        class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="overflow-hidden">
-          <img src="assets/img/QZ/Quthbuzzaman in Ajmeer.webp" alt="Event 3"
-            class="gallery-img w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
+          <img src="assets/img/NQ/Akbar Ali Suthan_Irada 2025.webp" alt="Akbar Ali Suthan — Irada 2025" width="1600"
+            height="1200" loading="lazy" decoding="async"
+            class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
         </div>
-        <!-- <div class="p-4">
-          <p class="text-center text-gray-700 text-sm">Quthbuzzaman in Ajmeer</p>
-        </div> -->
+      </div>
+
+      <!-- Card 4 -->
+      <div data-aos="zoom-in" data-aos-duration="1000"
+        class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
+        <div class="overflow-hidden">
+          <img src="assets/img/Nizamia/Institute Inauguration.webp" alt="Nizamia Institute — Inauguration" width="1600"
+            height="1200" loading="lazy" decoding="async"
+            class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div data-aos="zoom-in" data-aos-duration="1000"
+        class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
+        <div class="overflow-hidden">
+          <img src="assets/img/NQ/Swalath Qctober 2024.webp" alt="Swalath — October 2024" width="1600" height="1200"
+            loading="lazy" decoding="async"
+            class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div data-aos="zoom-in" data-aos-duration="1000"
+        class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
+        <div class="overflow-hidden">
+          <img src="assets/img/QZ/Quthbuzzaman in Ajmeer.webp" alt="Quthbuzzaman in Ajmer" width="1600" height="1200"
+            loading="lazy" decoding="async"
+            class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
+        </div>
       </div>
     </div>
+
+    <!-- CTA -->
     <div class="mt-8 flex justify-center">
       <a href="gallery.html"
-        class="inline-flex items-center px-6 py-3 text-base font-medium text-green-800 border border-[#2b3e3a]  mt-10 bg-white hover:bg-trust-800 hover:text-white rounded-lg transition">
+        class="inline-flex items-center px-6 py-3 text-base font-medium text-green-800 border border-[#2b3e3a] mt-10 bg-white hover:bg-trust-800 hover:text-white rounded-lg transition">
         View More Photos
       </a>
     </div>
-
   </section>
 
-<!-- Controls & caption inside the modal -->
-<div id="imageModal"
-  class="fixed inset-0 bg-black/80 hidden opacity-0 transition-opacity duration-300 items-center justify-center z-50"
-  role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button id="closeModalBtn" class="absolute top-5 right-6 text-white text-3xl leading-none" aria-label="Close">&times;</button>
-  <button id="prevBtn" class="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 text-white text-4xl px-3" aria-label="Previous">‹</button>
-  <img id="modalImage" class="max-h-[90%] max-w-[90%] rounded-lg shadow-lg select-none" draggable="false">
-  <button id="nextBtn" class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-white text-4xl px-3" aria-label="Next">›</button>
-  <div id="modalCaption" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-sm bg-black/60 px-3 py-1 rounded"></div>
-</div>
+  <!-- ================== Lightbox Modal (once per page) ================== -->
+  <div id="hp-lightbox" class="fixed inset-0 bg-black/90 z-[9999] hidden items-center justify-center">
+    <!-- Close -->
+    <button id="hp-close"
+      class="fixed top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white border border-white/20 flex items-center justify-center"
+      aria-label="Close">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" fill="none" />
+      </svg>
+    </button>
+
+    <!-- Zoom controls -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2">
+      <button id="hp-zoom-out"
+        class="px-3 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/20">−</button>
+      <button id="hp-zoom-reset"
+        class="px-3 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/20">Reset</button>
+      <button id="hp-zoom-in"
+        class="px-3 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/20">+</button>
+    </div>
+
+    <!-- Prev / Next -->
+    <button id="hp-prev"
+      class="fixed left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 text-white border border-white/20 flex items-center justify-center"
+      aria-label="Previous">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button id="hp-next"
+      class="fixed right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 text-white border border-white/20 flex items-center justify-center"
+      aria-label="Next">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+
+    <!-- Stage -->
+    <div id="hp-stage" class="relative max-w-6xl w-full max-h-[86vh] h-[86vh] flex items-center justify-center px-4">
+      <div id="hp-zoom-wrap" class="w-full h-full overflow-hidden rounded-lg shadow-lg bg-transparent">
+        <img id="hp-img" src="" alt="" class="max-w-none select-none object-contain w-full h-full" />
+      </div>
+    </div>
+  </div>
+
   <!-- contact -->
 
   <!-- Contact Section -->
@@ -1150,7 +1260,8 @@
             </a>
 
             <!-- WhatsApp -->
-            <a href="https://wa.me/919495913799" target="_blank" aria-label="WhatsApp" class="group relative">
+            <a href="https://wa.me/919495913799?text=Hello,+I+saw+the+Gallery+on+Jeelani+Trust+website+and+would+like+to+know+more."
+              target="_blank" aria-label="WhatsApp" class="group relative">
               <div
                 class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-green-700 to-green-600 rounded-lg flex items-center justify-center shadow hover:shadow-lg transition hover:-translate-y-1 border border-green-600/50 hover:border-green-300/50 overflow-hidden">
                 <i
@@ -1179,7 +1290,8 @@
             <li><a href="jeelani-shareef.html" class=" hover:text-white transition-colors">Jeelani Shareef</a></li>
             <li><a href="jeelani-study-centre.html" class=" hover:text-white transition-colors">Jeelani Study Centre</a>
             </li>
-            <li><a href="ghausiyya-sunni-jamiyyathul-ulama.html" class=" hover:text-white transition-colors">Ghousiyya</a></li>
+            <li><a href="ghausiyya-sunni-jamiyyathul-ulama.html"
+                class=" hover:text-white transition-colors">Ghousiyya</a></li>
             <li><a href="nizamia-institute.html" class=" hover:text-white transition-colors">Nizamia Institute</a></li>
           </ul>
         </div>
@@ -1243,95 +1355,186 @@
       window.closeSpecialPhotoModal = closeSpecialPhotoModal;
     }
   </script>
-  
-<script>
-  (() => {
-    const imgs = Array.from(document.querySelectorAll('.gallery-img'));
-    if (!imgs.length) return;
 
-    // Optional: use high-res image if available via data-full="..."
-    imgs.forEach((img, i) => {
-      img.loading = 'lazy';
-      img.style.cursor = 'zoom-in';
-      img.dataset.index = i;
-    });
-
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const captionEl = document.getElementById('modalCaption');
-    const closeBtn = document.getElementById('closeModalBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    let current = 0;
-    let touchStartX = 0;
-
-    function getCaptionFor(imgEl) {
-      // Prefer visible caption text inside the same card if present, else alt
-      const card = imgEl.closest('.group');
-      const cardCaption = card?.querySelector('.p-4 p')?.textContent?.trim();
-      return cardCaption || imgEl.alt || '';
-    }
-
-    function show(index) {
-      current = (index + imgs.length) % imgs.length;
-      const srcImg = imgs[current];
-      modalImg.src = srcImg.dataset.full || srcImg.src;
-      captionEl.textContent = getCaptionFor(srcImg);
-    }
-
-    function openModal(index) {
-      show(index);
-      modal.classList.remove('hidden', 'opacity-0');
-      modal.classList.add('flex', 'opacity-100');
-      document.body.classList.add('overflow-hidden');
-    }
-
-    function closeModal() {
-      modal.classList.add('opacity-0');
-      modal.addEventListener('transitionend', function handler() {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        modal.removeEventListener('transitionend', handler);
-      });
-      document.body.classList.remove('overflow-hidden');
-    }
-
-    // Click to open
-    imgs.forEach(img => {
-      img.addEventListener('click', () => openModal(+img.dataset.index));
-    });
-
-    // Backdrop click closes
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-
-    // Buttons
-    closeBtn.addEventListener('click', closeModal);
-    prevBtn.addEventListener('click', () => show(current - 1));
-    nextBtn.addEventListener('click', () => show(current + 1));
-
-    // Keyboard
-    document.addEventListener('keydown', (e) => {
-      if (modal.classList.contains('hidden')) return;
-      if (e.key === 'Escape') closeModal();
-      if (e.key === 'ArrowLeft') show(current - 1);
-      if (e.key === 'ArrowRight') show(current + 1);
-    });
-
-    // Swipe (mobile)
-    modal.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].clientX;
-    }, { passive: true });
-
-    modal.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) {
-        dx > 0 ? show(current - 1) : show(current + 1);
+  <!-- ================== Lightbox Script ================== -->
+  <!-- ================== Lightbox / Zoom Script ================== -->
+  <script>
+    // ================== Lightbox / Zoom Script ==================
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.AOS && typeof AOS.init === "function") {
+        AOS.init({ once: true, offset: 80, duration: 600, easing: 'ease-out-cubic' });
       }
-    }, { passive: true });
-  })();
+
+      const section = document.getElementById("preview-gallery");
+      const thumbs = Array.from(section.querySelectorAll("img.gallery-img"));
+
+      const lb = document.getElementById("hp-lightbox");
+      const imgEl = document.getElementById("hp-img");
+      const wrap = document.getElementById("hp-zoom-wrap");
+      const btnX = document.getElementById("hp-close");
+      const btnN = document.getElementById("hp-next");
+      const btnP = document.getElementById("hp-prev");
+      const zi = document.getElementById("hp-zoom-in");
+      const zo = document.getElementById("hp-zoom-out");
+      const zr = document.getElementById("hp-zoom-reset");
+
+      const items = thumbs.map(t => ({ src: t.currentSrc || t.src, alt: t.alt || "Gallery image" }));
+
+      let i = 0, scale = 1, ox = 0, oy = 0, isPanning = false, sx = 0, sy = 0;
+      const minScale = 1, maxScale = 8;
+
+      function clampPan() {
+        const rect = wrap.getBoundingClientRect();
+        const imgW = rect.width * scale;
+        const imgH = rect.height * scale;
+        const maxX = Math.max(0, imgW - rect.width);
+        const maxY = Math.max(0, imgH - rect.height);
+        ox = Math.min(0, Math.max(-maxX, ox));
+        oy = Math.min(0, Math.max(-maxY, oy));
+      }
+      function applyTransform() {
+        imgEl.style.transformOrigin = "0 0";
+        imgEl.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
+        imgEl.style.cursor = scale > 1 ? (isPanning ? "grabbing" : "grab") : "pointer";
+      }
+      function resetZoom() { scale = 1; ox = 0; oy = 0; applyTransform(); }
+
+      function setImage(idx) {
+        i = idx;
+        const { src, alt } = items[i];
+        imgEl.src = src; imgEl.alt = alt;
+        resetZoom();
+      }
+
+      function open(idx) {
+        setImage(idx);
+        lb.classList.remove("hidden");
+        lb.classList.add("flex");
+        document.documentElement.style.overflow = "hidden";
+        btnX.focus({ preventScroll: true });
+      }
+      function close() {
+        lb.classList.add("hidden");
+        lb.classList.remove("flex");
+        document.documentElement.style.overflow = "";
+      }
+      function next() { setImage((i + 1) % items.length); }
+      function prev() { setImage((i - 1 + items.length) % items.length); }
+
+      thumbs.forEach((t, idx) => {
+        t.addEventListener("click", () => open(idx));
+      });
+
+      btnX.addEventListener("click", close);
+      btnN.addEventListener("click", next);
+      btnP.addEventListener("click", prev);
+
+      // ❌ removed backdrop click-to-close
+
+      document.addEventListener("keydown", (e) => {
+        if (lb.classList.contains("hidden")) return;
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+        if (e.key === "Escape") close();
+        if (e.key === "+") zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1.2);
+        if (e.key === "-") zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1 / 1.2);
+        if (e.key.toLowerCase() === "0") resetZoom();
+      });
+
+      function zoomAt(cx, cy, factor) {
+        const rect = imgEl.getBoundingClientRect();
+        const x = cx - rect.left - ox;
+        const y = cy - rect.top - oy;
+        const newScale = Math.min(maxScale, Math.max(minScale, scale * factor));
+        if (newScale === scale) return;
+        ox -= x * (newScale / scale - 1);
+        oy -= y * (newScale / scale - 1);
+        scale = newScale;
+        clampPan(); applyTransform();
+      }
+
+      zi.addEventListener("click", () => zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1.2));
+      zo.addEventListener("click", () => zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1 / 1.2));
+      zr.addEventListener("click", resetZoom);
+
+      wrap.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.2 : 1 / 1.2);
+      }, { passive: false });
+
+      imgEl.addEventListener("pointerdown", (e) => {
+        if (scale <= 1) return;
+        isPanning = true;
+        imgEl.setPointerCapture(e.pointerId);
+        sx = e.clientX - ox; sy = e.clientY - oy;
+        applyTransform();
+      });
+      imgEl.addEventListener("pointermove", (e) => {
+        if (!isPanning) return;
+        ox = e.clientX - sx; oy = e.clientY - sy;
+        clampPan(); applyTransform();
+      });
+      const endPan = () => { isPanning = false; applyTransform(); };
+      imgEl.addEventListener("pointerup", endPan);
+      imgEl.addEventListener("pointercancel", endPan);
+
+      let lastTap = 0;
+      imgEl.addEventListener("click", (e) => {
+        const now = Date.now();
+        if (now - lastTap < 300) {
+          const nextScale = scale >= 2 ? 1 : 2;
+          zoomAt(e.clientX, e.clientY, nextScale / scale);
+        }
+        lastTap = now;
+      });
+
+      const pointers = new Map();
+      wrap.addEventListener("pointerdown", (e) => { pointers.set(e.pointerId, e); wrap.setPointerCapture(e.pointerId); });
+      wrap.addEventListener("pointermove", (e) => {
+        if (!pointers.has(e.pointerId)) return;
+        pointers.set(e.pointerId, e);
+        if (pointers.size === 2) {
+          const [p1, p2] = Array.from(pointers.values());
+          const dist = Math.hypot(p2.clientX - p1.clientX, p2.clientY - p1.clientY);
+          if (!wrap._lastDist) wrap._lastDist = dist;
+          const factor = dist / wrap._lastDist;
+          const cx = (p1.clientX + p2.clientX) / 2, cy = (p1.clientY + p2.clientY) / 2;
+          zoomAt(cx, cy, factor);
+          wrap._lastDist = dist;
+        }
+      });
+      ["pointerup", "pointercancel", "pointerleave"].forEach(type => {
+        wrap.addEventListener(type, (e) => {
+          pointers.delete(e.pointerId);
+          if (pointers.size < 2) wrap._lastDist = null;
+        });
+      });
+    });
+
+  </script>
+
+  <script>
+  function closeRemembrance() {
+    const box = document.getElementById('remembranceBox');
+    if (!box) return;
+    // Smooth fade + scale, then collapse height
+    box.style.opacity = '0';
+    box.style.transform = 'scale(0.98)';
+    box.style.marginTop = '0';
+    box.style.marginBottom = '0';
+    setTimeout(() => {
+      box.style.height = box.offsetHeight + 'px'; // lock current height
+      requestAnimationFrame(() => {
+        box.style.transition = 'height 250ms ease';
+        box.style.height = '0px';
+        box.style.paddingTop = '0';
+        box.style.paddingBottom = '0';
+        box.style.borderWidth = '0';
+      });
+    }, 180);
+    // Remove from layout after animation
+    setTimeout(() => box.remove(), 480);
+  }
 </script>
 </body>
 
