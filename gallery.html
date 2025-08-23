@@ -1,98 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gallery | Jeelani Trust</title>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeelani Shareef | Jeelani Trust</title>
+  <script>
+    fetch("meta.html")
+      .then(res => res.text())
+      .then(data => document.head.insertAdjacentHTML("afterbegin", data));
+  </script>
+
+  <link rel="icon" href="assets/img/logo/logo-w.webp" type="image/webp">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet">
+  <script src="tailwind.config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
 
   <style>
-    body { font-family: 'Segoe UI', sans-serif; }
 
-    /* Masonry with CSS columns */
-    .masonry > * { break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid; }
 
-    /* Image polish + paint optimizations */
-    .gallery img {
-      display: block; width: 100%; height: auto; border-radius: 0.75rem;
-      transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
-      cursor: pointer;                     /* pointer, not lens */
-      content-visibility: auto;            /* render only when needed */
-      contain-intrinsic-size: 400px 300px; /* reserve space; reduce CLS */
-    }
-    .gallery img:hover { transform: scale(1.03); }
+/* Masonry with CSS columns */
+.masonry > * { 
+  break-inside: avoid; 
+  -webkit-column-break-inside: avoid; 
+  page-break-inside: avoid; 
+}
 
-    /* Chips scroller */
-    .chips::-webkit-scrollbar { height: 8px; }
-    .chips::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 999px; }
+/* Image polish + paint optimizations */
+.gallery img {
+  display: block; 
+  width: 100%; 
+  height: auto; 
+  border-radius: 0.75rem;
+  transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+  cursor: pointer;                     /* pointer, not lens */
+  content-visibility: auto;            /* render only when needed */
+  contain-intrinsic-size: 400px 300px; /* reserve space; reduce CLS */
+}
+.gallery img:hover { 
+  transform: scale(1.03); 
+}
 
-    /* Lightbox zoom canvas wrapper to contain transforms */
-    .zoom-wrap { transform-origin: 0 0; will-change: transform; }
+/* Chips scroller */
+.chips::-webkit-scrollbar { height: 8px; }
+.chips::-webkit-scrollbar-thumb { 
+  background: rgba(0,0,0,.12); 
+  border-radius: 999px; 
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      [data-aos], .gallery img { transition: none !important; transform: none !important; opacity: 1 !important; }
-    }
+/* Lightbox zoom canvas wrapper */
+.zoom-wrap { 
+  transform-origin: 0 0; 
+  will-change: transform; 
+}
 
-    /* -------- Lightbox Controls: arrows + close -------- */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos], .gallery img { 
+    transition: none !important; 
+    transform: none !important; 
+    opacity: 1 !important; 
+  }
+}
 
-    /* Remove any zoom backgrounds/side gradients */
-    #lightbox::before, #lightbox::after { display: none !important; }
-    #zoomContainer { background: transparent !important; }
+/* -------- Lightbox Controls: arrows + close -------- */
 
-    /* Lightbox navigation buttons (chevrons) */
-    .nav-btn{
-      position:absolute; top:50%; transform:translateY(-50%);
-      display:flex; align-items:center; justify-content:center;
-      width:64px; height:64px; z-index:10;
-      color:#fff; background:rgba(0,0,0,.65); backdrop-filter: blur(4px);
-      border:1px solid rgba(255,255,255,.25);
-      border-radius:999px; padding:0; margin:0;
-      box-shadow:0 8px 28px rgba(0,0,0,.35);
-      transition:background .15s ease, transform .08s ease, box-shadow .15s ease, opacity .15s ease;
-      opacity:1;
-    }
-    .nav-btn:hover{ background:rgba(0,0,0,.85); transform:translateY(-50%) scale(1.03); }
-    .nav-btn:active{ transform:translateY(-50%) scale(.98); }
-    #lightbox-prev.nav-btn{ left:16px; }
-    #lightbox-next.nav-btn{ right:16px; }
+/* Remove zoom backgrounds/side gradients */
+#lightbox::before, 
+#lightbox::after { 
+  display: none !important; 
+}
+#zoomContainer { 
+  background: transparent !important; 
+}
 
-    /* Bigger tap targets on small screens */
-    @media (max-width: 640px){
-      .nav-btn{ width:56px; height:56px; }
-    }
+/* Lightbox navigation buttons (chevrons) */
+.nav-btn {
+  position: fixed;                     /* fixed to viewport edges */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px;
+  z-index: 10000;                      /* above everything */
+  color: #fff;
+  background: rgba(0,0,0,.65); 
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+  transition: background .15s ease, transform .08s ease, box-shadow .15s ease, opacity .15s ease;
+  opacity: 1;
+}
+.nav-btn:hover { 
+  background: rgba(0,0,0,.85); 
+  transform: translateY(-50%) scale(1.03); 
+}
+.nav-btn:active { 
+  transform: translateY(-50%) scale(.98); 
+}
+#lightbox-prev.nav-btn { 
+  left: max(16px, env(safe-area-inset-left)); 
+}
+#lightbox-next.nav-btn { 
+  right: max(16px, env(safe-area-inset-right)); 
+}
 
-    /* Close (X) button with better hit area */
-    .close-btn{
-      position:absolute; top:14px; right:14px; z-index:10;
-      display:flex; align-items:center; justify-content:center;
-      width:44px; height:44px;
-      color:#fff; background:rgba(0,0,0,.65); backdrop-filter: blur(4px);
-      border:1px solid rgba(255,255,255,.25);
-      border-radius:999px;
-      box-shadow:0 8px 28px rgba(0,0,0,.35);
-      transition:background .15s ease, transform .08s ease;
-    }
-    .close-btn:hover{ background:rgba(0,0,0,.85); transform:scale(1.03); }
-    .close-btn:active{ transform:scale(.98); }
+/* Bigger tap targets on small screens */
+@media (max-width: 640px){
+  .nav-btn { width: 56px; height: 56px; }
+}
 
-    /* Ensure controls are clickable above image */
-    #lightbox .nav-btn, #lightbox .close-btn { pointer-events:auto; }
+/* Close (X) button with better hit area */
+.close-btn{
+  position: fixed;                      /* fixed instead of absolute */
+  top: max(14px, env(safe-area-inset-top)); 
+  right: max(14px, env(safe-area-inset-right));
+  z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  color: #fff; 
+  background: rgba(0,0,0,.65); 
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+  transition: background .15s ease, transform .08s ease;
+}
+.close-btn:hover { 
+  background: rgba(0,0,0,.85); 
+  transform: scale(1.03); 
+}
+.close-btn:active { 
+  transform: scale(.98); 
+}
 
-    /* Keyboard focus ring */
-    .nav-btn:focus-visible, .close-btn:focus-visible{
-      outline: 3px solid rgba(255,255,255,.75);
-      outline-offset: 2px;
-      box-shadow: 0 0 0 4px rgba(0,0,0,.4);
-    }
+/* Ensure controls clickable above image */
+#lightbox .nav-btn, 
+#lightbox .close-btn { 
+  pointer-events: auto; 
+}
 
-    /* Lightbox image cursor: pointer when not zoomed; grab when zoomed (JS toggles) */
-    #lightbox-img{ cursor: pointer; }
+/* Keyboard focus ring */
+.nav-btn:focus-visible, 
+.close-btn:focus-visible {
+  outline: 3px solid rgba(255,255,255,.75);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0,0,0,.4);
+}
+
+/* Lightbox image cursor: pointer when not zoomed; grab when zoomed */
+#lightbox-img { 
+  cursor: pointer; 
+}
+
   </style>
 </head>
 
-<body class="bg-white text-gray-800 min-h-screen flex flex-col">
+<body class="bg-amber-100/10 text-gray-800 min-h-screen flex flex-col">
   <!-- Navbar -->
   <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-50" aria-label="Main">
     <div class="flex items-center justify-between h-[72px] px-4 shadow bg-white">
@@ -111,10 +194,12 @@
   </nav>
 
   <!-- Gallery -->
-  <main class="flex-grow pt-[90px]">
-    <div class="text-center mb-6 md:mb-8" data-aos="fade-up" data-aos-duration="700">
-      <h1 class="text-3xl md:text-4xl font-cinzel font-bold">Jeelani Moments</h1>
-      <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Glimpses from our cherished events, gatherings, and milestones.</p>
+  <main class="flex-grow pt-[90px] mb-18">
+    <div class="text-center mb-6 md:mx-28 md:my-12" >
+      <h1 class="font-bold text-trust-800 mb-8 text-center font-cormorant text-3xl uppercase">Treasured Jeelani Moments</h1>
+      
+ 
+      <p class="mt-3 text-gray-600 max-w-2xl mx-auto font-quicksand">From heartfelt gatherings to historic milestones, these moments capture the spirit of Jeelani Trust. A celebration of togetherness, faith, and service — preserved for generations to cherish.</p>
     </div>
 
     <!-- Filter + Sort Bar -->
@@ -126,13 +211,13 @@
             <div class="text-sm font-medium shrink-0">Categories</div>
             <div class="chips relative flex-1 overflow-x-auto no-scrollbar flex gap-2 px-1" role="group" aria-label="Category filter">
               <button data-cat="all" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm bg-trust-900 text-white shadow">
-                All <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-white/20">0</span>
+                All
               </button>
               <button data-cat="NQ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
-                NQ <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-gray-100">0</span>
+                NQ
               </button>
               <button data-cat="QZ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
-                QZ <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-gray-100">0</span>
+                QZ
               </button>
             </div>
           </div>
@@ -338,7 +423,7 @@
   </footer>
 
   <!-- Lightbox Modal with Zoom Controls -->
-  <div id="lightbox" class="fixed inset-0 bg-trust-800/90 flex items-center justify-center z-[9999] hidden">
+  <div id="lightbox" class="fixed inset-0 bg-gray-800/90 flex items-center justify-center z-[9999] hidden">
     <!-- Upgraded Close Button -->
     <button id="lightbox-close" class="close-btn" aria-label="Close">
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
