@@ -22,11 +22,8 @@
     }
     .gallery img:hover { transform: scale(1.03); }
 
-    /* Blur-up loading hint */
-    .img-loading { filter: blur(12px) saturate(80%); transform: scale(1.02); }
 
-    /* Modern sticky toolbar */
-    .toolbar { position: sticky; top: 72px; z-index: 40; }
+
 
     /* Chips scroller */
     .chips::-webkit-scrollbar { height: 8px; }
@@ -68,8 +65,8 @@
     </div>
 
     <!-- Filter + Sort Bar (Redesigned) -->
-    <div class="toolbar mb-6">
-      <div class="px-12 border border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 p-3 md:p-4 shadow-sm">
+    <div class=" mb-6">
+      <div class=" border border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 p-3 md:p-4 shadow-sm">
         <div class="flex flex-col gap-4">
           <!-- Category chips: modern, scrollable -->
           <div class="flex items-center justify-between gap-3">
@@ -314,7 +311,18 @@
   </div>
 
   <!-- Scripts -->
-   <script src="/assets/js/tailwind.config.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/swalath.js"></script>
+  <script src="assets/js/day-remainder-arabic.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/date.js"></script>
+  <script src="assets/js/scrollspy.js"></script>
+  <!-- <script src="assets/js/special-redirect.js"></script> -->
+  <script src="assets/js/gallery-modal.js"></script>
+  <script src="assets/js/form-submission.js"></script>
+  <script src="assets/js/arabic-date-api.js"></script>
+  <script src="assets/js/add.js"></script>
+  <script src="assets/js/tailwind.config.js"></script>
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
   <!-- Inline lightbox + AOS + Filter + Sorting + Zoom -->
