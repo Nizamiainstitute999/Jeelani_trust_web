@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Sathyasandesham Monthly | Jeelani Trust</title>
+     <script>
+          fetch("meta.html")
+               .then(res => res.text())
+               .then(data => document.head.insertAdjacentHTML("afterbegin", data));
+     </script>
+
+     <link rel="icon" href="assets/img/logo/logo-w.webp" type="image/webp">
+     <link rel="stylesheet" href="style.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+     <link href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display&display=swap"
+          rel="stylesheet">
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Quicksand:wght@300..700&display=swap"
+          rel="stylesheet">
+     <script src="tailwind.config.js"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body class="min-h-screen flex flex-col">
+     <nav
+          class="bg-white shadow-sm border-b border-white border-opacity-10 fixed top-0 left-0 w-full z-50 mb-5 text-trust-900">
+          <div class="max-w-full ">
+               <div
+                    class="flex items-center justify-between h-[72px] px-[10px] relative shadow-[0_2px_18px_0_rgba(129,162,182,0.2)] bg-white">
+
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-2 group">
+                         <!-- Logo -->
+                         <img src="assets/img/logo/logo.webp" alt="Jeelani Trust Logo" class="h-10 w-auto ml-4">
+
+                         <!-- Text Block -->
+                         <div class="flex flex-col leading-tight">
+                              <a href="index.html" class="font-bold text-2xl tracking-tight font-cinzel sm:text-md">
+                                   Jeelani Trust
+                              </a>
+
+                         </div>
+                    </div>
+
+
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex space-x-1">
+                         <a href="#"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Home</span>
+                         </a>
+                         <a href="#about"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">About
+                                   Us</span>
+                         </a>
+                         <a href="#programs"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Initiatives</span>
+                         </a>
+                         <a href="#gallery"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Gallery</span>
+                         </a>
+                         <a href="#contact"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Contact</span>
+                         </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button
+                         class="md:hidden text-trust-700 focus:outline-none p-2 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors"
+                         aria-label="Toggle mobile menu" id="menu-toggle">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                   d="M4 6h16M4 12h16M4 18h16" />
+                         </svg>
+                    </button>
+               </div>
+          </div>
+
+          <!-- Mobile Menu -->
+          <!-- Mobile Menu -->
+          <div id="mobile-menu" class="fixed inset-0 bg-trust-900 bg-opacity-95 backdrop-blur-sm z-50 pt-24 px-6 text-white
+         transform translate-x-full opacity-0 pointer-events-none
+         transition-all duration-3500 ease-in-out md:hidden">
+               <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-xl py-3 px-4 hover:text-gold transition-all">Home</a>
+                    <a href="#about" class="text-xl py-3 px-4 hover:text-gold transition-all">About</a>
+                    <a href="#programs" class="text-xl py-3 px-4 hover:text-gold transition-all">Initiatives</a>
+                    <a href="#gallery" class="text-xl py-3 px-4 hover:text-gold transition-all">Gallery</a>
+                    <a href="#contact" class="text-xl py-3 px-4 hover:text-gold transition-all">Contact</a>
+               </div>
+
+               <!-- Close Button -->
+               <button id="menu-close"
+                    class="absolute top-6 right-6 text-white hover:bg-white hover:bg-opacity-10 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+               </button>
+          </div>
+
+
+     </nav>
+     <section class="max-w-6xl mx-auto flex-grow mt-28 px-4">
+
+          <h2 class="font-bold mt-28 text-center text-trust-700 mb-6 font-cormorant text-3xl uppercase"  data-aos="fade-up" data-aos-duration="1000">PUBLICATIONS 
+          </h2>
+          <!-- <img src="assets/img/magazine/magazine.webp" alt="Sathyasandesham Monthly" class="mx-auto mb-6 rounded-xl shadow-lg max-h-[300px] w-auto"
+      data-aos="zoom-out" data-aos-duration="1000" /> -->
+          <div class="mx-auto px-4 font-quicksand text-justify leading-relaxed text-gray-500 space-y-5 pb-12"  data-aos="fade-up" data-aos-duration="1000">
+
+               <p>
+                    The pious and humanitarian Sufi mission of Jeelani Trust is taken forward also by a number of
+                    publications, and media platforms, including social media. The publication division of the Trust is
+                    aimed at producing books, periodicals, research journals and pamphlets; keenly attending to a global
+                    audience of multi-language bases, with special attention to the local language, Malayalam. With the
+                    central vision of spreading Sufi knowledge, perspective and guidance, the publications draw on a
+                    variety of themes and a wider outlook of human development and universal spiritual enlightenment,
+                    accessible to societies across the globe. Broadly, beyond the varied social media, the books,
+                    periodicals and journal underscore the growing relevance of the mission of Jeelani Shareef in the
+                    contemporary society, representing the message of the founding Sufi Guru, Holy Hazrat Quthbuzzaman,
+                    and the current leader, Sufi master Hazrat Naeb Quthbuzzaman Dr. Sheikh Nizamudhin Sulthan.
+
+
+               </p>
+               <p>
+                    From the Sufi humanitarian vantage point directed by Holy Hazrat Naeb Quthbuzzaman, the Jeelani
+                    publications engage in and address the pressing issues of the current world, enriching knowledge and
+                    perspective and enabling peace and harmony. Although popular / shorter studies on Sufism, Islam and
+                    society form a major section of publications, the media & publication unit under Jeelani Trust also
+                    produces erudite academic research publications to provide proper Sufi vision and guidance to the
+                    global community.
+
+               </p>
+
+          </div>
+          <div class="mx-auto px-4 font-quicksand text-justify leading-relaxed text-gray-500 space-y-5 pb-12"  data-aos="fade-up" data-aos-duration="1000">
+               <h3 class="font-cormorant mb-4 text-trust-800 text-3xl font-medium italic">Quthbuzzamān Māla: </h3>
+   <img src="assets/img/Magazine/mala-m.webp" alt="Inspirational" class="mx-auto mb-6 rounded-xl shadow-lg max-h-[300px] w-auto"
+      data-aos="zoom-out" data-aos-duration="1000" />
+ 
+
+
+               <p>
+                    The sacred biography and the Sufi mission and message of the Master Guru Holy Hazrat Quthbuzzaman
+                    Dr. Shaikh Sufi Muhammad Yousuf Sulthan Shah Qadiri Chishti.
+
+               </p>
+
+               <p>
+
+                    This eulogy, written in Malayalam, is often prescribed as a ritual manual for personal recitation to
+                    achieve spiritual strength and inner peace. The 'Quthbuzzamān Māla' contains the life lessons,
+                    message, and guidance of Holy Hazrat Quthbuzzaman, dedicated to all of humanity. Narrating the
+                    hardships faced on the long path of pursuing knowledge and enlightenment, the 'Quthbuzzamān Māla'
+                    follows the tradition of ‘Muhyiddin Māla' (1607), the first vernacular Islamic text produced in
+                    Malayalam and the pioneering hagiographic poetry of the Qadiri Sufi order in the region. The Māla
+                    poetically presents the power of love in the Prophetic path, as well as the practical knowledge and
+                    embodied wisdom of Sufi tradition.
+
+
+               </p>
+
+          </div>
+              <div class="mx-auto px-4 font-quicksand text-justify leading-relaxed text-gray-500 space-y-5 pb-12"  data-aos="fade-up" data-aos-duration="1000">
+               <h3 class="font-cormorant mb-4 text-trust-800 text-3xl font-medium italic">'Contemporary Sufi Talks'/
+                    Sufi Varthamānam: Compendium of Expositions & Collection of Epistles</h3>
+
+
+
+               <p>
+                    The words of wisdom and guidance in life, delivered by the master Sufis of the contemporary times,
+                    Holy Hazrat Quthbuzzaman Dr. Sheikh Yousuf Sulthan Shah Qadiri Chishti and Holy Hazrat Naeb
+                    Quthbuzzaman Dr. Sheikh Nizamudhin Sulthan Shah Qadiri Chishti. Presented as a volume of Collected
+                    Essays, serialized in the monthly periodical in Malayalam, Sathyasandesham (‘The Message of Truth’).
+
+               </p>
+
+               <p>
+                    <span class="font-bold italic"> Kalām:</span> collection of essays – the compilation of public
+                    speeches, Majlis sermons, counsels and advices to the disciples, conversations and interviews of the
+                    great Sufi master of our times, Holy Hazrat Quthbuzzaman Dr. Sheikh Yousuf Sulthan Shah Qadiri
+                    Chishti, the founder of Jeelani movement and the moral leadership from the modern global south.
+                    <span class="font-bold italic"> Kalām,</span> as a compendium of corrective wisdom and guiding
+                    knowledge, stands truly as ‘The Master’s Counsel’ for the humanity. (Forthcoming).
+
+
+               </p>
+               <p>
+                    <span class="font-bold italic"> Bāb / Baab:</span> The Opening Expositions – the anthology of Sufi
+                    messages by the current master, Holy Hazrat Naeb Quthbuzzaman Dr. Sheikh Nizamudhin Sulthan Shah
+                    Qadiri Chishti, previously brought serially in the ‘Sathyasandesham’ Monthly. As the key note lead
+                    note by the supreme leader of Jeelani mission for humanity, <span class="font-bold italic"> Bāb /
+                         Baab: Sufi Varthamanam / Contemporary Sufi Talks, vol.1</span> (First edition, June, 2005) is a
+                    perfect ‘Epistle from the Master of Hearts’ to guide humanity to peace and unity. The first edition
+                    of the Vol.1 of the Sufi Expositions / <span class="font-bold italic"> Bāb -1 </span> was released
+                    as an intellectual souvenir to the “Quthbuzzaman Khilafat 50th Anniversary” – 2nd June 2024. 2nd
+                    edition and the English version of the anthology is soon to be published, followed by Vol.2.
+
+
+               </p>
+
+          </div>
+
+          <div class="mx-auto px-4 font-quicksand text-justify leading-relaxed text-gray-500 space-y-5 pb-12"  data-aos="fade-up" data-aos-duration="1000">
+               <h3 class="font-cormorant mb-4 text-trust-800 text-3xl font-medium ">‘SATHYASANDESHAM’ Monthly:
+               </h3>
+
+
+
+               <p>
+                    A distinguished Sufi monthly periodical published in Malayalam by Jeelani Trust,  <span class="font-bold"> ‘Santhyasandesham’,</span>
+                    (‘The Message of Truth’) serves as the eloquent voice of Jeelani mission for Sufi social and ethical
+                    reform, dedicated to realize peaceful humanity and universal harmony. The printed magazine carries
+                    the moral and social ideals and values upheld by the Sufi Guru Hazrat Quthbuzzaman Shaikh Yousuf
+                    Sulthan Shah Qadiri Chishti and his Sufi successor and the patron of Jeelani Shareef – Kerala, Naeb
+                    Quthbuzzaman Dr. Sheikh Nizamudhin Sulthan Shah Qadiri Chishti.
+
+               </p>
+
+               <p>
+                    Although the key language being Malayalam, <span class="font-bold"> ‘Sathyasandesham’</span> regularly includes articles and
+                    features in English, Arabic and Urdu, among other languages. Featuring essays on Sufism, religion
+                    and culture, contemporary commentary pieces, research articles, translations of classical Sufi
+                    writings, Sufi stories and poetry, <span class="font-bold"> ‘Sathyasandesham’</span> presents the readers with a plethora of
+                    refreshing ideas to inspire positivity and change. The monthly is assorted cues of moral guidance
+                    for the seekers, as well as short pieces of clear guidance and wisdom to the society for reform and
+                    renewal. The pivotal section of the Sufi monthly is devoted to <span class="font-bold"> ‘Kalām’</span>, the transcribed version of
+                    the Sufi counsels, speeches and conversations – the ethical expositions by the holy Sufi Guru Hazrat
+                    Quthbuzzaman – the founder of Jeelani mission, and  <span class="font-bold"> ‘Bāb’</span>, the monthly social and moral message - the
+                    epistle of peace and guidance to the world from the current leader of Jeelani Sufi movement, the
+                    holy master Dr. Sheikh Nizamudhin Sulthan Shah Qadiri Chishti.
+
+
+               </p>
+               <p>
+                    The magazine regularly covers the monthly message, <span class="font-bold"> ‘Sandesham’</span>, from the President of the Jeelani
+                    Study Centre, Shaikh Ahmad Kabeer Sulthan, and <span class="font-bold"> ‘Soul-Note’</span> - a creative column in English delivered
+                    by the chief advisor of Nizamia educational venture, His Holiness Akbar Ali Sulthan. Based at
+                    Nizamia Institute-Cochin, with the creative crew of Nizamia research students and professional
+                    editorial board, the monthly Sufi journal of Jeelani Trust is published under H.H. Akbar Ali
+                    Sulthan, guided by the esteemed Chairman of the Trust, Holy Hazrat Naeb Quthbuzzaman.
+
+
+               </p>
+               <p>
+                    As a literary- cultural publication of the Jeelani movement, published from Quthbuzzaman Jeelani
+                    Shareef – Kerala, Sathyasandesham Monthly also carries the news feature capturing the activities in
+                    Jeelani Shareef, reports and updates on the state-national-international campaigns and conferences
+                    held under Jeelani Study Centre, and covering the academic programmes and educational seminars and
+                    academic conferences held at Nizamia Institute. An informational and intellectual cultural magazine,
+                    ‘Sathyasandesham’ stands as an inspirational Sufi self-help like companion for those who seek
+                    practical guidance in personal and social moral life and positive insights for ethical futures for
+                    humanity.
+
+
+               </p>
+
+          </div>
+         <div class="mx-auto px-4 font-quicksand text-justify leading-relaxed text-gray-500 space-y-5 pb-12"  data-aos="fade-up" data-aos-duration="1000">
+             
+
+
+               <p>
+                   <span class="font-bold"> MEDIA & COMMUNICATIONS:</span> Currently, the publication venture of Jeelani Trust covers various range of
+                    intellectual, educational and informational material, in practice and in process, in Malayalam and
+                    other languages – mainly English, Arabic and Urdu: 1) books, research monographs, edited volumes –
+                    of original essays and translations, research papers, academic journal, periodicals, and special
+                    pamphlets.
+
+               </p>
+
+               <p>
+                    The publication ventures also progress towards facilitating more platforms of knowledge sharing and
+                    useful devices of education and reflection for a wider audience, by reproducing texts and A/V
+                    materials in the fast-growing digital communications platforms.
+
+
+               </p>
+               <p>
+                    As a humanitarian Sufi movement with universal outlook, the public mission of Jeelani Trust is
+                    actively maintained also through social media. Most of the publications, especially Sufi messages of
+                    wider social relevance and critical salience, are re-produced in social media as a public commitment
+                    to knowledge and intellectual service to humanity.
+
+               </p>
+
+
+          </div>
+          <a href="index.html"
+               class="inline-flex items-center gap-2 group font-medium text-white px-5 py-2.5 rounded-lg bg-trust-900 hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-emerald-500/20 my-5">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-2 transition-transform"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                         d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+               </svg>
+               Back to Home
+          </a>
+     </section>
+     <footer class="bg-trust-800 text-white py-6 text-center text-sm mt-8">
+          <p class="no-aos">© 2025 Jeelani Trust. All Rights Reserved.</p>
+     </footer>
+     <script src="assets/js/main.js"></script>
+     <script src="assets/js/swalath.js"></script>
+     <script src="assets/js/day-remainder-arabic.js"></script>
+     <script src="assets/js/menu.js"></script>
+     <script src="assets/js/date.js"></script>
+     <script src="assets/js/scrollspy.js"></script>
+     <!-- <script src="assets/js/special-redirect.js"></script> -->
+     <script src="assets/js/gallery-modal.js"></script>
+     <script src="assets/js/form-submission.js"></script>
+     <script src="assets/js/arabic-date-api.js"></script>
+     <script src="assets/js/add.js"></script>
+     <script src="assets/js/tailwind.config.js"></script>
+     <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("p:not(.no-aos)").forEach(p => {
+    p.setAttribute("data-aos", "fade-up");
+    p.setAttribute("data-aos-duration", "1000");
+  });
+  AOS.init();
+});
+</script>
+
+     
+</body>
+
+</html>

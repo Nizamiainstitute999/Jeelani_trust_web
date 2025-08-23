@@ -6,16 +6,37 @@
   <title>Gallery | Jeelani Trust</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- AOS (Animate On Scroll) -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
   <style>
     body { font-family: 'Segoe UI', sans-serif; }
-    .gallery img { transition: transform 0.3s ease; cursor: zoom-in; }
-    .gallery img:hover { transform: scale(1.05); }
-    /* Respect users who prefer reduced motion */
+
+    /* Masonry with CSS columns */
+    .masonry > * { break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid; }
+
+    /* Image polish */
+    .gallery img {
+      display: block; width: 100%; height: auto; border-radius: 0.75rem;
+      transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+      cursor: zoom-in;
+    }
+    .gallery img:hover { transform: scale(1.03); }
+
+    /* Blur-up loading hint */
+    .img-loading { filter: blur(12px) saturate(80%); transform: scale(1.02); }
+
+    /* Modern sticky toolbar */
+    .toolbar { position: sticky; top: 72px; z-index: 40; }
+
+    /* Chips scroller */
+    .chips::-webkit-scrollbar { height: 8px; }
+    .chips::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 999px; }
+
+    /* Lightbox zoom canvas wrapper to contain transforms */
+    .zoom-wrap { transform-origin: 0 0; will-change: transform; }
+
     @media (prefers-reduced-motion: reduce) {
-      [data-aos] { transition: none !important; transform: none !important; opacity: 1 !important; }
+      [data-aos], .gallery img { transition: none !important; transform: none !important; opacity: 1 !important; }
     }
   </style>
 </head>
@@ -23,9 +44,9 @@
 <body class="bg-white text-gray-800 min-h-screen flex flex-col">
   <!-- Navbar -->
   <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-50" aria-label="Main">
-    <div class="flex items-center justify-between h-[72px] px-[10px] shadow bg-white">
+    <div class="flex items-center justify-between h-[72px] px-4 shadow bg-white">
       <div class="flex items-center space-x-2">
-        <img src="assets/img/logo/logo.webp" alt="Jeelani Trust Logo" class="h-10 w-auto ml-4">
+        <img src="assets/img/logo/logo.webp" alt="Jeelani Trust Logo" class="h-10 w-auto">
         <a href="index.html" class="font-bold text-2xl tracking-tight font-cinzel">Jeelani Trust</a>
       </div>
       <div class="hidden md:flex space-x-1">
@@ -40,169 +61,222 @@
 
   <!-- Gallery -->
   <main class="flex-grow pt-[90px]">
-    <section class="py-16 px-4 max-w-7xl mx-auto">
-      <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="700">
-        <h1 class="text-3xl md:text-4xl font-cinzel font-bold">Jeelani Moments</h1>
-        <p class="mt-3 text-gray-600 max-w-2xl mx-auto">
-          Glimpses from our cherished events, gatherings, and milestones.
-        </p>
+    <!-- Wider container + smaller padding = reduced side margins -->
+    <div class="text-center mb-6 md:mb-8" data-aos="fade-up" data-aos-duration="700">
+      <h1 class="text-3xl md:text-4xl font-cinzel font-bold">Jeelani Moments</h1>
+      <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Glimpses from our cherished events, gatherings, and milestones.</p>
+    </div>
+
+    <!-- Filter + Sort Bar (Redesigned) -->
+    <div class="toolbar mb-6">
+      <div class="px-12 border border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 p-3 md:p-4 shadow-sm">
+        <div class="flex flex-col gap-4">
+          <!-- Category chips: modern, scrollable -->
+          <div class="flex items-center justify-between gap-3">
+            <div class="text-sm font-medium shrink-0">Categories</div>
+            <div class="chips relative flex-1 overflow-x-auto no-scrollbar flex gap-2 px-1" role="group" aria-label="Category filter">
+              <!-- Chips injected by JS for active styles -->
+              <button data-cat="all" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm bg-trust-900 text-white shadow">
+               
+                All <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-white/20">0</span>
+              </button>
+              <button data-cat="NQ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
+               
+                NQ <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-gray-100">0</span>
+              </button>
+              <button data-cat="QZ" class="cat-btn inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm hover:bg-trust-50">
+               
+                QZ <span class="count hidden ml-1 text-xs px-2 py-0.5 rounded-full bg-gray-100">0</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filters row -->
+          <div class="flex flex-wrap items-end gap-3">
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium" for="event">Event</label>
+              <select id="event" class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                <option value="all">All</option>
+                <option value="Swalath">Swalath</option>
+                <option value="Eid">Eid</option>
+                <option value="Irada">Irada</option>
+                <option value="Conference">Conference</option>
+                <option value="Inauguration">Inauguration</option>
+                <option value="Hajj">Hajj</option>
+                <option value="Mahan">Mahan</option>
+                <option value="Hostel">Hostel</option>
+                <option value="BackCover">Back Cover</option>
+                <option value="Ajmer">Ajmer</option>
+              </select>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium" for="year">Year</label>
+              <select id="year" class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                <option value="all">All</option>
+                <option>2016</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+              </select>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <input id="search" type="search" placeholder="Search title…" class="border rounded-lg px-3 py-2 text-sm w-64 focus:outline-none focus:ring-2 focus:ring-gray-300" />
+              <button id="resetFilters" class="px-3 py-2 text-sm border rounded-lg hover:bg-gray-50">Reset</button>
+            </div>
+
+            <div class="ml-auto flex items-center gap-3">
+              <div class="flex items-center gap-2">
+                <label for="sort" class="font-medium text-sm">Sort</label>
+                <select id="sort" class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                  <option value="default">Default</option>
+                  <option value="title">Title (A–Z)</option>
+                  <option value="title-desc">Title (Z–A)</option>
+                  <option value="date">Date (Newest)</option>
+                  <option value="date-asc">Date (Oldest)</option>
+                </select>
+              </div>
+              <span id="resultCount" class="text-xs md:text-sm text-gray-600">Showing 0</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+    <section class="py-10 px-2 sm:px-3 max-w-7xl md:max-w-screen-2xl mx-auto">
 
-      <!-- Grid of images -->
-      <div class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+      <!-- Masonry container -->
+      <div class="gallery masonry columns-1 sm:columns-2 md:columns-3 xl:columns-4 gap-3 md:gap-5">
 
-        <!-- Tip: width/height prevent layout shift; adjust if your source images differ -->
+        <!-- NQ -->
         <img src="assets/img/NQ/Akbar Ali Suthan Swalath June 2023.webp"
-             alt="Akbar Ali Suthan Swalath June 2023"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="eager" fetchpriority="high" decoding="async">
+             alt="Akbar Ali Suthan Swalath — June 2023" width="1600" height="1200"
+             data-title="Akbar Ali Suthan Swalath — June 2023" data-date="2023-06-01"
+             data-category="NQ" data-event="Swalath" data-year="2023" loading="lazy" fetchpriority="high" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Akbar Ali Suthan_Indian Independence Day Cebration 2024_ Nizamia Institute.webp"
-             alt="Akbar Ali Suthan Indian Independence Day Celebration 2024 — Nizamia Institute"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Akbar Ali Suthan — Indian Independence Day Celebration 2024 — Nizamia Institute" width="1600" height="1200"
+             data-title="Akbar Ali Suthan — Indian Independence Day Celebration 2024" data-date="2024-08-15"
+             data-category="NQ" data-event="Swalath" data-year="2024" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Akbar Ali Suthan_Irada 2025.webp"
-             alt="Akbar Ali Suthan — Irada 2025"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Akbar Ali Suthan — Irada 2025" width="1600" height="1200"
+             data-title="Akbar Ali Suthan — Irada 2025" data-date="2025-01-01"
+             data-category="NQ" data-event="Irada" data-year="2025" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Baab Inauguration Swalath June 2024.webp"
-             alt="Baab Inauguration — Swalath June 2024"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Baab Inauguration — Swalath June 2024" width="1600" height="1200"
+             data-title="Baab Inauguration — Swalath June 2024" data-date="2024-06-01"
+             data-category="NQ" data-event="Inauguration" data-year="2024" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Eidul Fitr April 2024.webp"
-             alt="Eidul Fitr — April 2024"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Eidul Fitr — April 2024" width="1600" height="1200"
+             data-title="Eidul Fitr — April 2024" data-date="2024-04-01"
+             data-category="NQ" data-event="Eid" data-year="2024" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Eidul Fitr April 2025.webp"
-             alt="Eidul Fitr — April 2025"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Eidul Fitr — April 2025" width="1600" height="1200"
+             data-title="Eidul Fitr — April 2025" data-date="2025-04-01"
+             data-category="NQ" data-event="Eid" data-year="2025" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Irada Conclave 2025.webp"
-             alt="Irada Conclave 2025"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Irada Conclave 2025" width="1600" height="1200"
+             data-title="Irada Conclave 2025" data-date="2025-01-15"
+             data-category="NQ" data-event="Irada" data-year="2025" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Mahan2.webp"
-             alt="Mahan 2"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Mahan 2" width="1600" height="1200"
+             data-title="Mahan 2" data-category="NQ" data-event="Mahan" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Swalath December 2024.webp"
-             alt="Swalath — December 2024"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Swalath — December 2024" width="1600" height="1200"
+             data-title="Swalath — December 2024" data-date="2024-12-01"
+             data-category="NQ" data-event="Swalath" data-year="2024" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Swalath February 2023.webp"
-             alt="Swalath — February 2023"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Swalath — February 2023" width="1600" height="1200"
+             data-title="Swalath — February 2023" data-date="2023-02-01"
+             data-category="NQ" data-event="Swalath" data-year="2023" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Swalath February 2025.webp"
-             alt="Swalath — February 2025"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Swalath — February 2025" width="1600" height="1200"
+             data-title="Swalath — February 2025" data-date="2025-02-01"
+             data-category="NQ" data-event="Swalath" data-year="2025" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Swalath July 2024.webp"
-             alt="Swalath — July 2024"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Swalath — July 2024" width="1600" height="1200"
+             data-title="Swalath — July 2024" data-date="2024-07-01"
+             data-category="NQ" data-event="Swalath" data-year="2024" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Swalath June 2023.webp"
-             alt="Swalath — June 2023"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Swalath — June 2023" width="1600" height="1200"
+             data-title="Swalath — June 2023" data-date="2023-06-01"
+             data-category="NQ" data-event="Swalath" data-year="2023" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/NQ/Swalath Qctober 2024.webp"
-             alt="Swalath — October 2024"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Swalath — October 2024" width="1600" height="1200"
+             data-title="Swalath — October 2024" data-date="2024-10-01"
+             data-category="NQ" data-event="Swalath" data-year="2024" loading="lazy" decoding="async" class="mb-5">
 
+        <!-- QZ -->
         <img src="assets/img/QZ/Back Cover.webp"
-             alt="Back Cover"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Back Cover" width="1600" height="1200"
+             data-title="Back Cover" data-category="QZ" data-event="BackCover" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/Haj Ceremony in Mekkah.webp"
-             alt="Hajj Ceremony in Makkah"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Hajj Ceremony in Makkah" width="1200" height="1600"
+             data-title="Hajj Ceremony in Makkah" data-category="QZ" data-event="Hajj" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/International Sufi Conference .webp"
-             alt="International Sufi Conference"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="International Sufi Conference" width="1600" height="1200"
+             data-title="International Sufi Conference" data-category="QZ" data-event="Conference" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/International Sufi Conference 2016.webp"
-             alt="International Sufi Conference — 2016"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="International Sufi Conference — 2016" width="1600" height="1200"
+             data-title="International Sufi Conference — 2016" data-date="2016-01-01"
+             data-category="QZ" data-event="Conference" data-year="2016" loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/Mahan.webp"
-             alt="Mahan"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Mahan" width="1600" height="1200"
+             data-title="Mahan" data-category="QZ" data-event="Mahan" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/Nizamia Institute Hostel Inauguration Ceremony.webp"
-             alt="Nizamia Institute Hostel Inauguration Ceremony"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Nizamia Institute Hostel Inauguration Ceremony" width="1600" height="1200"
+             data-title="Nizamia Institute Hostel Inauguration Ceremony" data-category="QZ" data-event="Hostel" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/Qthbuzzaman International Sufi Conference 1.webp"
-             alt="Quthbuzzaman — International Sufi Conference (1)"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Quthbuzzaman — International Sufi Conference (1)" width="1200" height="1600"
+             data-title="Quthbuzzaman — International Sufi Conference (1)" data-category="QZ" data-event="Conference" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/Qthbuzzaman International Sufi Conference.webp"
-             alt="Quthbuzzaman — International Sufi Conference"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Quthbuzzaman — International Sufi Conference" width="1600" height="1200"
+             data-title="Quthbuzzaman — International Sufi Conference" data-category="QZ" data-event="Conference" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/Quthbuzzaman in Ajmeer.webp"
-             alt="Quthbuzzaman in Ajmer"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Quthbuzzaman in Ajmer" width="1600" height="1200"
+             data-title="Quthbuzzaman in Ajmer" data-category="QZ" data-event="Ajmer" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
         <img src="assets/img/QZ/Quthbuzzaman With Grandchild of Ghousul Aa'lam.webp"
-             alt="Quthbuzzaman with Grandchild of Ghous-ul A'lam"
-             class="w-full aspect-[4/3] object-cover rounded-xl"
-             width="1600" height="1200"
-             loading="lazy" decoding="async">
+             alt="Quthbuzzaman with Grandchild of Ghous-ul A'lam" width="1600" height="1200"
+             data-title="Quthbuzzaman with Grandchild of Ghous-ul A'lam" data-category="QZ" data-event="Conference" data-year=""
+             loading="lazy" decoding="async" class="mb-5">
 
       </div>
     </section>
 
     <!-- Back to Home -->
-    <div class="text-center mt-12" data-aos="fade-up">
+    <div class="text-center mt-10" data-aos="fade-up">
       <a href="index.html"
-        class="inline-flex items-center gap-2 font-medium text-white px-6 py-3 rounded-lg bg-trust-900 hover:bg-trust-700 transition duration-300 shadow-md">
+        class="inline-flex items-center gap-2 font-medium text-white px-6 py-3 rounded-lg bg-gray-900 hover:bg-gray-800 transition duration-300 shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -212,123 +286,358 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-trust-900 text-white py-6 text-center text-sm mt-12">
+  <footer class="bg-trust-800 text-white py-6 text-center text-sm mt-12">
     <p>© 2025 Jeelani Trust. All Rights Reserved.</p>
   </footer>
 
-  <!-- Lightbox Modal -->
-  <div id="lightbox"
-       class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[9999] hidden">
+  <!-- Lightbox Modal with Zoom Controls -->
+  <div id="lightbox" class="fixed inset-0 bg-trust-800/90 flex items-center justify-center z-[9999] hidden">
     <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl font-bold" aria-label="Close">&times;</button>
 
-    <div class="relative max-w-5xl w-full flex items-center justify-center px-10">
-      <button id="lightbox-prev"
-              class="absolute left-2 md:left-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full"
-              aria-label="Previous">&#10094;</button>
+    <!-- Zoom controls -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2">
+      <button id="zoomOut" class="px-3 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/20">−</button>
+      <button id="zoomReset" class="px-3 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/20">Reset</button>
+      <button id="zoomIn" class="px-3 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/20">+</button>
+    </div>
 
-      <img id="lightbox-img"
-           src=""
-           alt="Gallery Image"
-           class="max-h-[80vh] max-w-full rounded-lg shadow-lg object-contain select-none" />
+    <div class="relative max-w-6xl w-full max-h-[86vh] h-[86vh] flex items-center justify-center px-4">
+      <button id="lightbox-prev" class="absolute left-2 md:left-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full" aria-label="Previous">&#10094;</button>
 
-      <button id="lightbox-next"
-              class="absolute right-2 md:right-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full"
-              aria-label="Next">&#10095;</button>
+      <!-- Zooming container -->
+      <div id="zoomContainer" class="zoom-wrap w-full h-full overflow-hidden rounded-lg shadow-lg bg-black/40">
+        <img id="lightbox-img" src="" alt="Gallery Image" class="max-w-none select-none object-contain w-full h-full" />
+      </div>
+
+      <button id="lightbox-next" class="absolute right-2 md:right-6 text-white text-4xl font-bold px-2 bg-black/30 hover:bg-black/60 rounded-full" aria-label="Next">&#10095;</button>
     </div>
   </div>
 
   <!-- Scripts -->
+   <script src="/assets/js/tailwind.config.js"></script>
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-  <!-- Non-critical scripts marked defer (keep or remove as per your project) -->
-  <script defer src="assets/js/main.js"></script>
-  <script defer src="assets/js/swalath.js"></script>
-  <script defer src="assets/js/day-remainder-arabic.js"></script>
-  <script defer src="assets/js/menu.js"></script>
-  <script defer src="assets/js/date.js"></script>
-  <script defer src="assets/js/scrollspy.js"></script>
-  <!-- <script defer src="assets/js/gallery-modal.js"></script> -->
-  <script defer src="assets/js/form-submission.js"></script>
-  <script defer src="assets/js/arabic-date-api.js"></script>
-  <script defer src="assets/js/add.js"></script>
-  <script defer src="assets/js/tailwind.config.js"></script>
-
-  <!-- Inline lightbox + AOS setup -->
+  <!-- Inline lightbox + AOS + Filter + Sorting + Zoom -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const images = document.querySelectorAll(".gallery img");
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-img");
-      const closeBtn = document.getElementById("lightbox-close");
-      const prevBtn = document.getElementById("lightbox-prev");
-      const nextBtn = document.getElementById("lightbox-next");
-      let currentIndex = 0;
+  document.addEventListener("DOMContentLoaded", () => {
+    const gallery = document.querySelector(".gallery");
+    const allImages = Array.from(gallery.querySelectorAll("img"));
 
-      // --- AOS: assign animations to gallery images programmatically ---
-      // Stagger delays 0, 75, 150, 225, 300, 375ms in a loop
-      images.forEach((img, i) => {
-        const delay = (i % 6) * 75;
-        img.setAttribute("data-aos", "zoom-in");
-        img.setAttribute("data-aos-delay", String(delay));
-        img.setAttribute("data-aos-duration", "600");
-        img.setAttribute("data-aos-easing", "ease-out-cubic");
-        // Ensure lazy behavior
-        if (i > 0) {
-          img.setAttribute("loading", img.getAttribute("loading") || "lazy");
-          img.setAttribute("decoding", img.getAttribute("decoding") || "async");
-        }
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const zoomWrap = document.getElementById("zoomContainer");
+    const closeBtn = document.getElementById("lightbox-close");
+    const prevBtn = document.getElementById("lightbox-prev");
+    const nextBtn = document.getElementById("lightbox-next");
+    const zoomInBtn = document.getElementById("zoomIn");
+    const zoomOutBtn = document.getElementById("zoomOut");
+    const zoomResetBtn = document.getElementById("zoomReset");
+
+    const sortSelect = document.getElementById("sort");
+    const resultCount = document.getElementById("resultCount");
+    const resetBtn = document.getElementById("resetFilters");
+
+    // Filters
+    const catButtons = Array.from(document.querySelectorAll(".cat-btn"));
+    const eventSelect = document.getElementById("event");
+    const yearSelect  = document.getElementById("year");
+    const searchInput = document.getElementById("search");
+
+    // Helpers
+    const norm = (v) => (v ?? "").toString().trim();
+    const normLower = (v) => norm(v).toLowerCase();
+    const normUpper = (v) => norm(v).toUpperCase();
+
+    // AOS + blur-up setup
+    allImages.forEach((img, i) => {
+      const delay = (i % 6) * 75;
+      img.setAttribute("data-aos", "zoom-in");
+      img.setAttribute("data-aos-delay", String(delay));
+      img.setAttribute("data-aos-duration", "600");
+      img.setAttribute("data-aos-easing", "ease-out-cubic");
+      img.classList.add("img-loading");
+      img.addEventListener("load", () => img.classList.remove("img-loading"), { once: true });
+      if (i > 0) {
+        img.setAttribute("loading", img.getAttribute("loading") || "lazy");
+        img.setAttribute("decoding", img.getAttribute("decoding") || "async");
+      }
+      if (!img.classList.contains("mb-5")) img.classList.add("mb-5");
+    });
+    if (window.AOS) AOS.init({ once: true, offset: 80, duration: 600, easing: 'ease-out-cubic' });
+
+    // ---------- Filters ----------
+    let state = { category: "all", event: "all", year: "all", search: "" };
+
+    function matchesFilters(img) {
+      const cat   = normUpper(img.dataset.category);
+      const event = normLower(img.dataset.event);
+      const year  = norm(img.dataset.year);
+      const title = normLower(img.dataset.title || img.alt);
+      const catOk   = state.category === "all" || cat === state.category;
+      const eventOk = state.event === "all"    || event === state.event;
+      const yearOk  = state.year  === "all"    || year === state.year;
+      const searchOk= !state.search || title.includes(state.search);
+      return catOk && eventOk && yearOk && searchOk;
+    }
+
+    function applyFilters() {
+      let visible = 0;
+      const counts = { all: allImages.length, NQ: 0, QZ: 0 };
+      allImages.forEach(img => {
+        const show = matchesFilters(img);
+        img.classList.toggle("hidden", !show);
+        img.style.display = show ? "block" : "none"; // force reflow in CSS columns
+        if (show) visible++;
+        const c = normUpper(img.dataset.category);
+        if (c === 'NQ') counts.NQ++; else if (c === 'QZ') counts.QZ++;
       });
+      resultCount.textContent = `Showing ${visible} of ${allImages.length}`;
+      // Update chip counts
+      catButtons.forEach(btn => {
+        const cat = btn.dataset.cat?.toUpperCase();
+        const el = btn.querySelector('.count');
+        if (!el) return;
+        let val = 0;
+        if (cat === 'ALL') val = visible; else if (cat === 'NQ') val = state.category==='all' ? counts.NQ : Array.from(gallery.querySelectorAll('img')).filter(i=> i.style.display!=="none" && i.dataset.category==='NQ').length; else if (cat === 'QZ') val = state.category==='all' ? counts.QZ : Array.from(gallery.querySelectorAll('img')).filter(i=> i.style.display!=="none" && i.dataset.category==='QZ').length;
+        el.textContent = val;
+        el.classList.toggle('hidden', false);
+      });
+      if (window.AOS && AOS.refresh) AOS.refresh();
+    }
 
-      // Init AOS after attributes are set
-      if (window.AOS) {
-        AOS.init({
-          once: true,           // animate only once
-          offset: 80,           // triggers slightly before entering
-          duration: 600,
-          easing: 'ease-out-cubic'
-        });
-      }
-
-      // --- Lightbox functions ---
-      function openLightbox(index) {
-        currentIndex = index;
-        lightboxImg.src = images[currentIndex].src;
-        lightboxImg.alt = images[currentIndex].alt || "Gallery Image";
-        lightbox.classList.remove("hidden");
-        document.documentElement.style.overflow = "hidden";
-      }
-      function closeLightbox() {
-        lightbox.classList.add("hidden");
-        document.documentElement.style.overflow = "";
-      }
-      function showNext() {
-        currentIndex = (currentIndex + 1) % images.length;
-        lightboxImg.src = images[currentIndex].src;
-        lightboxImg.alt = images[currentIndex].alt || "Gallery Image";
-      }
-      function showPrev() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        lightboxImg.src = images[currentIndex].src;
-        lightboxImg.alt = images[currentIndex].alt || "Gallery Image";
-      }
-
-      // Bind clicks
-      images.forEach((img, index) => img.addEventListener("click", () => openLightbox(index)));
-      closeBtn.addEventListener("click", closeLightbox);
-      nextBtn.addEventListener("click", showNext);
-      prevBtn.addEventListener("click", showPrev);
-
-      // Close on backdrop click
-      lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-
-      // Keyboard navigation
-      document.addEventListener("keydown", (e) => {
-        if (lightbox.classList.contains("hidden")) return;
-        if (e.key === "ArrowRight") showNext();
-        if (e.key === "ArrowLeft") showPrev();
-        if (e.key === "Escape") closeLightbox();
+    // Category pills
+    catButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        catButtons.forEach(b => b.classList.remove("bg-gray-900","text-white","shadow","border-gray-900"));
+        btn.classList.add("bg-gray-900","text-white","shadow","border-gray-900");
+        const raw = btn.dataset.cat || "all";
+        state.category = raw.toUpperCase() === "ALL" ? "all" : normUpper(raw);
+        applyFilters();
       });
     });
+    // initial
+    const allBtn = catButtons.find(b => normLower(b.dataset.cat) === "all");
+    if (allBtn) allBtn.click();
+
+    eventSelect.addEventListener("change", () => {
+      state.event = eventSelect.value === "all" ? "all" : normLower(eventSelect.value);
+      applyFilters();
+    });
+    yearSelect.addEventListener("change", () => {
+      state.year = yearSelect.value;
+      applyFilters();
+    });
+
+    // Search (debounced)
+    let searchTimer;
+    searchInput.addEventListener("input", () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        state.search = normLower(searchInput.value);
+        applyFilters();
+      }, 150);
+    });
+
+    // Reset
+    resetBtn.addEventListener("click", () => {
+      if (allBtn) allBtn.click();
+      eventSelect.value = "all";
+      yearSelect.value = "all";
+      searchInput.value = "";
+      sortSelect.value = "default";
+      state = { category: "all", event: "all", year: "all", search: "" };
+      sortAndRender("default");
+      applyFilters();
+    });
+
+    // ---------- Sorting ----------
+    const originalOrder = Array.from(gallery.children);
+    const parseDateSafe = (s) => {
+      const t = Date.parse(norm(s));
+      return Number.isNaN(t) ? NaN : t;
+    };
+
+    function sortAndRender(mode) {
+      if (mode === "default") {
+        originalOrder.forEach(node => gallery.appendChild(node));
+      } else {
+        const imgs = Array.from(gallery.querySelectorAll("img"));
+        let cmp;
+        if (mode === "title") {
+          cmp = (a,b)=> norm(a.dataset.title).localeCompare(norm(b.dataset.title));
+        } else if (mode === "title-desc") {
+          cmp = (a,b)=> norm(b.dataset.title).localeCompare(norm(a.dataset.title));
+        } else if (mode === "date" || mode === "date-asc") {
+          cmp = (a,b)=> {
+            const ad = parseDateSafe(a.dataset.date);
+            const bd = parseDateSafe(b.dataset.date);
+            if (Number.isNaN(ad) && Number.isNaN(bd)) return 0;
+            if (Number.isNaN(ad)) return 1;
+            if (Number.isNaN(bd)) return -1;
+            return mode === "date" ? (bd - ad) : (ad - bd);
+          };
+        }
+        imgs.sort(cmp).forEach(img => gallery.appendChild(img));
+      }
+      if (window.AOS && AOS.refresh) AOS.refresh();
+    }
+    sortSelect.addEventListener("change", (e)=> sortAndRender(e.target.value));
+
+    // ---------- Lightbox (visible-only navigation) ----------
+    const getVisibleImages = () => allImages.filter(img => img.style.display !== "none");
+    let currentIndex = 0;
+
+    function setLightboxSrc(imgEl) {
+      lightboxImg.src = imgEl.src;
+      lightboxImg.alt = imgEl.alt || "Gallery Image";
+    }
+
+    function openLightbox(index, list) {
+      const visible = list || getVisibleImages();
+      if (!visible.length) return;
+      currentIndex = index;
+      setLightboxSrc(visible[currentIndex]);
+      lightbox.classList.remove("hidden");
+      document.documentElement.style.overflow = "hidden";
+      // Reset zoom every open
+      resetZoom();
+    }
+    function closeLightbox() {
+      lightbox.classList.add("hidden");
+      document.documentElement.style.overflow = "";
+    }
+    function showNext() {
+      const list = getVisibleImages();
+      if (!list.length) return;
+      currentIndex = (currentIndex + 1) % list.length;
+      setLightboxSrc(list[currentIndex]);
+      resetZoom();
+    }
+    function showPrev() {
+      const list = getVisibleImages();
+      if (!list.length) return;
+      currentIndex = (currentIndex - 1 + list.length) % list.length;
+      setLightboxSrc(list[currentIndex]);
+      resetZoom();
+    }
+
+    allImages.forEach(img => {
+      img.addEventListener("click", () => {
+        const visible = getVisibleImages();
+        const idx = visible.indexOf(img);
+        if (idx !== -1) openLightbox(idx, visible);
+      });
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    nextBtn.addEventListener("click", showNext);
+    prevBtn.addEventListener("click", showPrev);
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", (e) => {
+      if (lightbox.classList.contains("hidden")) return;
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "Escape") closeLightbox();
+    });
+
+    // ---------- Zoom/Pan (wheel, buttons, drag, pinch) ----------
+    let scale = 1;
+    let minScale = 1;
+    let maxScale = 8;
+    let originX = 0; // content transform origin X (px)
+    let originY = 0; // content transform origin Y (px)
+
+    function applyTransform() {
+      zoomWrap.style.transform = `translate(0,0)`; // container stays
+      lightboxImg.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
+      lightboxImg.style.transformOrigin = '0 0';
+      lightboxImg.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+    }
+
+    function resetZoom() {
+      scale = 1; originX = 0; originY = 0; applyTransform();
+    }
+
+    function zoomAt(clientX, clientY, deltaScale) {
+      const rect = lightboxImg.getBoundingClientRect();
+      const x = clientX - rect.left - originX;
+      const y = clientY - rect.top  - originY;
+      const newScale = Math.min(maxScale, Math.max(minScale, scale * deltaScale));
+      if (newScale === scale) return;
+      originX -= (x * (newScale/scale - 1));
+      originY -= (y * (newScale/scale - 1));
+      scale = newScale;
+      clampPan();
+      applyTransform();
+    }
+
+    function clampPan() {
+      const rect = zoomWrap.getBoundingClientRect();
+      const imgW = rect.width * scale;
+      const imgH = rect.height * scale;
+      const maxX = Math.max(0, (imgW - rect.width));
+      const maxY = Math.max(0, (imgH - rect.height));
+      originX = Math.min(0, Math.max(-maxX, originX));
+      originY = Math.min(0, Math.max(-maxY, originY));
+    }
+
+    // Wheel zoom
+    zoomWrap.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const factor = e.deltaY < 0 ? 1.2 : 1/1.2;
+      zoomAt(e.clientX, e.clientY, factor);
+    }, { passive: false });
+
+    // Buttons
+    zoomInBtn.addEventListener('click', ()=> zoomAt(window.innerWidth/2, window.innerHeight/2, 1.2));
+    zoomOutBtn.addEventListener('click',()=> zoomAt(window.innerWidth/2, window.innerHeight/2, 1/1.2));
+    zoomResetBtn.addEventListener('click', resetZoom);
+
+    // Drag to pan
+    let isPanning = false; let startX=0, startY=0;
+    lightboxImg.addEventListener('pointerdown', (e)=>{
+      if (scale <= 1) return; isPanning = true; lightboxImg.setPointerCapture(e.pointerId);
+      startX = e.clientX - originX; startY = e.clientY - originY; lightboxImg.style.cursor='grabbing';
+    });
+    lightboxImg.addEventListener('pointermove', (e)=>{
+      if (!isPanning) return; originX = e.clientX - startX; originY = e.clientY - startY; clampPan(); applyTransform();
+    });
+    lightboxImg.addEventListener('pointerup', ()=>{ isPanning=false; lightboxImg.style.cursor= scale>1?'grab':'zoom-in';});
+    lightboxImg.addEventListener('pointercancel', ()=>{ isPanning=false; lightboxImg.style.cursor= scale>1?'grab':'zoom-in';});
+
+    // Double-click / double-tap to zoom
+    let lastTap = 0;
+    lightboxImg.addEventListener('click', (e)=>{
+      const now = Date.now();
+      if (now - lastTap < 300) { // double
+        const next = scale >= 2 ? 1 : 2;
+        zoomAt(e.clientX, e.clientY, next/scale);
+      }
+      lastTap = now;
+    });
+
+    // Pinch to zoom (touch)
+    let pointers = new Map();
+    zoomWrap.addEventListener('pointerdown', (e)=>{ pointers.set(e.pointerId, e); zoomWrap.setPointerCapture(e.pointerId); });
+    zoomWrap.addEventListener('pointermove', (e)=>{
+      if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, e);
+      if (pointers.size === 2) {
+        const [p1, p2] = Array.from(pointers.values());
+        const dist = Math.hypot(p2.clientX - p1.clientX, p2.clientY - p1.clientY);
+        if (!zoomWrap._lastDist) zoomWrap._lastDist = dist;
+        const factor = dist / zoomWrap._lastDist; // >1 zoom in
+        const cx = (p1.clientX + p2.clientX)/2; const cy = (p1.clientY + p2.clientY)/2;
+        zoomAt(cx, cy, factor);
+        zoomWrap._lastDist = dist;
+      }
+    });
+    ['pointerup','pointercancel','pointerleave'].forEach(type=> zoomWrap.addEventListener(type, (e)=>{
+      pointers.delete(e.pointerId); if (pointers.size < 2) zoomWrap._lastDist = null;
+    }));
+
+    // Initial paint
+    applyFilters();
+  });
   </script>
 </body>
 </html>
