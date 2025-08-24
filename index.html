@@ -341,7 +341,7 @@
 
     </div>
   </div>
-  
+
 
 
 
@@ -453,28 +453,33 @@
   </section>
 
   <!-- Today’s Event Card -->
-  <!-- Today’s Remembrance – Full Width (Light Theme) -->
-  <section id="today-event" aria-labelledby="eventHeading"
-    class="py-10 px-4 bg-gradient-to-r from-trust-100 to-trust-200">
-    <div class="max-w-7xl mx-auto text-center text-trust-800" data-aos="fade-up" data-aos-duration="900">
 
-      <!-- Heading -->
-      <h2 id="eventHeading" class="text-2xl sm:text-3xl font-bold mb-3">
+<section id="today-event" aria-labelledby="eventHeading"
+  class="py-8 px-4 bg-gradient-to-r from-trust-50 to-trust-200">
+  <div class="max-w-3xl mx-auto text-center text-trust-800"
+       data-aos="fade-up" data-aos-duration="800">
+
+    <!-- Heading -->
+    <h2 id="eventHeading"
+        class="text-2xl sm:text-3xl font-bold mb-4 tracking-tight text-trust-900">
         Today’s Remembrance
-      </h2>
+    </h2>
 
-      <!-- Date -->
-      <p class="text-base sm:text-lg font-medium mb-4 text-trust-600">
-        📅 Today: 15 Muharram 1447 AH
-      </p>
-
-      <!-- Event -->
-      <p class="text-lg sm:text-xl font-semibold">
-        Passing of Uwais al-Qarani (RA)
-      </p>
-
+    <!-- Date -->
+    <div id="today-date"
+         class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm text-base sm:text-lg font-semibold text-trust-800 mb-5">
+      <span class="text-lg">📅</span>
+      <span id="hijri-text">Loading date…</span>
     </div>
-  </section>
+
+    <!-- Event(s) -->
+    <div id="today-events"
+         class="space-y-3 text-base sm:text-lg font-medium text-trust-900">
+      <p class="animate-pulse text-gray-500">Loading events…</p>
+    </div>
+
+  </div>
+</section>
 
 
 
@@ -790,8 +795,7 @@
         <article class="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-all" data-aos="fade-up"
           data-aos-duration="1500" data-aos-delay="500">
           <div class="relative">
-            <img src="assets/img/Card/Publication.webp" alt="publications  image" class="w-full h-full "
-              loading="lazy">
+            <img src="assets/img/Card/Publication.webp" alt="publications  image" class="w-full h-full " loading="lazy">
             <div class="absolute bottom-0 left-0 p-3">
               <!-- <span class="bg-green-300 text-green-900 px-3 py-1 text-xs font-medium rounded-full">lorem</span> -->
             </div>
@@ -913,8 +917,8 @@
       <div data-aos="zoom-in" data-aos-duration="1000"
         class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="overflow-hidden">
-          <img src="assets/img/gallery/qm/Quthbuzzaman-d-litt-award-chennai.webp" alt="International Sufi Conference — 2016"
-            width="1600" height="1200" loading="lazy" decoding="async"
+          <img src="assets/img/gallery/qm/Quthbuzzaman-d-litt-award-chennai.webp"
+            alt="International Sufi Conference — 2016" width="1600" height="1200" loading="lazy" decoding="async"
             class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
         </div>
       </div>
@@ -923,8 +927,8 @@
       <div data-aos="zoom-in" data-aos-duration="1000"
         class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="overflow-hidden">
-          <img src="assets/img/gallery/nm/Eidul Fitr April 2025.webp" alt="Eidul Fitr — April 2025" width="1600" height="1200"
-            loading="lazy" decoding="async"
+          <img src="assets/img/gallery/nm/Eidul Fitr April 2025.webp" alt="Eidul Fitr — April 2025" width="1600"
+            height="1200" loading="lazy" decoding="async"
             class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
         </div>
       </div>
@@ -933,8 +937,8 @@
       <div data-aos="zoom-in" data-aos-duration="1000"
         class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="overflow-hidden">
-          <img src="assets/img/gallery/qm/Qmahan-bagdag-grandson08.webp" alt="Akbar Ali Suthan — Irada 2025" width="1600"
-            height="1200" loading="lazy" decoding="async"
+          <img src="assets/img/gallery/qm/Qmahan-bagdag-grandson08.webp" alt="Akbar Ali Suthan — Irada 2025"
+            width="1600" height="1200" loading="lazy" decoding="async"
             class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
         </div>
       </div>
@@ -953,8 +957,8 @@
       <div data-aos="zoom-in" data-aos-duration="1000"
         class="group overflow-hidden  bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="overflow-hidden">
-          <img src="assets/img/gallery/qm/Qmahan-rifae-grandson.webp" alt="Swalath — October 2024" width="1600" height="1200"
-            loading="lazy" decoding="async"
+          <img src="assets/img/gallery/qm/Qmahan-rifae-grandson.webp" alt="Swalath — October 2024" width="1600"
+            height="1200" loading="lazy" decoding="async"
             class="gallery-img w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110">
         </div>
       </div>
@@ -1273,15 +1277,15 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/swalath.js"></script>
-  <script src="assets/js/day-remainder-arabic.js"></script>
+
   <script src="assets/js/menu.js"></script>
   <script src="assets/js/date.js"></script>
   <script src="assets/js/scrollspy.js"></script>
   <!-- <script src="assets/js/special-redirect.js"></script> -->
-  <script src="assets/js/gallery-modal.js"></script>
+
   <script src="assets/js/form-submission.js"></script>
   <script src="assets/js/arabic-date-api.js"></script>
+  <script src="assets/js/special-days-api.js"></script>
   <script src="assets/js/add.js"></script>
   <script src="assets/js/tailwind.config.js"></script>
   <script>
