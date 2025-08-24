@@ -33,97 +33,108 @@
      <script src="tailwind.config.js"></script>
      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
           rel="stylesheet">
+     <!-- Swiper CSS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+     <!-- Swiper JS -->
+     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 </head>
 
 <body class="min-h-screen flex flex-col">
      <!-- Navbar -->
-  <nav
-    class="bg-white shadow-sm border-b border-white border-opacity-10 fixed top-0 left-0 w-full z-50 mb-5 text-trust-900">
-    <div class="max-w-full ">
-      <div
-        class="flex items-center justify-between h-[72px] px-[10px] relative shadow-[0_2px_18px_0_rgba(129,162,182,0.2)] bg-white">
+     <nav
+          class="bg-white shadow-sm border-b border-white border-opacity-10 fixed top-0 left-0 w-full z-50 mb-5 text-trust-900">
+          <div class="max-w-full ">
+               <div
+                    class="flex items-center justify-between h-[72px] px-[10px] relative shadow-[0_2px_18px_0_rgba(129,162,182,0.2)] bg-white">
 
-        <!-- Logo -->
-        <div class="flex items-center space-x-2 group">
-          <!-- Logo -->
-          <img src="assets/img/logo/logo.webp" alt="Jeelani Trust Logo" class="h-10 w-auto ml-4">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-2 group">
+                         <!-- Logo -->
+                         <img src="assets/img/logo/logo.webp" alt="Jeelani Trust Logo" class="h-10 w-auto ml-4">
 
-          <!-- Text Block -->
-          <div class="flex flex-col leading-tight">
-            <a href="index.html" class="font-bold text-2xl tracking-tight font-cinzel sm:text-md">
-              Jeelani Trust
-            </a>
+                         <!-- Text Block -->
+                         <div class="flex flex-col leading-tight">
+                              <a href="index.html" class="font-bold text-2xl tracking-tight font-cinzel sm:text-md">
+                                   Jeelani Trust
+                              </a>
 
+                         </div>
+                    </div>
+
+
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex space-x-1">
+                         <a href="index.html"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Home</span>
+                         </a>
+                         <a href="index.html#about"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">About
+                                   Us</span>
+                         </a>
+                         <a href="index.html#programs"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Initiatives</span>
+                         </a>
+                         <a href="index.html#gallery"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Gallery</span>
+                         </a>
+                         <a href="index.html#contact"
+                              class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
+                              <span
+                                   class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Contact</span>
+                         </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button
+                         class="md:hidden text-trust-700 focus:outline-none p-2 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors"
+                         aria-label="Toggle mobile menu" id="menu-toggle">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                   d="M4 6h16M4 12h16M4 18h16" />
+                         </svg>
+                    </button>
+               </div>
           </div>
-        </div>
 
-
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex space-x-1">
-          <a href="index.html"
-            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
-            <span
-              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Home</span>
-          </a>
-          <a href="index.html#about"
-            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
-            <span
-              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">About
-              Us</span>
-          </a>
-          <a href="index.html#programs"
-            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
-            <span
-              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Initiatives</span>
-          </a>
-          <a href="index.html#gallery"
-            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
-            <span
-              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Gallery</span>
-          </a>
-          <a href="index.html#contact"
-            class="nav-link px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-200 flex items-center">
-            <span
-              class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gold after:w-0 hover:after:w-full after:transition-all after:duration-300">Contact</span>
-          </a>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button
-          class="md:hidden text-trust-700 focus:outline-none p-2 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors"
-          aria-label="Toggle mobile menu" id="menu-toggle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-trust-900 bg-opacity-95 backdrop-blur-sm z-50 pt-24 px-6 text-white
+          <!-- Mobile Menu -->
+          <!-- Mobile Menu -->
+          <div id="mobile-menu" class="fixed inset-0 bg-trust-900 bg-opacity-95 backdrop-blur-sm z-50 pt-24 px-6 text-white
          transform translate-x-full opacity-0 pointer-events-none
          transition-all duration-3500 ease-in-out md:hidden">
-      <div class="flex flex-col space-y-4">
-        <a href="index.html" class="text-xl py-3 px-4 hover:text-gold transition-all">Home</a>
-        <a href="index.html#about" class="text-xl py-3 px-4 hover:text-gold transition-all">About</a>
-        <a href="index.html#programs" class="text-xl py-3 px-4 hover:text-gold transition-all">Initiatives</a>
-        <a href="index.html#gallery" class="text-xl py-3 px-4 hover:text-gold transition-all">Gallery</a>
-        <a href="index.html#contact" class="text-xl py-3 px-4 hover:text-gold transition-all">Contact</a>
-      </div>
+               <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-xl py-3 px-4 hover:text-gold transition-all">Home</a>
+                    <a href="index.html#about" class="text-xl py-3 px-4 hover:text-gold transition-all">About</a>
+                    <a href="index.html#programs"
+                         class="text-xl py-3 px-4 hover:text-gold transition-all">Initiatives</a>
+                    <a href="index.html#gallery" class="text-xl py-3 px-4 hover:text-gold transition-all">Gallery</a>
+                    <a href="index.html#contact" class="text-xl py-3 px-4 hover:text-gold transition-all">Contact</a>
+               </div>
 
-      <!-- Close Button -->
-      <button id="menu-close"
-        class="absolute top-6 right-6 text-white hover:bg-white hover:bg-opacity-10 p-2 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
+               <!-- Close Button -->
+               <button id="menu-close"
+                    class="absolute top-6 right-6 text-white hover:bg-white hover:bg-opacity-10 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+               </button>
+          </div>
 
 
-  </nav>
+     </nav>
      <section class="max-w-6xl mx-auto flex-grow mt-28 px-4">
 
           <h2 class="font-bold mt-28 text-center text-trust-700 mb-6 font-cormorant text-3xl uppercase"
@@ -224,6 +235,9 @@
 
 
                </p>
+               <img src="assets/img/Magazine/baab.webp" alt="Inspirational"
+                    class="mx-auto mb-6 rounded-lg shadow-lg max-h-[300px] w-auto  transition-transform duration-300 hover:scale-105"
+                    data-aos="zoom-out" data-aos-duration="1000" />
                <p>
                     <span class="font-bold italic"> Bāb / Baab:</span> The Opening Expositions – the anthology of Sufi
                     messages by the current master, Holy Hazrat Naeb Quthbuzzaman Dr. Sheikh Nizamudhin Sulthan Shah
@@ -245,7 +259,11 @@
                <h3 class="font-cormorant mb-4 text-trust-800 text-3xl font-medium ">‘SATHYASANDESHAM’ Monthly:
                </h3>
 
-
+   <img src="assets/img/Magazine/cover_august_2025.webp" alt="Inspirational"
+                    class="mx-auto mb-6 rounded-lg shadow-lg max-h-[300px] w-auto  transition-transform duration-300 hover:scale-105"
+                    data-aos="zoom-out" data-aos-duration="1000" />
+               <p>
+          
 
                <p>
                     A distinguished Sufi monthly periodical published in Malayalam by Jeelani Trust, <span
@@ -349,12 +367,12 @@
           <p class="no-aos">© 2025 Jeelani Trust. All Rights Reserved.</p>
      </footer>
      <script src="assets/js/main.js"></script>
-      
+
      <script src="assets/js/menu.js"></script>
      <script src="assets/js/date.js"></script>
      <script src="assets/js/scrollspy.js"></script>
      <!-- <script src="assets/js/special-redirect.js"></script> -->
-   
+
      <script src="assets/js/form-submission.js"></script>
      <script src="assets/js/arabic-date-api.js"></script>
      <script src="assets/js/add.js"></script>
@@ -368,6 +386,26 @@
                AOS.init();
           });
      </script>
+     <script>
+          const swiper = new Swiper(".sathyasandesham-swiper", {
+               loop: true,
+               grabCursor: true,
+               centeredSlides: true,
+               slidesPerView: 1,         // bigger image on mobile
+               spaceBetween: 20,
+               speed: 600,               // smooth slide animation
+               keyboard: { enabled: true },
+               pagination: { el: ".swiper-pagination", clickable: true },
+               navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+               breakpoints: {
+                    640: { slidesPerView: 1.25 },
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+               }
+          });
+     </script>
+
+
 
 
 </body>

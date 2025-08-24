@@ -21,7 +21,7 @@
       if (data.hijri) {
         const monthName = ARABIC_MONTHS[data.hijri.month] || data.hijri.month;
         document.getElementById("today-date").textContent =
-          `📅 ${data.hijri.day} ${monthName} ${data.hijri.year} AH`;
+          ` ${data.hijri.day} ${monthName} ${data.hijri.year} AH`;
       }
 
       // Events
@@ -31,21 +31,21 @@
         data.todays.forEach(event => {
           eventsBox.insertAdjacentHTML(
             "beforeend",
-            `<div class="p-4 rounded-xl bg-white shadow-md border border-trust-100">
-               ✨ ${event}
+            `<div class="font-quicksand ">
+           <span class="text-lg font-bold font-cinzel">o</span>  ${event}
              </div>`
           );
         });
       } else {
         eventsBox.innerHTML =
-          `<div class="p-4 rounded-xl bg-gray-100 text-gray-600 shadow-inner">
+          `<div class=" text-gray-600 font-quicksand">
              No special remembrance today.
            </div>`;
       }
     })
     .catch(err => {
       document.getElementById("today-events").innerHTML =
-        `<div class="p-4 rounded-xl bg-red-100 text-red-700 shadow-inner">
+        `<div class="p-4 rounded-xl  text-red-700 shadow-inner">
            ⚠️ Failed to load events. Please try again later.
          </div>`;
       console.error(err);
