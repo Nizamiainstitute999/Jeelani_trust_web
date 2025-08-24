@@ -354,10 +354,14 @@
       tabindex="-1">
 
       <!-- Close Button -->
-      <button onclick="closeSpecialPhotoModal()" aria-label="Close modal"
-        class="absolute top-2 right-2 z-50 text-white text-3xl font-bold hover:text-yellow-400 transition-all">
-        &times;
-      </button>
+<button onclick="closeSpecialPhotoModal()" aria-label="Close modal"
+  class="absolute top-2 right-2 z-50 flex items-center justify-center
+         w-9 h-9 rounded-full bg-black/20 backdrop-blur-md text-black text-2xl
+         hover:bg-white hover:text-red-600 shadow-md transition border-black/60 border-2">
+  &times;
+</button>
+
+
 
       <!-- Carousel Area -->
       <div class="w-full h-full overflow-hidden rounded-xl border border-white/20 backdrop-blur-xl bg-white/10">
