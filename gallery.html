@@ -19,129 +19,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Quicksand:wght@300..700&display=swap"
     rel="stylesheet">
-  <script src="tailwind.config.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
+<link rel="stylesheet" href="assets/css/gallery-lightbox.css">
 
-  <style>
-    /* Masonry with CSS columns */
-    .masonry > * {
-      break-inside: avoid;
-      -webkit-column-break-inside: avoid;
-      page-break-inside: avoid;
-    }
-
-    /* Image wrapper (prevents border-radius + transform flicker) */
-    .img-wrap{
-      position: relative;
-      overflow: hidden;               /* key */
-      border-radius: 0.75rem;         /* radius on wrapper, not img */
-      transition: transform .5s ease;
-      will-change: transform;
-      backface-visibility: hidden;
-      transform: translateZ(0);
-      margin-bottom: 1.25rem;         /* replaces .mb-5 from <img> */
-    }
-    @media (hover:hover){
-      .img-wrap:hover{ transform: scale(1.050); }
-    }
-
-    /* Image polish (no transforms here) */
-    .gallery img{
-      display: block;
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-      transition: opacity .3s ease;
-      /* Removed: content-visibility & contain-intrinsic-size (can cause shimmer) */
-      image-rendering: auto;
-      backface-visibility: hidden;
-      transform: translateZ(0);
-    }
-
-    /* Lightbox zoom canvas wrapper */
-    .zoom-wrap {
-      transform-origin: 0 0;
-      will-change: transform;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      [data-aos],
-      .gallery img {
-        transition: none !important;
-        transform: none !important;
-        opacity: 1 !important;
-      }
-    }
-
-    /* -------- Lightbox Controls: arrows + close -------- */
-    #lightbox::before,
-    #lightbox::after { display: none !important; }
-
-    #zoomContainer { background: transparent !important; }
-
-    .nav-btn {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      z-index: 10000;
-      color: #fff;
-      background: rgba(0, 0, 0, .65);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, .25);
-      border-radius: 999px;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, .35);
-      transition: background .15s ease, transform .08s ease, box-shadow .15s ease, opacity .15s ease;
-      opacity: 1;
-    }
-    .nav-btn:hover { background: rgba(0, 0, 0, .85); transform: translateY(-50%) scale(1.03); }
-    .nav-btn:active { transform: translateY(-50%) scale(.98); }
-
-    #lightbox-prev.nav-btn { left: max(16px, env(safe-area-inset-left)); }
-    #lightbox-next.nav-btn { right: max(16px, env(safe-area-inset-right)); }
-
-    @media (max-width: 640px) {
-      .nav-btn { width: 56px; height: 56px; }
-    }
-
-    .close-btn {
-      position: fixed;
-      top: max(14px, env(safe-area-inset-top));
-      right: max(14px, env(safe-area-inset-right));
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      color: #fff;
-      background: rgba(0, 0, 0, .65);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, .25);
-      border-radius: 999px;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, .35);
-      transition: background .15s ease, transform .08s ease;
-    }
-    .close-btn:hover { background: rgba(0, 0, 0, .85); transform: scale(1.03); }
-    .close-btn:active { transform: scale(.98); }
-
-    #lightbox .nav-btn, #lightbox .close-btn { pointer-events: auto; }
-
-    /* Lightbox image cursor: pointer when not zoomed; grab when zoomed */
-    #lightbox-img { cursor: pointer; }
-  </style>
 </head>
 
 <body class="bg-amber-100/10 text-gray-800 min-h-screen flex flex-col">
@@ -244,10 +131,7 @@
         <img src="assets/img/gallery/qm/Quthbuzzaman-award-06.webp" alt="Quthbuzzaman Award 06" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman Award 06">
         <img src="assets/img/gallery/nm/sw feb 23.webp" alt="Sw Feb 23" width="1600" height="1200" loading="eager" decoding="async" data-title="Sw Feb 23">
         <img src="assets/img/gallery/qm/Qthbuzzaman International Sufi Conference.webp" alt="Qthbuzzaman International Sufi Conference" width="1600" height="1200" loading="eager" decoding="async" data-title="Qthbuzzaman International Sufi Conference">
-        <img src="assets/img/gallery/nizamia/Institute Inauguration.webp" alt="Institute Inauguration" width="1600" height="1200" loading="eager" decoding="async" data-title="Institute Inauguration">
-        <img src="assets/img/gallery/qm/Quthbuzzaman-jwala-award.webp" alt="Quthbuzzaman Jwala Award" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman Jwala Award">
-        <img src="assets/img/gallery/nm/Eidul Fitr April 2025.webp" alt="Eidul Fitr April 2025" width="1600" height="1200" loading="eager" decoding="async" data-title="Eidul Fitr April 2025">
-        <img src="assets/img/gallery/qm/Qmahan-rifae-grandson.webp" alt="Qmahan Rifae Grandson" width="1600" height="1200" loading="eager" decoding="async" data-title="Qmahan Rifae Grandson">
+        <img src="assets/img/gallery/qm/Quthbuzzaman-jwala-award.webp" alt="Quthbuzzaman Jwala Award" width="1600" height="1200" loading="eager" decoding="async" 
         <img src="assets/img/gallery/nm/sw jul 24.webp" alt="Sw Jul 24" width="1600" height="1200" loading="eager" decoding="async" data-title="Sw Jul 24">
         <img src="assets/img/gallery/qm/Quthbuzzaman-bagdaad01.webp" alt="Quthbuzzaman Bagdaad01" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman Bagdaad01">
         <img src="assets/img/gallery/nm/Akbar Ali Suthan Swalath June 2023.webp" alt="Akbar Ali Suthan Swalath June 2023" width="1600" height="1200" loading="eager" decoding="async" data-title="Akbar Ali Suthan Swalath June 2023">
@@ -260,14 +144,9 @@
         <img src="assets/img/gallery/qm/Quthbuzzaman-award-07.webp" alt="Quthbuzzaman Award 07" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman Award 07">
         <img src="assets/img/gallery/qm/Quthbuzzaman-koofa01.webp" alt="Quthbuzzaman Koofa01" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman Koofa01">
         <img src="assets/img/gallery/nm/sw feb 25.webp" alt="Sw Feb 25" width="1600" height="1200" loading="eager" decoding="async" data-title="Sw Feb 25">
-        <img src="assets/img/gallery/qm/Qmahan-bagdag-grandson08.webp" alt="Qmahan Bagdad Grandson08" width="1600" height="1200" loading="eager" decoding="async" data-title="Qmahan Bagdad Grandson08">
         <img src="assets/img/gallery/nm/Eidul Fitr April 2024.webp" alt="Eidul Fitr April 2024" width="1600" height="1200" loading="eager" decoding="async" data-title="Eidul Fitr April 2024">
-        <img src="assets/img/gallery/qm/Quthbuzzaman-d-litt-award-chennai.webp" alt="Quthbuzzaman D Litt Award Chennai" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman D Litt Award Chennai">
         <img src="assets/img/gallery/nm/Baab Inauguration Swalath June 2024.webp" alt="Baab Inauguration Swalath June 2024" width="1600" height="1200" loading="eager" decoding="async" data-title="Baab Inauguration Swalath June 2024">
         <img src="assets/img/gallery/qm/International Sufi Conference .webp" alt="International Sufi Conference" width="1600" height="1200" loading="eager" decoding="async" data-title="International Sufi Conference">
-        <img src="assets/img/gallery/qm/Quthbuzzaman in Ajmeer.webp" alt="Quthbuzzaman In Ajmeer" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman In Ajmeer">
-        <img src="assets/img/gallery/nm/naeb quthbuzzaman.webp" alt="Naeb Quthbuzzaman" width="1600" height="1200" loading="eager" decoding="async" data-title="Naeb Quthbuzzaman">
-        <img src="assets/img/gallery/qm/International Sufi Conference 2016.webp" alt="International Sufi Conference 2016" width="1600" height="1200" loading="eager" decoding="async" data-title="International Sufi Conference 2016">
         <img src="assets/img/gallery/nm/Akbar Ali Suthan_Irada 2025.webp" alt="Akbar Ali Suthan Irada 2025" width="1600" height="1200" loading="eager" decoding="async" data-title="Akbar Ali Suthan Irada 2025">
         <img src="assets/img/gallery/qm/Quthbuzzaman-award-05.webp" alt="Quthbuzzaman Award 05" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman Award 05">
         <img src="assets/img/gallery/qm/baghdad stage.webp" alt="Baghdad Stage" width="1600" height="1200" loading="eager" decoding="async" data-title="Baghdad Stage">
@@ -281,7 +160,6 @@
         <img src="assets/img/gallery/qm/Qmahan-bagdag-grandson09.webp" alt="Qmahan Bagdad Grandson09" width="1600" height="1200" loading="eager" decoding="async" data-title="Qmahan Bagdad Grandson09">
         <img src="assets/img/gallery/qm/Quthbuzzaman-with behra.webp" alt="Quthbuzzaman With Behra" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman With Behra">
         <img src="assets/img/gallery/nm/Akbar Ali Suthan_Indian Independence Day Cebration 2024_ Nizamia Institute.webp" alt="Akbar Ali Suthan Indian Independence Day Cebration 2024 Nizamia Institute" width="1600" height="1200" loading="eager" decoding="async" data-title="Akbar Ali Suthan Indian Independence Day Cebration 2024 Nizamia Institute">
-        <img src="assets/img/gallery/qm/quthbuzzaman.webp" alt="Quthbuzzaman" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman">
         <img src="assets/img/gallery/qm/Qthbuzzaman programme01.webp" alt="Quthbuzzaman Programme01" width="1600" height="1200" loading="eager" decoding="async" data-title="Quthbuzzaman Programme01">
 
       </div>
@@ -350,212 +228,13 @@
   </div>
 
   <!-- Scripts (UNCHANGED LIST, kept defer for perf) -->
+
+
   <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/swalath.js" defer></script>
-  <script src="assets/js/day-remainder-arabic.js" defer></script>
-  <script src="assets/js/menu.js" defer></script>
-  <script src="assets/js/date.js" defer></script>
-  <script src="assets/js/scrollspy.js" defer></script>
-  <!-- <script src="assets/js/special-redirect.js" defer></script> -->
-  <script src="assets/js/gallery-modal.js" defer></script>
-  <script src="assets/js/form-submission.js" defer></script>
-  <script src="assets/js/arabic-date-api.js" defer></script>
-  <script src="assets/js/add.js" defer></script>
+  <script src="assets/js/tailwind.js" defer></script>
   <script src="assets/js/tailwind.config.js" defer></script>
-  <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="assets/js/gallery-lightbox.js" defer></script>
 
-  <!-- Inline: AOS + Lightbox + Zoom + Flicker fixes -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const gallery = document.querySelector(".gallery");
-      if (!gallery) return;
-
-      // Collect all images first
-      const originalImages = Array.from(gallery.querySelectorAll("img"));
-
-      // --- Wrap each image in a .img-wrap (prevents flicker with radius+scale) ---
-      originalImages.forEach((img) => {
-        if (img.parentElement?.classList?.contains('img-wrap')) return;
-        const wrap = document.createElement('div');
-        wrap.className = 'img-wrap';
-        img.replaceWith(wrap);
-        wrap.appendChild(img);
-      });
-
-      // Recollect images after wrapping (DOM has changed)
-      const allImages = Array.from(gallery.querySelectorAll("img"));
-
-      // --- AOS setup: stable fade on columns; disable on small screens ---
-      allImages.forEach((img, i) => {
-        img.setAttribute("data-aos", "fade-up");
-        img.setAttribute("data-aos-delay", String((i % 6) * 60));
-        img.setAttribute("data-aos-duration", "500");
-        if (!img.hasAttribute("loading")) img.setAttribute("loading", "eager");
-        if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
-      });
-      if (window.AOS) AOS.init({
-        once: true,
-        offset: 80,
-        duration: 500,
-        easing: "ease-out-cubic",
-        disable: window.innerWidth < 768
-      });
-
-      // --- Lightbox + Zoom refs ---
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-img");
-      const zoomWrap = document.getElementById("zoomContainer");
-      const closeBtn = document.getElementById("lightbox-close");
-      const prevBtn = document.getElementById("lightbox-prev");
-      const nextBtn = document.getElementById("lightbox-next");
-      const zoomInBtn = document.getElementById("zoomIn");
-      const zoomOutBtn = document.getElementById("zoomOut");
-      const zoomResetBtn = document.getElementById("zoomReset");
-
-      // Helpers
-      let currentIndex = 0;
-      const setSrc = (el) => { lightboxImg.src = el.src; lightboxImg.alt = el.alt || "Gallery Image"; };
-
-      // Preload neighbors to avoid flicker on next/prev
-      const preload = (idx) => {
-        [-1, 1].forEach(step => {
-          const j = (idx + step + allImages.length) % allImages.length;
-          const src = allImages[j].src;
-          const img = new Image();
-          img.decoding = "async";
-          img.loading = "eager";
-          img.src = src;
-        });
-      };
-
-      const open = (index) => {
-        currentIndex = index;
-        setSrc(allImages[currentIndex]);
-        lightbox.classList.remove("hidden");
-        document.documentElement.style.overflow = "hidden";
-        resetZoom();
-        preload(currentIndex);
-      };
-      const close = () => {
-        lightbox.classList.add("hidden");
-        document.documentElement.style.overflow = "";
-      };
-      const next = () => {
-        currentIndex = (currentIndex + 1) % allImages.length;
-        setSrc(allImages[currentIndex]);
-        resetZoom();
-        preload(currentIndex);
-      };
-      const prev = () => {
-        currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-        setSrc(allImages[currentIndex]);
-        resetZoom();
-        preload(currentIndex);
-      };
-
-      // Click bindings on wrappers (capture clicks inside)
-      Array.from(gallery.querySelectorAll('.img-wrap')).forEach((wrap, i) => {
-        wrap.addEventListener("click", () => open(i));
-      });
-      closeBtn.addEventListener("click", close);
-      nextBtn.addEventListener("click", next);
-      prevBtn.addEventListener("click", prev);
-      lightbox.addEventListener("click", (e) => { if (e.target === lightbox) close(); });
-      document.addEventListener("keydown", (e) => {
-        if (lightbox.classList.contains("hidden")) return;
-        if (e.key === "ArrowRight") next();
-        if (e.key === "ArrowLeft") prev();
-        if (e.key === "Escape") close();
-      });
-
-      // --- Zoom / Pan ---
-      let scale = 1, minScale = 1, maxScale = 8;
-      let originX = 0, originY = 0;
-      let isPanning = false, startX = 0, startY = 0;
-
-      const applyTransform = () => {
-        lightboxImg.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
-        lightboxImg.style.transformOrigin = "0 0";
-        lightboxImg.style.cursor = scale > 1 ? (isPanning ? "grabbing" : "grab") : "pointer";
-      };
-      const resetZoom = () => { scale = 1; originX = 0; originY = 0; applyTransform(); };
-      const clampPan = () => {
-        const rect = zoomWrap.getBoundingClientRect();
-        const imgW = rect.width * scale;
-        const imgH = rect.height * scale;
-        const maxX = Math.max(0, imgW - rect.width);
-        const maxY = Math.max(0, imgH - rect.height);
-        originX = Math.min(0, Math.max(-maxX, originX));
-        originY = Math.min(0, Math.max(-maxY, originY));
-      };
-      const zoomAt = (clientX, clientY, deltaScale) => {
-        const rect = lightboxImg.getBoundingClientRect();
-        const x = clientX - rect.left - originX;
-        const y = clientY - rect.top - originY;
-        const newScale = Math.min(maxScale, Math.max(minScale, scale * deltaScale));
-        if (newScale === scale) return;
-        originX -= (x * (newScale / scale - 1));
-        originY -= (y * (newScale / scale - 1));
-        scale = newScale;
-        clampPan(); applyTransform();
-      };
-
-      zoomWrap.addEventListener("wheel", (e) => {
-        e.preventDefault();
-        const factor = e.deltaY < 0 ? 1.2 : 1 / 1.2;
-        zoomAt(e.clientX, e.clientY, factor);
-      }, { passive: false });
-      zoomInBtn.addEventListener("click", () => zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1.2));
-      zoomOutBtn.addEventListener("click", () => zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1 / 1.2));
-      zoomResetBtn.addEventListener("click", resetZoom);
-
-      lightboxImg.addEventListener("pointerdown", (e) => {
-        if (scale <= 1) return;
-        isPanning = true;
-        lightboxImg.setPointerCapture(e.pointerId);
-        startX = e.clientX - originX; startY = e.clientY - originY;
-        applyTransform();
-      });
-      lightboxImg.addEventListener("pointermove", (e) => {
-        if (!isPanning) return;
-        originX = e.clientX - startX; originY = e.clientY - startY;
-        clampPan(); applyTransform();
-      });
-      const endPan = () => { isPanning = false; applyTransform(); };
-      lightboxImg.addEventListener("pointerup", endPan);
-      lightboxImg.addEventListener("pointercancel", endPan);
-
-      // Double-tap / Double-click to toggle zoom
-      let lastTap = 0;
-      lightboxImg.addEventListener("click", (e) => {
-        const now = Date.now();
-        if (now - lastTap < 300) {
-          const nextScale = scale >= 2 ? 1 : 2;
-          zoomAt(e.clientX, e.clientY, nextScale / scale);
-        }
-        lastTap = now;
-      });
-
-      // Optional: pinch zoom support
-      let pointers = new Map();
-      zoomWrap.addEventListener("pointerdown", (e) => { pointers.set(e.pointerId, e); zoomWrap.setPointerCapture(e.pointerId); });
-      zoomWrap.addEventListener("pointermove", (e) => {
-        if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, e);
-        if (pointers.size === 2) {
-          const [p1, p2] = Array.from(pointers.values());
-          const dist = Math.hypot(p2.clientX - p1.clientX, p2.clientY - p1.clientY);
-          if (!zoomWrap._lastDist) zoomWrap._lastDist = dist;
-          const factor = dist / zoomWrap._lastDist;
-          const cx = (p1.clientX + p2.clientX) / 2; const cy = (p1.clientY + p2.clientY) / 2;
-          zoomAt(cx, cy, factor);
-          zoomWrap._lastDist = dist;
-        }
-      });
-      ["pointerup", "pointercancel", "pointerleave"].forEach(t => zoomWrap.addEventListener(t, (e) => {
-        pointers.delete(e.pointerId); if (pointers.size < 2) zoomWrap._lastDist = null;
-      }));
-    });
-  </script>
 </body>
 
 </html>

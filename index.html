@@ -17,7 +17,7 @@
     content="Jeelani Trust, Kerala, Sufi, Education, Charity, Islamic Studies, Madrasas, Aluva Masjid, Twareeqath, Quthbuzzaman, Naeb Quthbuzzaman, GHAUSIYYA SUNNI JAM’IYYATHUL ULAMA, JEELANI STUDY CENTRE, JEELANI SHAREEF" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="author" content="Jeelani Trust" />
-  <link rel="canonical" href="https://jeelanitrust.com/index.html" />
+  <link rel="canonical" href="https://jeelanitrust.com" />
 
 
   <!-- Open Graph -->
@@ -126,7 +126,7 @@
     rel="stylesheet">
 
   <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind.js"></script>
 
   <!-- AOS Animation -->
 
@@ -141,7 +141,7 @@
 
   <!-- Local CSS -->
   <link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="assets/css/gallery-lightbox.css">
   <style>
     [id] {
       scroll-margin-top: 80px;
@@ -358,8 +358,8 @@
       <!-- Close Button -->
 <button onclick="closeSpecialPhotoModal()" aria-label="Close modal"
   class="absolute top-2 right-2 z-50 flex items-center justify-center
-         w-9 h-9 rounded-full bg-black/20 backdrop-blur-md text-black text-2xl
-         hover:bg-white hover:text-red-600 shadow-md transition border-black/60 border-2">
+         w-4 h-4 rounded-full bg-black/10 backdrop-blur-lg text-black text-2xl
+         hover:bg-white hover:text-red-600 shadow-md transition ">
   &times;
 </button>
 
@@ -473,7 +473,7 @@
 
     <!-- Date -->
 <div id="today-date"
-   class="inline-flex items-center gap-2 px-4 py-2 bg-trust-100/30 text-base sm:text-lg font-bold text-trust-700 mb-6 uppercase font-quicksand
+   class="inline-flex items-center gap-2 px-4 py-2  text-base sm:text-lg font-bold text-trust-700 mb-6 uppercase font-quicksand
    ">
   
 </div>
@@ -1281,230 +1281,16 @@
     </div>
   </footer>
 
+
   <script src="assets/js/main.js"></script>
-
-  <script src="assets/js/menu.js"></script>
-  <script src="assets/js/date.js"></script>
-  <script src="assets/js/scrollspy.js"></script>
-  <!-- <script src="assets/js/special-redirect.js"></script> -->
-
+  <script src="assets/js/carousel-ad-modal.js.js"></script>
   <script src="assets/js/form-submission.js"></script>
   <script src="assets/js/arabic-date-api.js"></script>
+  <script src="assets/js/date.js"></script>
   <script src="assets/js/special-days-api.js"></script>
-  <script src="assets/js/add.js"></script>
   <script src="assets/js/tailwind.config.js"></script>
-  <script>
-
-    window.onload = function () {
-      let currentSlide = 0;
-      const slidesContainer = document.getElementById('carouselSlides');
-      const totalSlides = slidesContainer.children.length;
-
-      function updateSlide() {
-        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-      }
-
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateSlide();
-      }
-
-      function closeSpecialPhotoModal() {
-        document.getElementById("specialPhotoModal").style.display = "none";
-        localStorage.setItem("specialShownTime", new Date().getTime());
-      }
-
-      // Run the slider every 5 seconds
-      setInterval(nextSlide, 5000);
-
-      // Auto close modal after 30 seconds
-      setTimeout(closeSpecialPhotoModal, 60000);
-
-      // Attach close to button
-      window.closeSpecialPhotoModal = closeSpecialPhotoModal;
-    }
-  </script>
-
-  <!-- ================== Lightbox Script ================== -->
-  <!-- ================== Lightbox / Zoom Script ================== -->
-  <script>
-    // ================== Lightbox / Zoom Script ==================
-    document.addEventListener("DOMContentLoaded", () => {
-      if (window.AOS && typeof AOS.init === "function") {
-        AOS.init({ once: true, offset: 80, duration: 600, easing: 'ease-out-cubic' });
-      }
-
-      const section = document.getElementById("preview-gallery");
-      const thumbs = Array.from(section.querySelectorAll("img.gallery-img"));
-
-      const lb = document.getElementById("hp-lightbox");
-      const imgEl = document.getElementById("hp-img");
-      const wrap = document.getElementById("hp-zoom-wrap");
-      const btnX = document.getElementById("hp-close");
-      const btnN = document.getElementById("hp-next");
-      const btnP = document.getElementById("hp-prev");
-      const zi = document.getElementById("hp-zoom-in");
-      const zo = document.getElementById("hp-zoom-out");
-      const zr = document.getElementById("hp-zoom-reset");
-
-      const items = thumbs.map(t => ({ src: t.currentSrc || t.src, alt: t.alt || "Gallery image" }));
-
-      let i = 0, scale = 1, ox = 0, oy = 0, isPanning = false, sx = 0, sy = 0;
-      const minScale = 1, maxScale = 8;
-
-      function clampPan() {
-        const rect = wrap.getBoundingClientRect();
-        const imgW = rect.width * scale;
-        const imgH = rect.height * scale;
-        const maxX = Math.max(0, imgW - rect.width);
-        const maxY = Math.max(0, imgH - rect.height);
-        ox = Math.min(0, Math.max(-maxX, ox));
-        oy = Math.min(0, Math.max(-maxY, oy));
-      }
-      function applyTransform() {
-        imgEl.style.transformOrigin = "0 0";
-        imgEl.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
-        imgEl.style.cursor = scale > 1 ? (isPanning ? "grabbing" : "grab") : "pointer";
-      }
-      function resetZoom() { scale = 1; ox = 0; oy = 0; applyTransform(); }
-
-      function setImage(idx) {
-        i = idx;
-        const { src, alt } = items[i];
-        imgEl.src = src; imgEl.alt = alt;
-        resetZoom();
-      }
-
-      function open(idx) {
-        setImage(idx);
-        lb.classList.remove("hidden");
-        lb.classList.add("flex");
-        document.documentElement.style.overflow = "hidden";
-        btnX.focus({ preventScroll: true });
-      }
-      function close() {
-        lb.classList.add("hidden");
-        lb.classList.remove("flex");
-        document.documentElement.style.overflow = "";
-      }
-      function next() { setImage((i + 1) % items.length); }
-      function prev() { setImage((i - 1 + items.length) % items.length); }
-
-      thumbs.forEach((t, idx) => {
-        t.addEventListener("click", () => open(idx));
-      });
-
-      btnX.addEventListener("click", close);
-      btnN.addEventListener("click", next);
-      btnP.addEventListener("click", prev);
-
-      // ❌ removed backdrop click-to-close
-
-      document.addEventListener("keydown", (e) => {
-        if (lb.classList.contains("hidden")) return;
-        if (e.key === "ArrowRight") next();
-        if (e.key === "ArrowLeft") prev();
-        if (e.key === "Escape") close();
-        if (e.key === "+") zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1.2);
-        if (e.key === "-") zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1 / 1.2);
-        if (e.key.toLowerCase() === "0") resetZoom();
-      });
-
-      function zoomAt(cx, cy, factor) {
-        const rect = imgEl.getBoundingClientRect();
-        const x = cx - rect.left - ox;
-        const y = cy - rect.top - oy;
-        const newScale = Math.min(maxScale, Math.max(minScale, scale * factor));
-        if (newScale === scale) return;
-        ox -= x * (newScale / scale - 1);
-        oy -= y * (newScale / scale - 1);
-        scale = newScale;
-        clampPan(); applyTransform();
-      }
-
-      zi.addEventListener("click", () => zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1.2));
-      zo.addEventListener("click", () => zoomAt(window.innerWidth / 2, window.innerHeight / 2, 1 / 1.2));
-      zr.addEventListener("click", resetZoom);
-
-      wrap.addEventListener("wheel", (e) => {
-        e.preventDefault();
-        zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.2 : 1 / 1.2);
-      }, { passive: false });
-
-      imgEl.addEventListener("pointerdown", (e) => {
-        if (scale <= 1) return;
-        isPanning = true;
-        imgEl.setPointerCapture(e.pointerId);
-        sx = e.clientX - ox; sy = e.clientY - oy;
-        applyTransform();
-      });
-      imgEl.addEventListener("pointermove", (e) => {
-        if (!isPanning) return;
-        ox = e.clientX - sx; oy = e.clientY - sy;
-        clampPan(); applyTransform();
-      });
-      const endPan = () => { isPanning = false; applyTransform(); };
-      imgEl.addEventListener("pointerup", endPan);
-      imgEl.addEventListener("pointercancel", endPan);
-
-      let lastTap = 0;
-      imgEl.addEventListener("click", (e) => {
-        const now = Date.now();
-        if (now - lastTap < 300) {
-          const nextScale = scale >= 2 ? 1 : 2;
-          zoomAt(e.clientX, e.clientY, nextScale / scale);
-        }
-        lastTap = now;
-      });
-
-      const pointers = new Map();
-      wrap.addEventListener("pointerdown", (e) => { pointers.set(e.pointerId, e); wrap.setPointerCapture(e.pointerId); });
-      wrap.addEventListener("pointermove", (e) => {
-        if (!pointers.has(e.pointerId)) return;
-        pointers.set(e.pointerId, e);
-        if (pointers.size === 2) {
-          const [p1, p2] = Array.from(pointers.values());
-          const dist = Math.hypot(p2.clientX - p1.clientX, p2.clientY - p1.clientY);
-          if (!wrap._lastDist) wrap._lastDist = dist;
-          const factor = dist / wrap._lastDist;
-          const cx = (p1.clientX + p2.clientX) / 2, cy = (p1.clientY + p2.clientY) / 2;
-          zoomAt(cx, cy, factor);
-          wrap._lastDist = dist;
-        }
-      });
-      ["pointerup", "pointercancel", "pointerleave"].forEach(type => {
-        wrap.addEventListener(type, (e) => {
-          pointers.delete(e.pointerId);
-          if (pointers.size < 2) wrap._lastDist = null;
-        });
-      });
-    });
-
-  </script>
-
-  <script>
-    function closeRemembrance() {
-      const box = document.getElementById('remembranceBox');
-      if (!box) return;
-      // Smooth fade + scale, then collapse height
-      box.style.opacity = '0';
-      box.style.transform = 'scale(0.98)';
-      box.style.marginTop = '0';
-      box.style.marginBottom = '0';
-      setTimeout(() => {
-        box.style.height = box.offsetHeight + 'px'; // lock current height
-        requestAnimationFrame(() => {
-          box.style.transition = 'height 250ms ease';
-          box.style.height = '0px';
-          box.style.paddingTop = '0';
-          box.style.paddingBottom = '0';
-          box.style.borderWidth = '0';
-        });
-      }, 180);
-      // Remove from layout after animation
-      setTimeout(() => box.remove(), 480);
-    }
-  </script>
+  <script src="assets/js/gallery-lightbox.js"></script>
+  
 </body>
 
 </html> 

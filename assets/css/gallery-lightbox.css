@@ -1,0 +1,111 @@
+/* Masonry with CSS columns */
+.masonry > * {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Image wrapper (prevents border-radius + transform flicker) */
+.img-wrap {
+  position: relative;
+  overflow: hidden;               /* key */
+  border-radius: 0.75rem;         /* radius on wrapper, not img */
+  transition: transform .5s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  margin-bottom: 1.25rem;         /* replaces .mb-5 from <img> */
+}
+@media (hover:hover) {
+  .img-wrap:hover { transform: scale(1.050); }
+}
+
+/* Image polish (no transforms here) */
+.gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: opacity .3s ease;
+  /* Removed: content-visibility & contain-intrinsic-size (can cause shimmer) */
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Lightbox zoom canvas wrapper */
+.zoom-wrap {
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-aos],
+  .gallery img {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* -------- Lightbox Controls: arrows + close -------- */
+#lightbox::before,
+#lightbox::after { display: none !important; }
+
+#zoomContainer { background: transparent !important; }
+
+.nav-btn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  z-index: 10000;
+  color: #fff;
+  background: rgba(0, 0, 0, .65);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .35);
+  transition: background .15s ease, transform .08s ease, box-shadow .15s ease, opacity .15s ease;
+  opacity: 1;
+}
+.nav-btn:hover { background: rgba(0, 0, 0, .85); transform: translateY(-50%) scale(1.03); }
+.nav-btn:active { transform: translateY(-50%) scale(.98); }
+
+#lightbox-prev.nav-btn { left: max(16px, env(safe-area-inset-left)); }
+#lightbox-next.nav-btn { right: max(16px, env(safe-area-inset-right)); }
+
+@media (max-width: 640px) {
+  .nav-btn { width: 56px; height: 56px; }
+}
+
+.close-btn {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(14px, env(safe-area-inset-right));
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #fff;
+  background: rgba(0, 0, 0, .65);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .35);
+  transition: background .15s ease, transform .08s ease;
+}
+.close-btn:hover { background: rgba(0, 0, 0, .85); transform: scale(1.03); }
+.close-btn:active { transform: scale(.98); }
+
+#lightbox .nav-btn,
+#lightbox .close-btn { pointer-events: auto; }
+
+/* Lightbox image cursor: pointer when not zoomed; grab when zoomed */
+#lightbox-img { cursor: pointer; }

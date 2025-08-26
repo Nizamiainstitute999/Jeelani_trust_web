@@ -22,10 +22,9 @@
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri&family=Playfair+Display&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="assets/js/tailwind.js"></script>
 </head>
 
 <body class="min-h-screen flex flex-col w-full text-gray-600 font-quicksand">
@@ -122,33 +121,6 @@
 
   <!-- Scripts -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/menu.js"></script>
-  <script src="assets/js/date.js"></script>
-  <script src="assets/js/scrollspy.js"></script>
-  <!-- <script src="assets/js/special-redirect.js"></script> -->
-  <script src="assets/js/form-submission.js"></script>
-  <script src="assets/js/arabic-date-api.js"></script>
-  <script src="assets/js/add.js"></script>
   <script src="assets/js/tailwind.config.js"></script>
-  <script>
-    AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
-
-    // Mobile menu toggle (kept from your original structure)
-    const menuToggle = document.getElementById('menu-toggle');
-    const menuClose = document.getElementById('menu-close');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    function openMenu() {
-      mobileMenu.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
-    }
-    function closeMenu() {
-      mobileMenu.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
-    }
-    menuToggle?.addEventListener('click', openMenu);
-    menuClose?.addEventListener('click', closeMenu);
-    mobileMenu?.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMenu();
-    });
-  </script>
 </body>
 </html>
