@@ -53,7 +53,7 @@ fetch("https://nizamiamadrasa.com/api/special-days/")
       // No events today → show empty state
       eventsBox.innerHTML = `
         <div class="text-gray-600 font-quicksand">
-          No special events today.
+     
         </div>`;
     }
   })
@@ -64,7 +64,7 @@ fetch("https://nizamiamadrasa.com/api/special-days/")
   .catch(err => {
     document.getElementById("today-events").innerHTML = `
       <div class="p-4 rounded-xl text-red-700 shadow-inner">
-        ⚠️ Error loading special days. Please try again later.
+      Error loading special days. Please try again later.
       </div>`;
     console.error("API Error:", err);
   });
