@@ -1,5 +1,10 @@
-// myconfig.js
-tailwind.config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./*.html",             // root HTML files
+    "./**/*.html",          // ALL subfolders HTML
+    "./assets/js/**/*.js"   // scan JS files for classes
+  ],
   theme: {
     extend: {
       colors: {
@@ -23,5 +28,6 @@ tailwind.config = {
         cormorant: ['Cormorant Garamond', 'serif'],
       }
     }
-  }
+  },
+  plugins: [],
 }

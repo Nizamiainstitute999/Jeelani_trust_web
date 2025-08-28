@@ -1,0 +1,28 @@
+{
+  "name": "jeelani-trust",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/tailwind.css --watch",
+  "build": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/tailwind.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abidmuhammad999/Jeelani_trust_web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abidmuhammad999/Jeelani_trust_web/issues"
+  },
+  "homepage": "https://github.com/Abidmuhammad999/Jeelani_trust_web#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.12",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.12"
+  }
+}

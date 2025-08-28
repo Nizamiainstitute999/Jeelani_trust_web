@@ -136,7 +136,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Local CSS -->
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/css/tailwind.css">
 <link rel="stylesheet" href="assets/css/gallery-lightbox.css">
   <style>
     [id] {
@@ -218,6 +218,12 @@
         opacity: 1;
       }
     }
+
+ 
+.text-shadow-black {
+  text-shadow: 0 3px 8px rgb(0, 0, 0);
+}
+
   </style>
 
 
@@ -354,7 +360,7 @@
       <!-- Close Button -->
 <button onclick="closeSpecialPhotoModal()" aria-label="Close modal"
   class="absolute top-2 right-2 z-50 flex items-center justify-center
-         w-4 h-4 rounded-full bg-black/10 backdrop-blur-lg text-black text-2xl
+          font-extrabold backdrop-blur-lg text-white text-shadow-lg text-shadow-black text-2xl
          hover:bg-white hover:text-red-600 shadow-md transition ">
   &times;
 </button>
@@ -368,11 +374,11 @@
           <img src="assets/img/swalath/rabee`e.webp" alt="swalath photo 1" loading="lazy"
             class="w-full h-full object-contain flex-shrink-0" />
 
-          <!-- <img src="assets/img/swalath/sw-1-7.webp" alt="Islamic photo 1" loading="lazy"
-            class="w-full h-full object-contain flex-shrink-0" />
+       <!-- <img src="assets/img/swalath/sw-1-7.webp" alt="Islamic photo 1" loading="lazy"
+            class="w-full h-full object-contain flex-shrink-0" /> -->
 
-          <img src="assets/img/swalath/sw-jun.webp" alt="Islamic photo 2" loading="lazy"
-            class="w-full h-full object-contain flex-shrink-0" />
+       <!--
+              class="w-full h-full object-contain flex-shrink-0" />
 
           <img src="assets/img/swalath/sw-may.webp" alt="Islamic photo 3" loading="lazy"
             class="w-full h-full object-contain flex-shrink-0" /> -->
