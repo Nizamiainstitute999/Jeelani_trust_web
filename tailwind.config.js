@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.html",             // root HTML files
-    "./**/*.html",          // ALL subfolders HTML
-    "./assets/js/**/*.js"   // scan JS files for classes
+    "./index.html",          // your main file
+    "./**/*.html",           // all subfolders HTML
+    "./assets/js/**/*.js"    // scripts (if you use classes in JS)
   ],
   theme: {
     extend: {
@@ -17,7 +17,7 @@ module.exports = {
           500: '#0e8a8a',
           600: '#087373',
           700: '#065c5c',
-          800: '#044a4a',  // Main Color
+          800: '#044a4a',  // main Jeelani Trust color
           900: '#033333',
         }
       },
@@ -26,6 +26,10 @@ module.exports = {
         quicksand: ['Quicksand', 'sans-serif'],
         cinzel: ['Cinzel', 'serif'],
         cormorant: ['Cormorant Garamond', 'serif'],
+        elmessiri: ['El Messiri', 'sans-serif'],
+        playfair: ['Playfair Display', 'serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        roboto: ['Roboto Condensed', 'sans-serif'],
       }
     }
   },
