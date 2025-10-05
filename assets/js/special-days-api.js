@@ -8,29 +8,29 @@ const ARABIC_MONTHS = {
   1: "Muharram",
   2: "Safar",
   3: "Rabiʿ al-Awwal",
-  4: "Rabiʿ ath-Thani",
-  5: "Jumada al-Ula",
-  6: "Jumada ath-Thaniya",
+  4: "Rabiʿ UL -Akhir",
+  5: "Jumada al-Awwal",
+  6: "Jumada al-Akhir",
   7: "Rajab",
   8: "Shaʿban",
   9: "Ramadan",
   10: "Shawwal",
   11: "Dhu al-Qaʿdah",
-  12: "Dhu al-Hijjah"
+  12: "Dhu al-Hijjah",
 };
 
 // 2️⃣ Fetch special days API
 fetch("https://nizamiamadrasa.com/api/special-days/")
-  .then(res => res.json())
-  .then(data => {
-    
+  .then((res) => res.json())
+  .then((data) => {
     // ----------------------------------------
     // 📌 A) Display Hijri Date (with month name)
     // ----------------------------------------
     if (data.hijri) {
       const monthName = ARABIC_MONTHS[data.hijri.month] || data.hijri.month;
-      document.getElementById("today-date").textContent =
-        `${data.hijri.day} ${monthName} ${data.hijri.year} AH`;
+      document.getElementById(
+        "today-date"
+      ).textContent = `${data.hijri.day} ${monthName} ${data.hijri.year} AH`;
     }
 
     // ----------------------------------------
@@ -41,7 +41,7 @@ fetch("https://nizamiamadrasa.com/api/special-days/")
 
     if (data.todays && data.todays.length > 0) {
       // Loop through events and insert
-      data.todays.forEach(event => {
+      data.todays.forEach((event) => {
         eventsBox.insertAdjacentHTML(
           "beforeend",
           `<div class="font-quicksand">
@@ -61,7 +61,7 @@ fetch("https://nizamiamadrasa.com/api/special-days/")
   // ----------------------------------------
   // 📌 C) Handle API / Network Errors
   // ----------------------------------------
-  .catch(err => {
+  .catch((err) => {
     document.getElementById("today-events").innerHTML = `
       <div class="p-4 rounded-xl text-red-700 shadow-inner">
       Error loading special days. Please try again later.
