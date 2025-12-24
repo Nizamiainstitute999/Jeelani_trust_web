@@ -1,5 +1,5 @@
 // =====================================================
-// 📅 SPECIAL DAYS SCRIPT (final working version + auto Hijri year)
+// 📅 SPECIAL DAYS SCRIPT (Synchronized with Arabic Date API)
 // =====================================================
 
 const ARABIC_MONTHS = {
@@ -27,102 +27,112 @@ function escapeHtml(str) {
     .replaceAll("'", "&#039;");
 }
 
-fetch("http://nizamiamadrasa.com/api/special-day-events/")
+// Helper to find month number from name (for filtering)
+function getMonthNumber(monthVal) {
+    if (!isNaN(monthVal)) return Number(monthVal);
+    
+    // Attempt to find by string value in ARABIC_MONTHS
+    const monthStr = String(monthVal).toLowerCase().trim();
+    for (const [key, value] of Object.entries(ARABIC_MONTHS)) {
+        if (value.toLowerCase() === monthStr) {
+            return Number(key);
+        }
+        // Handle potential minor spelling diffs if necessary
+        // e.g. "Jumada al-Akhirah" vs "Jumada al-Akhir"
+        if (monthStr === "jumada al-akhirah" && value === "Jumada al-Akhir") return 6;
+    }
+    return null; 
+}
+
+// 1. Fetch the authoritative Arabic Date first
+fetch("https://nizamiamadrasa.com/api/arabic-date/")
   .then((res) => {
-    if (!res.ok) throw new Error("Network error");
+    if (!res.ok) throw new Error("Failed to fetch arabic date");
     return res.json();
   })
-  .then((data) => {
-    console.log("[special-day-events] full response:", data);
-
-    let hijri = data.hijri_date ?? data.hijri ?? null;
-
-    if (!hijri && Array.isArray(data.events)) {
-      for (const ev of data.events) {
-        if (ev && typeof ev === "object") {
-          if ("hijri_day" in ev || "hijri_month" in ev || "hijri_year" in ev) {
-            hijri = {
-              day: ev.hijri_day ?? ev.day ?? null,
-              month: ev.hijri_month ?? ev.month ?? null,
-              year: ev.hijri_year ?? ev.year ?? null,
-              month_name: ev.hijri_month_name ?? ev.month_name ?? null
-            };
-            break;
-          }
+  .then((dateData) => {
+    // 2. We have the date, now fetch the events
+    return fetch("https://nizamiamadrasa.com/api/special-day-events/")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch events");
+        return res.json();
+      })
+      .then((eventsData) => {
+        // Validation of date data
+        if (!dateData || dateData.error) {
+          throw new Error("Invalid arabic date data");
         }
-      }
-    }
 
-    // ----------------------------------------
-    // ⭐ AUTO-SET CURRENT HIJRI YEAR IF MISSING
-    // ----------------------------------------
-    if (!hijri.year || hijri.year === null) {
-      // Convert today’s Gregorian date → Hijri year (simple algorithm)
-      const today = new Date();
-      const hijriCalc = new Intl.DateTimeFormat("en-TN-u-ca-islamic", {
-        year: "numeric"
-      }).format(today);
+        // Handle potentially different types (string vs number)
+        const dayVal = Number(dateData.day);
+        const yearVal = Number(dateData.year);
+        const monthVal = dateData.month; // Could be "Rajab" (string) or 7 (number)
 
-      hijri.year = parseInt(hijriCalc);  // Example: "1447"
-    }
+        const currentHijri = {
+          day: dayVal,
+          month: monthVal, 
+          year: yearVal,
+          monthNum: getMonthNumber(monthVal)
+        };
 
-    // ----------------------------------------
-    // ⭐ DISPLAY DATE
-    // ----------------------------------------
-    if (hijri) {
-      let monthName =
-        hijri.month_name ||
-        ARABIC_MONTHS[hijri.month] ||
-        hijri.month;
+        // ----------------------------------------
+        // ⭐ DISPLAY DATE (Synced with arabic-date-api)
+        // ----------------------------------------
+        let displayMonth = currentHijri.month;
+        
+        // If it's a number, map it. If it's a string, use it.
+        if (!isNaN(displayMonth)) {
+             displayMonth = ARABIC_MONTHS[displayMonth] || displayMonth;
+        }
 
-      if (monthName === "Jumada al-Akhirah") monthName = "Jumada al-Akhir";
+        if (displayMonth === "Jumada al-Akhirah") displayMonth = "Jumada al-Akhir";
 
-      const dateEl = document.getElementById("today-date");
-      if (dateEl) {
-        dateEl.textContent = `${hijri.day} ${monthName} ${hijri.year} AH`;
-      }
-    }
+        const dateEl = document.getElementById("today-date");
+        if (dateEl) {
+          dateEl.textContent = `${currentHijri.day} ${displayMonth} ${currentHijri.year} AH`;
+        }
 
-    // ----------------------------------------
-    // 📌 EVENTS (same as before)
-    // ----------------------------------------
-    const eventsBox = document.getElementById("today-events");
-    if (!eventsBox) return;
-    eventsBox.innerHTML = "";
+        // ----------------------------------------
+        // 📌 EVENTS FILTERING
+        // ----------------------------------------
+        const eventsBox = document.getElementById("today-events");
+        if (!eventsBox) return;
+        eventsBox.innerHTML = "";
 
-    let todays = [];
+        let todays = [];
 
-    if (Array.isArray(data.todays) && data.todays.length) {
-      todays = data.todays;
-    } else if (Array.isArray(data.events) && data.events.length) {
-      todays = data.events;
-    } else if (Array.isArray(data.all_rows) && data.all_rows.length && hijri) {
-      todays = data.all_rows.filter((r) => {
-        const rowDay = r.day ?? r.hijri_day;
-        const rowMonth = r.month ?? r.hijri_month;
-        return Number(rowDay) === Number(hijri.day) &&
-               Number(rowMonth) === Number(hijri.month);
+        // We only trust the 'all_rows' or 'events' if we filter them ourselves matching the fetched date
+        const allEvents = eventsData.all_rows || eventsData.events || [];
+
+        if (Array.isArray(allEvents) && currentHijri.monthNum) {
+            todays = allEvents.filter(ev => {
+                const evDay = Number(ev.day ?? ev.hijri_day);
+                const evMonth = Number(ev.month ?? ev.hijri_month);
+                return evDay === currentHijri.day && evMonth === currentHijri.monthNum;
+            });
+        }
+
+        if (todays.length > 0) {
+          todays.forEach((event) => {
+            const text =
+              typeof event === "string"
+                ? event
+                : (event.title || event.name || JSON.stringify(event));
+
+            eventsBox.insertAdjacentHTML(
+              "beforeend",
+              `<div class="font-quicksand">
+                 <span class="text-lg font-bold font-cinzel"></span> ${escapeHtml(text)}
+               </div>`
+            );
+          });
+        } else {
+            eventsBox.innerHTML = `<div class="font-quicksand text-gray-500 text-center italic">No special events today</div>`;
+        }
       });
-    }
-
-    if (todays.length > 0) {
-      todays.forEach((event) => {
-        const text =
-          typeof event === "string"
-            ? event
-            : (event.title || event.name || JSON.stringify(event));
-
-        eventsBox.insertAdjacentHTML(
-          "beforeend",
-          `<div class="font-quicksand">
-             <span class="text-lg font-bold font-cinzel"></span> ${escapeHtml(text)}
-           </div>`
-        );
-      });
-    }
   })
   .catch((err) => {
-    console.error("API Error:", err);
+    console.error("Special Days API Error:", err);
     const eventsBox = document.getElementById("today-events");
     if (eventsBox) {
       eventsBox.innerHTML = `
