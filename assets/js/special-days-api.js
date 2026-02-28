@@ -29,30 +29,30 @@ function escapeHtml(str) {
 
 // Helper to find month number from name (for filtering)
 function getMonthNumber(monthVal) {
-    if (!isNaN(monthVal)) return Number(monthVal);
-    
-    // Attempt to find by string value in ARABIC_MONTHS
-    const monthStr = String(monthVal).toLowerCase().trim();
-    for (const [key, value] of Object.entries(ARABIC_MONTHS)) {
-        if (value.toLowerCase() === monthStr) {
-            return Number(key);
-        }
-        // Handle potential minor spelling diffs if necessary
-        // e.g. "Jumada al-Akhirah" vs "Jumada al-Akhir"
-        if (monthStr === "jumada al-akhirah" && value === "Jumada al-Akhir") return 6;
+  if (!isNaN(monthVal)) return Number(monthVal);
+
+  // Attempt to find by string value in ARABIC_MONTHS
+  const monthStr = String(monthVal).toLowerCase().trim();
+  for (const [key, value] of Object.entries(ARABIC_MONTHS)) {
+    if (value.toLowerCase() === monthStr) {
+      return Number(key);
     }
-    return null; 
+    // Handle potential minor spelling diffs if necessary
+    // e.g. "Jumada al-Akhirah" vs "Jumada al-Akhir"
+    if (monthStr === "jumada al-akhirah" && value === "Jumada al-Akhir") return 6;
+  }
+  return null;
 }
 
 // 1. Fetch the authoritative Arabic Date first
-fetch("https://nizamiamadrasa.com/api/arabic-date/")
+fetch("https://nizamiamadrasa.com/hijri-hub/api/arabic-date/")
   .then((res) => {
     if (!res.ok) throw new Error("Failed to fetch arabic date");
     return res.json();
   })
   .then((dateData) => {
     // 2. We have the date, now fetch the events
-    return fetch("https://nizamiamadrasa.com/api/special-day-events/")
+    return fetch("https://nizamiamadrasa.com/hijri-hub/api/special-day-events/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch events");
         return res.json();
@@ -70,7 +70,7 @@ fetch("https://nizamiamadrasa.com/api/arabic-date/")
 
         const currentHijri = {
           day: dayVal,
-          month: monthVal, 
+          month: monthVal,
           year: yearVal,
           monthNum: getMonthNumber(monthVal)
         };
@@ -79,10 +79,10 @@ fetch("https://nizamiamadrasa.com/api/arabic-date/")
         // ⭐ DISPLAY DATE (Synced with arabic-date-api)
         // ----------------------------------------
         let displayMonth = currentHijri.month;
-        
+
         // If it's a number, map it. If it's a string, use it.
         if (!isNaN(displayMonth)) {
-             displayMonth = ARABIC_MONTHS[displayMonth] || displayMonth;
+          displayMonth = ARABIC_MONTHS[displayMonth] || displayMonth;
         }
 
         if (displayMonth === "Jumada al-Akhirah") displayMonth = "Jumada al-Akhir";
@@ -105,11 +105,11 @@ fetch("https://nizamiamadrasa.com/api/arabic-date/")
         const allEvents = eventsData.all_rows || eventsData.events || [];
 
         if (Array.isArray(allEvents) && currentHijri.monthNum) {
-            todays = allEvents.filter(ev => {
-                const evDay = Number(ev.day ?? ev.hijri_day);
-                const evMonth = Number(ev.month ?? ev.hijri_month);
-                return evDay === currentHijri.day && evMonth === currentHijri.monthNum;
-            });
+          todays = allEvents.filter(ev => {
+            const evDay = Number(ev.day ?? ev.hijri_day);
+            const evMonth = Number(ev.month ?? ev.hijri_month);
+            return evDay === currentHijri.day && evMonth === currentHijri.monthNum;
+          });
         }
 
         if (todays.length > 0) {
@@ -127,7 +127,7 @@ fetch("https://nizamiamadrasa.com/api/arabic-date/")
             );
           });
         } else {
-            eventsBox.innerHTML = `<div class="font-quicksand text-gray-500 text-center italic">No special events today</div>`;
+          eventsBox.innerHTML = `<div class="font-quicksand text-gray-500 text-center italic">No special events today</div>`;
         }
       });
   })

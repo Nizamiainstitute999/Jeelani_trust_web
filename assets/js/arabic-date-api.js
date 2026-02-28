@@ -1,7 +1,7 @@
 // ===============================
 // 📅 FETCH HIJRI DATE FROM API
 // ===============================
-fetch("https://nizamiamadrasa.com/api/arabic-date/")
+fetch("https://nizamiamadrasa.com/hijri-hub/api/arabic-date/")
 
   // Step 1: Convert response → JSON
   .then(res => res.json())
